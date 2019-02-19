@@ -11,8 +11,8 @@ git status
 echo --------------------------------------
 set /p temp="Comit Message: "
 echo --------------------------------------
-echo commit -a -m "Script commit" -m "%temp%"
-git commit -a -m "Script commit" -m "%temp%"
+echo commit -a -m "%temp%" -m "Script commit"
+git commit -a -m "%temp%" -m "Script commit" 
 echo --------------------------------------
 echo git push
 git push
