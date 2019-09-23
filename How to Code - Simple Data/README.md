@@ -15,5 +15,4 @@ by The University of British Columbia
 - Space Invaders
 
 Following the online course:
-https://courses.edx.org/courses/course-v1:UBCx+HtC1x+2T2017/course/
-
+https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
