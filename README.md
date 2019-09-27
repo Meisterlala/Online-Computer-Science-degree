@@ -4,24 +4,33 @@ My course files for the Online Computer Sience degree. I started this degree 01.
 Following the guide of: 
 [![Open Source Society University - Computer Science](https://img.shields.io/badge/OSSU-computer--science-blue.svg)](https://github.com/ossu/computer-science)
 
+
 # Working on:
-### Essence of Linear Algebra (27.09.2019)
 
-### How to Code - Complex Data (23.09.2019)
-- How to identify commonalities in data definitions and functions
-- How to avoid repetition using abstraction
-- How to design functions that operate on graphs
-- How to design programs that search a given problem space to find a valid solution
+| Name                                   | Course link                                  |      Date  |
+| :------------------------------------- |:-------------------------------------------- |-----------:|
+| Essence of Linear Algebra              | [Youtube / 3Blue1Brown][cm12]                | 27.09.2019 |
+| [How to Code - Complex Data][cp21]     | [edX / University of British Columbia][cp22] | 23.09.2019 |
 
+
+[cm12]: https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
+
+[cp21]: How%20to%20Code%20-%20Complex%20Data/
+[cp22]: https://www.edx.org/course/how-code-complex-data-ubcx-htc2x
 
 # Completed: 
-### How to Code - Simple Data (23.09.2019)
-- How to represent information as data
-- How to focus each part of your program on a single task
-- How to use examples and tests to clarify what your program should do
-- How to simplify the structure of your program using common patterns
-- Recognize and represent more complicated information
+
+### Core programming:
+
+| Name                                   | Course link                                  |      Date  |
+| :------------------------------------- |:-------------------------------------------- |-----------:|
+| [How to Code - Simple Data][cp11]      | [edX / University of British Columbia][cp12] | 23.09.2019 |
+
+
+[cp11]: How%20to%20Code%20-%20Simple%20Data/
+[cp12]: https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
 
 
 # Skipped:
 - Introduction to Computer Science
+#
