@@ -5,6 +5,8 @@ Following the guide of:
 [![Open Source Society University - Computer Science](https://img.shields.io/badge/OSSU-computer--science-blue.svg)](https://github.com/ossu/computer-science)
 
 # Working on:
+### Essence of Linear Algebra (27.09.2019)
+
 ### How to Code - Complex Data (23.09.2019)
 - How to identify commonalities in data definitions and functions
 - How to avoid repetition using abstraction
