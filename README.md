@@ -9,14 +9,13 @@ Following the guide of:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
-| Essence of Linear Algebra              | [Youtube / 3Blue1Brown][cm12]                | 27.09.2019 |
 | [How to Code - Complex Data][cp21]     | [edX / University of British Columbia][cp22] | 23.09.2019 |
-
-
-[cm12]: https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
 
 [cp21]: How%20to%20Code%20-%20Complex%20Data/
 [cp22]: https://www.edx.org/course/how-code-complex-data-ubcx-htc2x
+
+
+
 
 # Completed: 
 
@@ -29,6 +28,16 @@ Following the guide of:
 
 [cp11]: How%20to%20Code%20-%20Simple%20Data/
 [cp12]: https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
+
+### Core math:
+
+| Name                                   | Course link                                  |      Date  |
+| :------------------------------------- |:-------------------------------------------- |-----------:|
+| Essence of Linear Algebra              | [Youtube / 3Blue1Brown][cm12]                | 27.09.2019 |
+
+
+[cm12]: https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
+
 
 
 # Skipped:
