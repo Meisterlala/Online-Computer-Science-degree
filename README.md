@@ -9,13 +9,22 @@ Following the guide of:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
-| [How to Code - Complex Data][cp21]     | [edX / University of British Columbia][cp22] | 23.09.2019 |
-
-[cp21]: How%20to%20Code%20-%20Complex%20Data/
-[cp22]: https://www.edx.org/course/how-code-complex-data-ubcx-htc2x
+| Programming Languages, Part A          | [Coursera / University of Washington][cp32]  | 27.05.2020 |
+| Calculus 1A: Differentiation           | [edX /  Massachusetts Institute of Technology][me12]  | 27.05.2020 |
 
 
 
+[cp31]: How%20to%20Code%20-%20Complex%20Data/
+[cp32]: https://www.coursera.org/learn/programming-languages
+
+[cp41]: How%20to%20Code%20-%20Complex%20Data/
+[cp42]: https://www.coursera.org/learn/programming-languages-part-b
+
+[cp41]: How%20to%20Code%20-%20Complex%20Data/
+[cp42]: https://www.coursera.org/learn/programming-languages-part-c
+
+
+[me12]: https://www.edx.org/course/calculus-1a-differentiation
 
 # Completed: 
 
@@ -23,11 +32,14 @@ Following the guide of:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
-| [How to Code - Simple Data][cp11]      | [edX / University of British Columbia][cp12] | 23.09.2019 |
-
+| [How to Code - Simple Data][cp11]      | [edX / University of British Columbia][cp12] | 27.05.2020 |
+| [How to Code - Complex Data][cp21]     | [edX / University of British Columbia][cp22] | 23.09.2019 |
 
 [cp11]: How%20to%20Code%20-%20Simple%20Data/
 [cp12]: https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
+
+[cp21]: How%20to%20Code%20-%20Complex%20Data/
+[cp22]: https://www.edx.org/course/how-code-complex-data-ubcx-htc2x
 
 ### Core math:
 
