@@ -10,7 +10,7 @@ Following the guide of:
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
 | Programming Languages, Part A          | [Coursera / University of Washington][cp32]  | 27.05.2020 |
-| Calculus 1A: Differentiation           | [edX /  Massachusetts Institute of Technology][me12]  | 27.05.2020 |
+| [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 27.05.2020 |
 
 
 
@@ -23,7 +23,7 @@ Following the guide of:
 [cp41]: How%20to%20Code%20-%20Complex%20Data/
 [cp42]: https://www.coursera.org/learn/programming-languages-part-c
 
-
+[me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
 
 # Completed: 
