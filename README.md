@@ -14,13 +14,13 @@ Following the guide of:
 
 
 
-[cp31]: How%20to%20Code%20-%20Complex%20Data/
+[cp31]: Programming%20Languages/Part%20A/
 [cp32]: https://www.coursera.org/learn/programming-languages
 
-[cp41]: How%20to%20Code%20-%20Complex%20Data/
+[cp41]: Programming%20Languages/Part%20B/
 [cp42]: https://www.coursera.org/learn/programming-languages-part-b
 
-[cp41]: How%20to%20Code%20-%20Complex%20Data/
+[cp41]: Programming%20Languages/Part%20C/
 [cp42]: https://www.coursera.org/learn/programming-languages-part-c
 
 [me11]: Calculus/1A%20Differentiation/
