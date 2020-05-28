@@ -9,7 +9,7 @@ Following the guide of:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
-| Programming Languages, Part A          | [Coursera / University of Washington][cp32]  | 27.05.2020 |
+| [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 27.05.2020 |
 | [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 27.05.2020 |
 
 
