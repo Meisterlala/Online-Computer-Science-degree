@@ -37,7 +37,7 @@ fun max2 (xs : int list) =
 		then hd xs
 		else let val tl_ans = max_nonempty(tl xs)
 		     in
-			 if hd xs > tl_ans
+			 if hd xs > tl_ans 
 			 then hd xs
 			 else tl_ans
 		     end
