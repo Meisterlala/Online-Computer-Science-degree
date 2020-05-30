@@ -11,7 +11,7 @@ Following the guide of:
 | :------------------------------------- |:-------------------------------------------- |-----------:|
 | [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 27.05.2020 |
 | [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 27.05.2020 |
-
+| [Introduction to Computer Science - CS50][cs11]     | [edX / Harvard University][cs12] | 30.05.2020 |
 
 
 [cp31]: Programming%20Languages/Part%20A/
@@ -25,6 +25,11 @@ Following the guide of:
 
 [me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
+
+
+[cs11]: Introduction%20to%20Computer%20Science/
+[cs12]: https://www.edx.org/course/cs50s-introduction-to-computer-science#!
+
 
 # Completed: 
 
@@ -41,6 +46,7 @@ Following the guide of:
 [cp21]: How%20to%20Code%20-%20Complex%20Data/
 [cp22]: https://www.edx.org/course/how-code-complex-data-ubcx-htc2x
 
+
 ### Core math:
 
 | Name                                   | Course link                                  |      Date  |
@@ -52,6 +58,3 @@ Following the guide of:
 
 
 
-# Skipped:
-- Introduction to Computer Science
-#
