@@ -14,5 +14,15 @@
             "console": "integratedTerminal",
             "cwd": "${fileDirname}"
         }
+
+        {
+            "name": "Python: Database",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["databases/small.csv", "sequences/1.txt"],
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}"
+        }
     ]
 }
