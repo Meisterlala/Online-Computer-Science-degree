@@ -2,9 +2,6 @@
 
 from sys import argv
 from cs50 import SQL
-import csv
-
-
 
 db = SQL("sqlite:///students.db")
 
@@ -12,23 +9,12 @@ if len(argv) != 2:
     print("Err")
     exit(1)
 
-with open(argv[1], "r") as csvFile:
-    csvReader = csv.DictReader(csvFile)
+hname = argv[1]
 
-    r = 0
-    for row in csvReader:       
-        spli = row["name"].split()
+students = db.execute("SELECT * FROM students WHERE house LIKE ? ORDER BY last ASC, first ASC", hname)
 
-        nf = spli[0]
-        if len(spli) == 2:
-            nm = ""
-            nl = spli[2]
-        else:
-            nm = spli[2]
-            nl = spli[3]
-            
-        db.execute("INSTERT INTO students (id first middle last house birth) VALUES (? ? ? ? ? ?)", 
-                        r, spli[0], spli[1], spli[2], row["house"], row["birth"])
-        r += 1
-
-
+for s in students:
+    print(s["first"], end=" ")
+    if s["middle"]:
+        print(s["middle"], end=" ")
+    print(f"{s['last']}, born {s['birth']}")
