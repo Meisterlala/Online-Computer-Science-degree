@@ -14,14 +14,24 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "cwd": "${fileDirname}"
-        }
+        },
 
         {
             "name": "Python: Database",
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["databases/small.csv", "sequences/1.txt"],
+            "args": ["characters.csv"],
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}"
+        }
+
+        {
+            "name": "Python: Database Gryffindor",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["Gryffindor"],
             "console": "integratedTerminal",
             "cwd": "${fileDirname}"
         }
