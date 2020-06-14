@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      function greet() {
+        let name = document.querySelector("#qText").value;
+        alert("Searching for " + name);
+      }
+
+      function addm() {
+        let name = document.querySelector("#qText").value;
+        document.querySelector("#nd").innerHTML += name + "<br>";
+      }
+    </script>
+  </head>
+  <body
+    style="text-align: center; background-color: azure; font-size: xx-large;"
+  >
+    <div
+      class="Box"
+      style="width: fit-content; height: fit-content; margin: auto;"
+    >
+      Search for Text on Google
+      <form
+        action="https://www.google.com/search"
+        method="GET"
+        onsubmit="greet();"
+      >
+        <input id="qText" type="text" name="q" style="margin-top: 10px;" />
+        <input type="submit" value="google" />
+      </form>
+    </div>
+    <div
+      class="Box"
+      id="nd"
+      style="
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        margin-top: 100px;
+      "
+    >
+      <button onclick="addm();">Add Search Text to this Box<br /></button>
+    </div>
+  </body>
+</html>
