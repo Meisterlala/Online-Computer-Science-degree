@@ -1,40 +1,51 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-    
-     
-        
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
 
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "cwd": "${fileDirname}"
-        },
+  "configurations": [
+    {
+      "name": "Python: Flask",
+      "type": "python",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "app.py",
+        "FLASK_ENV": "development"
+      },
+      "args": ["run"],
+      "jinja": true,
+      "cwd": "${fileDirname}"
+    },
 
-        {
-            "name": "Python: Database",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "args": ["characters.csv"],
-            "console": "integratedTerminal",
-            "cwd": "${fileDirname}"
-        }
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${fileDirname}"
+    },
 
-        {
-            "name": "Python: Database Gryffindor",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "args": ["Gryffindor"],
-            "console": "integratedTerminal",
-            "cwd": "${fileDirname}"
-        }
-    ]
+    {
+      "name": "Python: Database",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "args": ["characters.csv"],
+      "console": "integratedTerminal",
+      "cwd": "${fileDirname}"
+    },
+
+    {
+      "name": "Python: Database Gryffindor",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "args": ["Gryffindor"],
+      "console": "integratedTerminal",
+      "cwd": "${fileDirname}"
+    }
+  ]
 }
