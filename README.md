@@ -9,8 +9,8 @@ Following the guide of:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
-| [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 27.05.2020 |
-| [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 27.05.2020 |
+| [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 22.06.2020 |
+| [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 17.06.2020 |
 | [Introduction to Computer Science - CS50][cs11]     | [edX / Harvard University][cs12] | 30.05.2020 |
 
 
