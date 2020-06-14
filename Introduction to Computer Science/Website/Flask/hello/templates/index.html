@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block body %}
+      Hello, {{ name }}! <br />
+      {% if number == 1 %} Your Coin is HEADS. {% else %} Your Coin is TAILS.
+      {% endif %}
+    </h1>
+    <br/>
+    <form action="/hello">
+        <input name="name" type="text">
+        <input type="submit">
+    </form>
+{% endblock %}
