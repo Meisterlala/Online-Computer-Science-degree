@@ -7,9 +7,15 @@
 	"settings": {
 		"sqltools.connections": [
 			{
-				"database": "${workspaceFolder:Introduction to Computer Science}/Website/Flask/register/lecture.db",
+				"database": "${workspaceFolder:Introduction to Computer Science}/Website/CS50 register/finance.db",
 				"driver": "SQLite",
-				"name": "lectures",
+				"name": "finante",
+				"previewLimit": 50
+			},
+			{
+				"database": "${workspaceFolder:Introduction to Computer Science}/Website/CS50 register/lecture.db",
+				"driver": "SQLite",
+				"name": "lec",
 				"previewLimit": 50
 			}
 		],

@@ -1,0 +1,61 @@
+#headerElements {
+  width: 800px;
+  font-size: 20pt;
+  margin: auto;
+  text-align: center;
+}
+
+#name {
+  font-size: 20pt;
+  width: fit-content;
+  margin-right: 20px;
+  margin-left: 40px;
+  text-align: left;
+}
+
+#nameAndPhoto {
+  align-items: center;
+  grid-template-columns: auto auto;
+}
+
+.middle {
+  align-content: center;
+  margin: auto;
+  width: 800px;
+}
+
+.middle2 {
+  align-content: center;
+  margin: auto;
+  font-size: larger;
+  margin-top: 20%;
+  width: 800px;
+}
+
+#photo {
+  border-radius: 100%;
+
+  float: right;
+}
+
+header {
+  height: auto;
+  position: relative;
+  padding-top: 100px;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  min-width: 980px;
+}
+
+body {
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #ffefd25e;
+  width: 100%;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
