@@ -5,7 +5,14 @@
 		}
 	],
 	"settings": {
-		"sqltools.connections": [],
+		"sqltools.connections": [
+			{
+				"database": "${workspaceFolder:Introduction to Computer Science}/Website/Flask/register/lecture.db",
+				"driver": "SQLite",
+				"name": "lectures",
+				"previewLimit": 50
+			}
+		],
 		"sqltools.useNodeRuntime": true
 	}
 }
