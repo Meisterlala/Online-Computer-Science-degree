@@ -1,0 +1,28 @@
+{% extends "layout.html" %} {% block title %} Register {% endblock %} {% block
+main %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Symbol</th>
+      <th scope="col">Price</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in entrys%}
+    <tr>
+      <td>{{ entry["name"] }}</td>
+      <td>{{ entry["symbol"] }}</td>
+      <td>{{ entry["price"] }}</td>
+      <td>{{ entry["amount"] }}</td>
+      <td>{{ entry["date"] }}</td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

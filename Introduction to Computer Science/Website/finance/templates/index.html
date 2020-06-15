@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block title %} Register {% endblock %} {% block
+main %}
+<div class="form-group">
+  Balance: {{ balance }} <br />
+  Total Value: {{ value }}
+  <br />
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in entrys %}
+    <tr>
+      <td>{{ entry["name"] }}</td>
+      <td>{{ entry["price"] }}</td>
+      <td>{{ entry["amount"] }}</td>
+      <td>{{ entry["value"] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

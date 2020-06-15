@@ -7,15 +7,15 @@
 	"settings": {
 		"sqltools.connections": [
 			{
-				"database": "${workspaceFolder:Introduction to Computer Science}/Website/CS50 register/finance.db",
-				"driver": "SQLite",
-				"name": "finante",
-				"previewLimit": 50
-			},
-			{
 				"database": "${workspaceFolder:Introduction to Computer Science}/Website/CS50 register/lecture.db",
 				"driver": "SQLite",
 				"name": "lec",
+				"previewLimit": 50
+			},
+			{
+				"database": "mnt/e/Education/Online Computer Sience degree/Introduction to Computer Science/Website/CS50 register/finance.db",
+				"driver": "SQLite",
+				"name": "finante",
 				"previewLimit": 50
 			}
 		],
