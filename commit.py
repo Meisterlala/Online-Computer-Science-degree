@@ -40,5 +40,8 @@ message = input("Commit Message: ")
 subprocess.run(["git", "commit", "-a", "-m", message,
                 "-m", "from script v" + version])
 
+# Upload
+subprocess.run(["git", "push"])
+
 # Don't Autoclose
 time.sleep(3)
