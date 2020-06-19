@@ -1,7 +1,10 @@
 import glob
 import subprocess
+import os.path
 
-version = "1.0"
+version = "1.1"
+# Time Difference between PDF and NB in sec
+maxTimeDifference = 900
 
 # Check if every Notebook is converted to PDF
 allAsPdf = True
@@ -9,7 +12,14 @@ nbs = glob.glob("Calculus/*/*.nb")
 pdfs = glob.glob("Calculus/*/*.pdf")
 for nbfile in nbs:
     nameAsPdf = nbfile.replace(".nb", ".pdf")
-    if nameAsPdf not in pdfs:
+    if nameAsPdf in pdfs:
+        mTimeNb = os.path.getmtime(nbfile)
+        mTimePdf = os.path.getmtime(nameAsPdf)
+        diff = mTimeNb - mTimePdf
+        if diff > maxTimeDifference:
+            print(nameAsPdf + " needs to be updated")
+            allAsPdf = False
+    else:
         print(nameAsPdf + " was not found")
         allAsPdf = False
 
