@@ -1,6 +1,7 @@
 import glob
 import subprocess
 import os.path
+import time
 
 version = "1.1"
 # Time Difference between PDF and NB in sec
@@ -40,4 +41,4 @@ subprocess.run(["git", "commit", "-a", "-m", message,
                 "-m", "from script v" + version])
 
 # Don't Autoclose
-input()
+time.sleep(3)
