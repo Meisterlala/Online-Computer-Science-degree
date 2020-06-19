@@ -1,9 +1,10 @@
 import glob
 import subprocess
 
-allAsPdf = True
 version = "1.0"
 
+# Check if every Notebook is converted to PDF
+allAsPdf = True
 nbs = glob.glob("Calculus/*/*.nb")
 pdfs = glob.glob("Calculus/*/*.pdf")
 for nbfile in nbs:
@@ -17,11 +18,16 @@ if not allAsPdf:
     input()
     exit(1)
 
+# Update git
 subprocess.run(["git", "pull"])
 subprocess.run(["git", "add", "."])
 subprocess.run(["git", "status"])
 
 message = input("Commit Message: ")
 
+# Commit
 subprocess.run(["git", "commit", "-a", "-m", message,
                 "-m", "from script v" + version])
+
+# Don't Autoclose
+input()
