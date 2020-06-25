@@ -6,12 +6,26 @@
 
   "configurations": [
     {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "pwa-chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:5500/Final/staticPage/index.html",
+      "webRoot": "${workspaceFolder}/Final/staticPage"
+    },
+    {
       "name": "Python: Flask",
       "type": "python",
       "request": "launch",
       "module": "flask",
       "env": {
-        "FLASK_APP": "application.py",
+        "FLASK_APP": "app.py",
         "FLASK_ENV": "development"
       },
       "args": ["run"],
