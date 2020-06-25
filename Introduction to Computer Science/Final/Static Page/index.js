@@ -1,5 +1,3 @@
-console.log("Hello workld");
-
 const cases = [
   [
     "Prisma 2 Case",
@@ -132,31 +130,9 @@ const cases = [
 
 let currentCaseName;
 
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  var expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 function RefreshList() {
-  let c = getCookie("history");
-  if (c == "") {
+  let c = localStorage.getItem("history");
+  if (!c) {
     return;
   }
   let h = JSON.parse(c);
@@ -179,8 +155,14 @@ function GetSelected() {
   $("dropDownCase").dropdown();
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function Open() {
   if (!currentCaseName) {
+    alert("Please select a case");
+    $("#formCheck-1")[0].checked = false;
     return;
   }
   // chose random
@@ -216,16 +198,15 @@ function Open() {
 
   let h;
   // add to cookie
-  let c = getCookie("history");
-  if (c == "") {
+  let c = localStorage.getItem("history");
+  if (!c) {
     h = [];
   } else {
     h = JSON.parse(c);
   }
 
   h.push([currentCaseName, rarity, drop]);
-  setCookie("history", JSON.stringify(h));
-
+  localStorage["history"] = JSON.stringify(h);
   RefreshList();
 }
 
@@ -248,6 +229,13 @@ $(document).ready(function () {
     Open();
   });
 
+  $("#formCheck-1").click(async function () {
+    let cb = $("#formCheck-1")[0];
+    while (cb.checked) {
+      Open();
+      await sleep(100);
+    }
+  });
   // Open Dropbox
   LoadDropdown();
   $("#dropDownCase a").on("click", function () {
@@ -256,11 +244,6 @@ $(document).ready(function () {
     $("#dropdownCaseButton").text(name);
     currentCaseName = name;
   });
-
-  // Initilize Cookie
-  if (!getCookie("history")) {
-    setCookie("history", "");
-  }
 
   // Load from cookie
   RefreshList();
