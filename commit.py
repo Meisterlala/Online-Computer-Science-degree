@@ -1,9 +1,12 @@
+#!/usr/bin/python3
+
 import glob
 import subprocess
 import os.path
 import time
 
-version = "1.1"
+version = "1.2"
+print("Version " + version)
 # Time Difference between PDF and NB in sec
 maxTimeDifference = 900
 
@@ -44,4 +47,5 @@ subprocess.run(["git", "commit", "-a", "-m", message,
 subprocess.run(["git", "push"])
 
 # Don't Autoclose
+print("Success! Closing in 3 seconds.")
 time.sleep(3)
