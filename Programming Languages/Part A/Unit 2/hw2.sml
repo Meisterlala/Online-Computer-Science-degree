@@ -43,11 +43,11 @@ fun get_substitutions2 (sll, s) =
 
 fun similar_names (sll,name) =
     let 
-        val {first=f, middle=m, last=l} = name
+         val {first=f, middle=m, last=l} = name
 	      fun make_names xs =
 	         case xs of
-		           [] => []
-	           | x::xs' => {first=x, middle=m, last=l}::(make_names(xs'))
+		         [] => []
+	         | x::xs' => {first=x, middle=m, last=l}::(make_names(xs'))
     in
 	      name::make_names(get_substitutions2(sll,f))
     end  
