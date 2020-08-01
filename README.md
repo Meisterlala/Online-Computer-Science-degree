@@ -9,12 +9,9 @@ Following the guide of:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
-| [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 22.06.2020 |
 | [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 17.06.2020 |
 
 
-[cp31]: Programming%20Languages/Part%20A/
-[cp32]: https://www.coursera.org/learn/programming-languages
 
 [cp41]: Programming%20Languages/Part%20B/
 [cp42]: https://www.coursera.org/learn/programming-languages-part-b
@@ -37,12 +34,16 @@ Following the guide of:
 | :------------------------------------- |:-------------------------------------------- |-----------:|
 | [How to Code - Simple Data][cp11]      | [edX / University of British Columbia][cp12] | 23.09.2019 |
 | [How to Code - Complex Data][cp21]     | [edX / University of British Columbia][cp22] | 27.05.2020 |
+| [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 01.08.2020 |
 
 [cp11]: How%20to%20Code%20-%20Simple%20Data/
 [cp12]: https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
 
 [cp21]: How%20to%20Code%20-%20Complex%20Data/
 [cp22]: https://www.edx.org/course/how-code-complex-data-ubcx-htc2x
+
+[cp31]: Programming%20Languages/Part%20A/
+[cp32]: https://www.coursera.org/learn/programming-languages
 
 
 ### Core math:
@@ -55,7 +56,7 @@ Following the guide of:
 [cm12]: https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
 
 
-### Core programming:
+### Core systems:
 
 | Name                                   | Course link                                  |      Date  |
 | :------------------------------------- |:-------------------------------------------- |-----------:|
