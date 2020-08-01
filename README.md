@@ -7,9 +7,9 @@ Following the guide of:
 
 # Working on:
 
-| Name                                   | Course link                                  |      Date  |
-| :------------------------------------- |:-------------------------------------------- |-----------:|
-| [Calculus 1A: Differentiation][me11]   | [edX /  Massachusetts Institute of Technology][me12]  | 17.06.2020 |
+| Name                                            | Course link                                                      |      Date  |
+| :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
+| [Calculus 1A: Differentiation][me11]            | [edX /  Massachusetts Institute of Technology][me12]             | 17.06.2020 |
 
 
 
@@ -30,11 +30,11 @@ Following the guide of:
 
 ### Core programming:
 
-| Name                                   | Course link                                  |      Date  |
-| :------------------------------------- |:-------------------------------------------- |-----------:|
-| [How to Code - Simple Data][cp11]      | [edX / University of British Columbia][cp12] | 23.09.2019 |
-| [How to Code - Complex Data][cp21]     | [edX / University of British Columbia][cp22] | 27.05.2020 |
-| [Programming Languages, Part A][cp31]  | [Coursera / University of Washington][cp32]  | 01.08.2020 |
+| Name                                            | Course link                                                      |      Date  |
+| :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
+| [How to Code - Simple Data][cp11]               | [edX / University of British Columbia][cp12]                     | 23.09.2019 |
+| [How to Code - Complex Data][cp21]              | [edX / University of British Columbia][cp22]                     | 27.05.2020 |
+| [Programming Languages, Part A][cp31]           | [Coursera / University of Washington][cp32]                      | 01.08.2020 |
 
 [cp11]: How%20to%20Code%20-%20Simple%20Data/
 [cp12]: https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
@@ -48,9 +48,9 @@ Following the guide of:
 
 ### Core math:
 
-| Name                                   | Course link                                  |      Date  |
-| :------------------------------------- |:-------------------------------------------- |-----------:|
-| Essence of Linear Algebra              | [Youtube / 3Blue1Brown][cm12]                | 27.09.2019 |
+| Name                                            | Course link                                                      |      Date  |
+| :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
+| Essence of Linear Algebra                       | [Youtube / 3Blue1Brown][cm12]                                    | 27.09.2019 |
 
 
 [cm12]: https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
@@ -58,9 +58,9 @@ Following the guide of:
 
 ### Core systems:
 
-| Name                                   | Course link                                  |      Date  |
-| :------------------------------------- |:-------------------------------------------- |-----------:|
-| [Introduction to Computer Science - CS50][cs11]     | [edX / Harvard University][cs12] | 25.06.2020 |
+| Name                                            | Course link                                                      |      Date  |
+| :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
+| [Introduction to Computer Science - CS50][cs11] | [edX / Harvard University][cs12]                                 | 25.06.2020 |
 
 [cs11]: Introduction%20to%20Computer%20Science/
 [cs12]: https://www.edx.org/course/cs50s-introduction-to-computer-science#!
