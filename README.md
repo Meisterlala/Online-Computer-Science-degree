@@ -10,7 +10,7 @@ Following the guide of:
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | [Calculus 1A: Differentiation][me11]            | [edX /  Massachusetts Institute of Technology][me12]             | 17.06.2020 |
-
+| [Programming Languages, Part B][cp41]           | [Coursera / University of Washington][cp42]                      | 11.08.2020 |
 
 
 [cp41]: Programming%20Languages/Part%20B/
