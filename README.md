@@ -10,14 +10,11 @@ Following the guide of:
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | [Calculus 1A: Differentiation][me11]            | [edX /  Massachusetts Institute of Technology][me12]             | 17.06.2020 |
-| [Programming Languages, Part B][cp41]           | [Coursera / University of Washington][cp42]                      | 11.08.2020 |
+| [Programming Languages, Part C][cp51]           | [Coursera / University of Washington][cp52]                      | 18.08.2020 |
 
 
-[cp41]: Programming%20Languages/Part%20B/
-[cp42]: https://www.coursera.org/learn/programming-languages-part-b
-
-[cp41]: Programming%20Languages/Part%20C/
-[cp42]: https://www.coursera.org/learn/programming-languages-part-c
+[cp51]: Programming%20Languages/Part%20C/
+[cp52]: https://www.coursera.org/learn/programming-languages-part-c
 
 [me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
@@ -35,6 +32,7 @@ Following the guide of:
 | [How to Code - Simple Data][cp11]               | [edX / University of British Columbia][cp12]                     | 23.09.2019 |
 | [How to Code - Complex Data][cp21]              | [edX / University of British Columbia][cp22]                     | 27.05.2020 |
 | [Programming Languages, Part A][cp31]           | [Coursera / University of Washington][cp32]                      | 01.08.2020 |
+| [Programming Languages, Part B][cp41]           | [Coursera / University of Washington][cp42]                      | 18.08.2020 |
 
 [cp11]: How%20to%20Code%20-%20Simple%20Data/
 [cp12]: https://www.edx.org/course/how-code-simple-data-ubcx-htc1x#!
@@ -44,6 +42,9 @@ Following the guide of:
 
 [cp31]: Programming%20Languages/Part%20A/
 [cp32]: https://www.coursera.org/learn/programming-languages
+
+[cp41]: Programming%20Languages/Part%20B/
+[cp42]: https://www.coursera.org/learn/programming-languages-part-b
 
 
 ### Core math:
