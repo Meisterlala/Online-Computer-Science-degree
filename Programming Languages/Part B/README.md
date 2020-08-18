@@ -2,13 +2,12 @@
 by University of Washington
 
 # Syllabus
-- Implement a programming language
-- Racket introduction
-- Delayed evaluation
-- Structs
-- Static vs Dynamic type systems
-
-
+- Racket basics
+- Dynamic vs. static typing
+- Laziness, streams, and memoization
+- Implementing languages, especially higher-order functions
+- Macros
+- Eval
 
 Following the online course:
-https://www.coursera.org/learn/programming-languages-part-b/
+https://www.coursera.org/learn/programming-languages-part-b
