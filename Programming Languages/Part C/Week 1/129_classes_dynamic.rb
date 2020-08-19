@@ -11,7 +11,7 @@ class MyRational
    end
 end
 
-class Fixnum
+class Integer
   def double
     self + self
   end

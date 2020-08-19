@@ -8,7 +8,17 @@
             "name": "Debug Local File",
             "type": "Ruby",
             "request": "launch",
+            "cwd": "${workspaceRoot}",
             "program": "${file}"
+        },
+        {
+            "name": "Run Game",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "enhanced"
+            ]
         }
     ]
 }

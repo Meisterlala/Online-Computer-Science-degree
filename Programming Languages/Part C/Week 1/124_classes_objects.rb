@@ -5,7 +5,7 @@ class A
   def m1
     34
   end
-
+  
   def m2 (x,y)
     z = 7
     if x > y 
