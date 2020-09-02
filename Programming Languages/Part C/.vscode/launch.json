@@ -8,7 +8,7 @@
             "name": "Debug Local File",
             "type": "Ruby",
             "request": "launch",
-            "cwd": "${workspaceRoot}",
+            "cwd": "${fileDirname}",
             "program": "${file}"
         },
         {
