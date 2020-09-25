@@ -96,6 +96,5 @@
 
     // Loop back around.
     @LOOP
-    0;JMP
+    0;JMP 
 
-    
