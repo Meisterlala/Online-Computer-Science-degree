@@ -15,7 +15,7 @@ Following the guide of:
 [me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
 
-[cs31]: From%20Nand%20to%20Tetris//Part%202
+[cs31]: From%20Nand%20to%20Tetris/
 [cs32]: https://www.coursera.org/learn/nand2tetris2
 
 # Completed: 
@@ -66,7 +66,7 @@ Following the guide of:
 [cs11]: Introduction%20to%20Computer%20Science/
 [cs12]: https://www.edx.org/course/cs50s-introduction-to-computer-science#!
 
-[cs21]: From%20Nand%20to%20Tetris//Part%201
+[cs21]: From%20Nand%20to%20Tetris/
 [cs22]: https://www.coursera.org/learn/build-a-computer
 
 
