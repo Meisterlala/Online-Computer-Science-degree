@@ -22,15 +22,14 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Assemble Verbose",
+            "name": "Translate",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/06/assembler.py",
+            "program": "${workspaceFolder}/07/translator.py",
             "args": [
-                "${file}",
-                "-v"
+                "${file}"
             ],
-            "console": "integratedTerminal"
-        }
+            "console": "integratedTerminal",
+        },
     ]
 }
