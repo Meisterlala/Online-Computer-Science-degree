@@ -3,7 +3,7 @@ import sys
 import os.path
 
 
-def main():
+def main(asm="null"):
     # Check Argumets
     if "-v" in sys.argv:
         sys.argv.remove("-v")
@@ -11,13 +11,16 @@ def main():
     else:
         verbose = False
 
-    if len(sys.argv) != 2:
-        print("Usage: assembler.py filename (-v)")
-        print(f"Given: {str(sys.argv)}")
-        sys.exit(1)
+    if asm == "null":
+        if len(sys.argv) != 2:
+            print("Usage: assembler.py filename (-v)")
+            print(f"Given: {str(sys.argv)}")
+            sys.exit(1)
+        # Load file
+        filename = str(sys.argv[1])
+    else:
+        filename = asm
 
-    # Load file
-    filename = str(sys.argv[1])
     # If File doesn't exits
     if not os.path.isfile(filename):
         print(f"File not found: {filename}")
