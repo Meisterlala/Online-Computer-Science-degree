@@ -159,6 +159,8 @@ M=M-1
 """
     elif op[0] == "neg":
         result += """@SP
+A=M-1
+M=!M
 """
     elif op[0] == "eq":
         result += ("@SP\n"
@@ -173,28 +175,76 @@ M=M-1
                    "A=M-1\n"
                    "M=0\n"
                    f"@labeln_{str(jmpID)}\n"
-                   "0;JMP"
-                   f"(label_{str(jmpID)}\n)"
+                   "0;JMP\n"
+                   f"(label_{str(jmpID)})\n"
                    "@SP\n"
                    "M=M-1\n"
                    "A=M-1\n"
                    "M=1\n"
-                   f"(labeln_{str(jmpID)}\n)")
+                   f"(labeln_{str(jmpID)})\n")
 
     elif op[0] == "gt":
-        result += """@SP
-"""
+        result += ("@SP\n"
+                   "A=M-1\n"
+                   "D=M\n"
+                   "A=A-1\n"
+                   "D=D-M\n"
+                   f"@label_{str(jmpID)}\n"
+                   "D;JGT\n"
+                   "@SP\n"
+                   "M=M-1\n"
+                   "A=M-1\n"
+                   "M=0\n"
+                   f"@labeln_{str(jmpID)}\n"
+                   "0;JMP\n"
+                   f"(label_{str(jmpID)})\n"
+                   "@SP\n"
+                   "M=M-1\n"
+                   "A=M-1\n"
+                   "M=1\n"
+                   f"(labeln_{str(jmpID)})\n")
     elif op[0] == "lt":
-        result += """@SP
-"""
+        result += ("@SP\n"
+                   "A=M-1\n"
+                   "D=M\n"
+                   "A=A-1\n"
+                   "D=D-M\n"
+                   f"@label_{str(jmpID)}\n"
+                   "D;JLT\n"
+                   "@SP\n"
+                   "M=M-1\n"
+                   "A=M-1\n"
+                   "M=0\n"
+                   f"@labeln_{str(jmpID)}\n"
+                   "0;JMP\n"
+                   f"(label_{str(jmpID)})\n"
+                   "@SP\n"
+                   "M=M-1\n"
+                   "A=M-1\n"
+                   "M=1\n"
+                   f"(labeln_{str(jmpID)})\n")
     elif op[0] == "and":
         result += """@SP
+A=M-1
+D=M
+@SP
+M=M-1
+A=M-1
+M=D|M
 """
     elif op[0] == "or":
         result += """@SP
+A=M-1
+D=M
+@SP
+M=M-1
+A=M-1
+M=D&M
 """
     elif op[0] == "not":
         result += """@SP
+A=M-1
+M=!M
 """
     return result
 
