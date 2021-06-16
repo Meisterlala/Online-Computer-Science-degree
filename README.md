@@ -10,7 +10,7 @@ Following the guide of:
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | [Calculus 1A: Differentiation][me11]            | [edX /  Massachusetts Institute of Technology][me12]             | 17.06.2020 |
-| [From Nand to Tetris II][cs31]                  | [Coursera /  Hebrew University of Jerusalem][cs32]               | 26.09.2020 |
+| [From Nand to Tetris II][cs31]                  | [Coursera /  Hebrew University of Jerusalem][cs32]               | 16.06.2021 |
 
 [me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
