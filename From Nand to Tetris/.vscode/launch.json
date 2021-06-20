@@ -5,14 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "VMTranslator",
+            "name": "VMTranslator BasicTest",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/07/VMTranslator/VMTranslator.py",
             "args": [
-                "projects/07/StackArithmetic/StackTest/StackTest.vm"
+                "projects/07/MemoryAccess/BasicTest/BasicTest.vm"
             ],
             "console": "integratedTerminal",
-        }
+        },
+        {
+            "name": "VMTranslator StaticTest",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/07/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/07/MemoryAccess/StaticTest/StaticTest.vm"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator PointerTest",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/07/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/07/MemoryAccess/PointerTest/PointerTest.vm"
+            ],
+            "console": "integratedTerminal",
+        },
     ],
 }

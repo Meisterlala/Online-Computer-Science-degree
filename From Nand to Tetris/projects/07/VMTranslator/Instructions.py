@@ -17,13 +17,16 @@ class Operation:
 
 
 SModes = ["push", "pop"]
-STypes = ["constant"]
+STypes = ["constant", "local", "argument", "this", "that", "temp"]
+SAdresses = {"stack": 0, "local": 1, "argument": 2, "this": 3, "that": 4}
+STempRange = (5, 12)
+SStaticRange = (16, 255)
 
 
 class Stack(Operation):
     mode = ""
     type = ""
-    value = ""
+    value = 0
 
     def translate(self):
         r = super().translate()
@@ -32,6 +35,51 @@ class Stack(Operation):
             r.extend([f"@{self.value}",
                       "D=A", "@SP", "A=M", "M=D"])
             r.extend(_SPinc)
+            return r
+
+        if self._mt("pop", "temp"):
+            # SP --, D = *SP, tempAddr = D
+            tempAddr = STempRange[0] + self.value
+            if tempAddr > STempRange[1]:
+                print(f"ERROR: Temp memory out of range ({STempRange})")
+            # SP --, D = *SP
+            r.extend(["@SP", "AM=M-1", "D=M"])
+            # tempAddr = D
+            r.extend([f"@{tempAddr}", "M=D"])
+            return r
+
+        if self._mt("push", "temp"):
+            # SP++, *SP = tempadd
+            tempAddr = STempRange[0] + self.value
+            if tempAddr > STempRange[1]:
+                print(f"ERROR: Temp memory out of range ({STempRange})")
+            # D = tempAddr
+            r.extend([f"@{tempAddr}", "D=M"])
+            # *SP = D, SP ++
+            r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
+            return r
+
+        if self.mode == "pop":
+            # addr=LCL+i, SP--, *addr=*SP
+            tempRegister = "@13"
+            typeBase = SAdresses.get(self.type)
+            # D = addr
+            r.extend([f"@{typeBase}", "D=M", f"@{self.value}", "D=D+A"])
+            # tempRegister = D
+            r.extend([tempRegister, "M=D"])
+            # SP --, D=*SP
+            r.extend(["@SP", "AM=M-1", "D=M"])
+            # *addr = *SP
+            r.extend([tempRegister, "A=M", "M=D"])
+            return r
+
+        if self.mode == "push":
+            # addr=LCL+i, *SP=*addr, SP++
+            typeBase = SAdresses.get(self.type)
+            # D = *addr + i
+            r.extend([f"@{typeBase}", "D=M", f"@{self.value}", "A=D+A", "D=M"])
+            # *SP = D, SP ++
+            r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
             return r
 
         # Default Case
@@ -56,7 +104,7 @@ class Stack(Operation):
             return False
 
         # Value
-        self.value = self.sOP[2]
+        self.value = int(self.sOP[2])
 
         return True
 
