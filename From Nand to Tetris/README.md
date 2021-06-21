@@ -11,3 +11,19 @@ by Hebrew University of Jerusalem
 
 Following the online course:
 https://www.coursera.org/learn/build-a-computer
+
+
+# Build a Modern Computer from First Principles: From Nand to Tetris 2
+by Hebrew University of Jerusalem
+
+# Project-Centered course
+1. Project: Programming a basic IL Language compiler
+2. Project: Adding more advanced functionality to the compiler
+3. Project: Building a Syntax Analyzer for the High-Level Language Jack
+4. Project: Completing the Jack compiler
+5. Project: Creating an Operation 
+6. Project: Constructing games and running them using everything build in this Course
+
+
+Following the online course:
+https://www.coursera.org/learn/nand2tetris2
