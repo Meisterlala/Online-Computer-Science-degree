@@ -25,4 +25,4 @@
 _config.yml
 
 # pycache
-**/__pycache__/**
+**__pycache__/
