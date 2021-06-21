@@ -23,3 +23,6 @@
 
 # yml Config
 _config.yml
+
+# pycache
+**/__pycache__/**

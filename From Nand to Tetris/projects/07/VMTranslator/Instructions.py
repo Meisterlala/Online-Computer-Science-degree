@@ -17,7 +17,7 @@ class Operation:
 
 
 SModes = ["push", "pop"]
-STypes = ["constant", "local", "argument", "this", "that", "temp"]
+STypes = ["constant", "local", "argument", "this", "that", "temp", "pointer"]
 SAdresses = {"stack": 0, "local": 1, "argument": 2, "this": 3, "that": 4}
 STempRange = (5, 12)
 SStaticRange = (16, 255)
@@ -57,6 +57,36 @@ class Stack(Operation):
             r.extend([f"@{tempAddr}", "D=M"])
             # *SP = D, SP ++
             r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
+            return r
+
+        if self._mt("push", "pointer"):
+            # *SP = THIS/THAT, SP++
+            if self.value == 0:
+                thisthat = SAdresses.get("this")
+            elif self.value == 1:
+                thisthat = SAdresses.get("that")
+            else:
+                thisthat = SAdresses.get("this")
+                print(f"ERROR: pointer can only be 0 or 1. not {self.value}")
+            # D = THIS/THAT
+            r.extend([f"@{thisthat}", "D=M"])
+            # *SP = D, SP ++
+            r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
+            return r
+
+        if self._mt("pop", "pointer"):
+            # SP--, THIS/THAT = *SP
+            if self.value == 0:
+                thisthat = SAdresses.get("this")
+            elif self.value == 1:
+                thisthat = SAdresses.get("that")
+            else:
+                thisthat = SAdresses.get("this")
+                print(f"ERROR: pointer can only be 0 or 1. not {self.value}")
+            # SP --, D = *SP
+            r.extend(["@SP", "AM=M-1", "D=M"])
+            # THIS/THAT = D
+            r.extend([f"@{thisthat}", "M=D"])
             return r
 
         if self.mode == "pop":
