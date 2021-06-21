@@ -3,12 +3,13 @@ import sys
 import os.path
 from typing import List
 from concurrent.futures import ProcessPoolExecutor, wait
-
-import Instructions as op
+from colorama import init
 import Parser
 
 
 def main():
+    # init colorama Color output
+    init()
 
     # Handle arguments
     arg = ArgumentsCheck()

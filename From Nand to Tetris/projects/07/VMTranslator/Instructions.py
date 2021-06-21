@@ -1,3 +1,5 @@
+from colorama import Fore
+
 
 class Operation:
 
@@ -17,7 +19,8 @@ class Operation:
 
 
 SModes = ["push", "pop"]
-STypes = ["constant", "local", "argument", "this", "that", "temp", "pointer"]
+STypes = ["constant", "local", "argument",
+          "this", "that", "temp", "pointer", "static"]
 SAdresses = {"stack": 0, "local": 1, "argument": 2, "this": 3, "that": 4}
 STempRange = (5, 12)
 SStaticRange = (16, 255)
@@ -31,17 +34,20 @@ class Stack(Operation):
     def translate(self):
         r = super().translate()
 
+        # constant
         if self._mt("push", "constant"):
             r.extend([f"@{self.value}",
                       "D=A", "@SP", "A=M", "M=D"])
             r.extend(_SPinc)
             return r
 
+        # temp
         if self._mt("pop", "temp"):
             # SP --, D = *SP, tempAddr = D
             tempAddr = STempRange[0] + self.value
             if tempAddr > STempRange[1]:
-                print(f"ERROR: Temp memory out of range ({STempRange})")
+                print(
+                    Fore.RED + f"ERROR: Temp memory out of range ({STempRange})")
             # SP --, D = *SP
             r.extend(["@SP", "AM=M-1", "D=M"])
             # tempAddr = D
@@ -52,11 +58,29 @@ class Stack(Operation):
             # SP++, *SP = tempadd
             tempAddr = STempRange[0] + self.value
             if tempAddr > STempRange[1]:
-                print(f"ERROR: Temp memory out of range ({STempRange})")
+                print(
+                    Fore.RED + f"ERROR: Temp memory out of range ({STempRange})")
             # D = tempAddr
             r.extend([f"@{tempAddr}", "D=M"])
             # *SP = D, SP ++
             r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
+            return r
+
+        # pointer
+        if self._mt("pop", "pointer"):
+            # SP--, THIS/THAT = *SP
+            if self.value == 0:
+                thisthat = SAdresses.get("this")
+            elif self.value == 1:
+                thisthat = SAdresses.get("that")
+            else:
+                thisthat = SAdresses.get("this")
+                print(
+                    Fore.RED + f"ERROR: pointer can only be 0 or 1. not {self.value}")
+            # SP --, D = *SP
+            r.extend(["@SP", "AM=M-1", "D=M"])
+            # THIS/THAT = D
+            r.extend([f"@{thisthat}", "M=D"])
             return r
 
         if self._mt("push", "pointer"):
@@ -67,28 +91,38 @@ class Stack(Operation):
                 thisthat = SAdresses.get("that")
             else:
                 thisthat = SAdresses.get("this")
-                print(f"ERROR: pointer can only be 0 or 1. not {self.value}")
+                print(
+                    Fore.RED + f"ERROR: pointer can only be 0 or 1. not {self.value}")
             # D = THIS/THAT
             r.extend([f"@{thisthat}", "D=M"])
             # *SP = D, SP ++
             r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
             return r
 
-        if self._mt("pop", "pointer"):
-            # SP--, THIS/THAT = *SP
-            if self.value == 0:
-                thisthat = SAdresses.get("this")
-            elif self.value == 1:
-                thisthat = SAdresses.get("that")
-            else:
-                thisthat = SAdresses.get("this")
-                print(f"ERROR: pointer can only be 0 or 1. not {self.value}")
-            # SP --, D = *SP
+        # static
+        if self._mt("pop", "static"):
+            # SP --, @filename.value = *SP
+            if SStaticRange[0] + self.value > SStaticRange[1]:
+                print(Fore.RED + "ERROR: Static out of memory range")
+            targetName = f"{self.fileName}.{self.value}"
+            # SP --, D = @SP
             r.extend(["@SP", "AM=M-1", "D=M"])
-            # THIS/THAT = D
-            r.extend([f"@{thisthat}", "M=D"])
+            # @filename.value = D
+            r.extend([f"@{targetName}", "M=D"])
             return r
 
+        if self._mt("push", "static"):
+            # *SP = @filename.value, SP ++
+            if SStaticRange[0] + self.value > SStaticRange[1]:
+                print(Fore.RED + "ERROR: Static out of memory range")
+            targetName = f"{self.fileName}.{self.value}"
+            #  D = @filename.value
+            r.extend([f"@{targetName}", "D=M"])
+            # SP ++, *SP = D
+            r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
+            return r
+
+        # local, argument, this, that
         if self.mode == "pop":
             # addr=LCL+i, SP--, *addr=*SP
             tempRegister = "@13"
@@ -113,7 +147,7 @@ class Stack(Operation):
             return r
 
         # Default Case
-        r.extend(["// not implemented"])
+        print(Fore.RED + f"ERROR: Unknown stack command ({self.JackOP})")
         return r
 
     def parse(self) -> bool:
@@ -194,7 +228,8 @@ class Arithmetic(Operation):
             return r
 
         # Default Case
-        r.extend(["// not implemented"])
+        print(
+            Fore.RED + f"ERROR: unknown arithmetic operation ({self.JackOP})")
         return r
 
     def comparison(self, type: str):
@@ -217,6 +252,12 @@ class Arithmetic(Operation):
 
 
 class Invalid(Operation):
+    def __init__(self):
+        pass
+    pass
+
+
+class Comment(Operation):
     def __init__(self):
         pass
     pass
