@@ -44,27 +44,13 @@
             "console": "integratedTerminal",
         },
         {
-            "name": "VMTranslator2 PointerTest",
-            "presentation": {
-                "group": "VMTranslator Complex",
-                "hidden": true
-            },
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
-            "args": [
-                "projects/07/MemoryAccess/PointerTest/PointerTest.vm"
-            ],
-            "console": "integratedTerminal",
-        },
-        {
             "name": "VMTranslator BasicLoop",
             "presentation": {
                 "group": "VMTranslator Complex",
             },
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "module": "translator.vmtranslator",
             "args": [
                 "projects/08/ProgramFlow/BasicLoop/BasicLoop.vm"
             ],
@@ -77,7 +63,7 @@
             },
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "module": "translator.vmtranslator",
             "args": [
                 "projects/08/ProgramFlow/FibonacciSeries/"
             ],
@@ -90,7 +76,7 @@
             },
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "module": "translator.vmtranslator",
             "args": [
                 "projects/08/FunctionCalls/FibonacciElement/"
             ],
@@ -103,7 +89,7 @@
             },
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "module": "translator.vmtranslator",
             "args": [
                 "projects/08/FunctionCalls/NestedCall/"
             ],
@@ -116,7 +102,7 @@
             },
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "module": "translator.vmtranslator",
             "args": [
                 "projects/08/FunctionCalls/SimpleFunction/"
             ],
@@ -129,7 +115,7 @@
             },
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "module": "translator.vmtranslator",
             "args": [
                 "projects/08/FunctionCalls/StaticsTest/"
             ],
