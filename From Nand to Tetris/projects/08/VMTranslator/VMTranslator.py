@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
-from concurrent.futures import ProcessPoolExecutor, wait
+from concurrent.futures import ThreadPoolExecutor, wait
 from typing import List
 
 from colorama import Fore, init
@@ -22,19 +22,21 @@ def main():
     # Read Files
     VMFiles = VMFile.FilenamesToObjects(files)
 
+    # Multi threading
+    MainPool = ThreadPoolExecutor()
+
     # Parse Files Multi threaded
-    FilePool = ProcessPoolExecutor()
     FileFutures = []
     for VMObject in VMFiles:
-        FileFutures.append(FilePool.submit(VMObject.Parse))
+        FileFutures.append(MainPool.submit(VMObject.Parse))
     wait(FileFutures)
 
     # Translate Files Multi threaded
-    TranslatePool = ProcessPoolExecutor()
     TranslateFutures = []
     for VMObject in VMFiles:
-        TranslateFutures.append(TranslatePool.submit(VMObject.Translate))
+        TranslateFutures.append(MainPool.submit(VMObject.Translate))
     wait(TranslateFutures)
+    MainPool.shutdown(True)
 
     # Combine Outputs
     translated = BootstrapCode()
@@ -42,7 +44,13 @@ def main():
         translated.extend(VMObject.assembly)
 
     # Write output
-    outFilename = os.path.basename(sys.argv[1]) + ".asm"
+    if os.path.isdir(sys.argv[1]):  # If folder
+        dirname = os.path.relpath(sys.argv[1]) + os.path.sep
+        outFilename = dirname + os.path.basename(sys.argv[1]) + ".asm"
+    else:  # If file
+        dirname = os.path.dirname(sys.argv[1]) + os.path.sep
+        outFilename = dirname + \
+            os.path.splitext(os.path.basename(sys.argv[1]))[0] + ".asm"
     print(f"Writing {outFilename}")
     out = open(outFilename, "w")
     out.write(OutputString(translated, outFilename))

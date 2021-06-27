@@ -34,5 +34,25 @@
             ],
             "console": "integratedTerminal",
         },
+        {
+            "name": "VMTranslator2 PointerTest",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/07/MemoryAccess/PointerTest/PointerTest.vm"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator2 BasicLoop",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/08/ProgramFlow/BasicLoop/BasicLoop.vm"
+            ],
+            "console": "integratedTerminal",
+        },
     ],
 }

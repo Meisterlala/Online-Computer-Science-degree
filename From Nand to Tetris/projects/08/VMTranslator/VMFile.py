@@ -1,3 +1,4 @@
+from concurrent.futures.thread import ThreadPoolExecutor
 from typing import List
 import os
 from concurrent.futures import ProcessPoolExecutor, wait
@@ -44,7 +45,9 @@ class VMFile():
         lineNumber = 0
         for line in self.fileContent:
             uid = VMFile._getUID()
-            futures.append(pool.submit(_ParseLine, line, uid, self.fileName))
+            fileNameNoExtension = os.path.splitext(self.fileName)[0]
+            futures.append(pool.submit(
+                _ParseLine, line, uid, fileNameNoExtension))
             lineNumber += 1
 
         # Filter Invalids
@@ -68,9 +71,9 @@ class VMFile():
 
         # Print for Debug
         if commentCounter > 0:
-            print(f"Ignoring {commentCounter} comments")
+            print(f"\tIgnoring {commentCounter} comments")
         if invalidCounter > 0:
-            print(Fore.YELLOW + f"WARNING: {invalidCounter} invalid lines")
+            print(Fore.YELLOW + f"\tWARNING: {invalidCounter} invalid lines")
 
     def Translate(self):
 
@@ -90,7 +93,7 @@ class VMFile():
             self.assembly.extend(result)
 
         print(Fore.GREEN +
-              f"Translated {self.fileName} to {len(self.assembly)} OPs")
+              f"\tTranslated to {len(self.assembly)} OPs")
 
     @staticmethod
     def _getUID():
@@ -125,5 +128,13 @@ def _ParseLine(line: str, jumpID: int, FileName: str):
     arithmetic = op.Arithmetic(preParsed, FileName, jumpID)
     if arithmetic.parse():
         return arithmetic
+
+    goto = op.GoTo(preParsed, FileName, jumpID)
+    if goto.parse():
+        return goto
+
+    label = op.Label(preParsed, FileName, jumpID)
+    if label.parse():
+        return label
 
     return op.Invalid()

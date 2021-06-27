@@ -1,7 +1,6 @@
 from colorama import Fore
 
 
-
 class Operation:
 
     def __init__(self, JackOP: str, SourceFile: str, lineNumber: int):
@@ -19,18 +18,14 @@ class Operation:
         return False
 
 
-SModes = ["push", "pop"]
-STypes = ["constant", "local", "argument",
-          "this", "that", "temp", "pointer", "static"]
-SAdresses = {"stack": 0, "local": 1, "argument": 2, "this": 3, "that": 4}
-STempRange = (5, 12)
-SStaticRange = (16, 255)
-
-
 class Stack(Operation):
-    mode = ""
-    type = ""
-    value = 0
+    Modes = ["push", "pop"]
+    Types = ["constant", "local", "argument",
+             "this", "that", "temp", "pointer", "static"]
+    Adresses = {"stack": "SP", "local": "LCL",
+                "argument": "ARG", "this": "THIS", "that": "THAT"}
+    TempRange = (5, 12)
+    StaticRange = (16, 255)
 
     def translate(self):
         r = super().translate()
@@ -39,16 +34,16 @@ class Stack(Operation):
         if self._mt("push", "constant"):
             r.extend([f"@{self.value}",
                       "D=A", "@SP", "A=M", "M=D"])
-            r.extend(_SPinc)
+            r.extend(["@SP", "M=M+1"])
             return r
 
         # temp
         if self._mt("pop", "temp"):
             # SP --, D = *SP, tempAddr = D
-            tempAddr = STempRange[0] + self.value
-            if tempAddr > STempRange[1]:
+            tempAddr = Stack.TempRange[0] + self.value
+            if tempAddr > Stack.TempRange[1]:
                 print(
-                    Fore.RED + f"ERROR: Temp memory out of range ({STempRange})")
+                    Fore.RED + f"ERROR: Temp memory out of range ({Stack.TempRange})")
             # SP --, D = *SP
             r.extend(["@SP", "AM=M-1", "D=M"])
             # tempAddr = D
@@ -57,10 +52,10 @@ class Stack(Operation):
 
         if self._mt("push", "temp"):
             # SP++, *SP = tempadd
-            tempAddr = STempRange[0] + self.value
-            if tempAddr > STempRange[1]:
+            tempAddr = Stack.TempRange[0] + self.value
+            if tempAddr > Stack.TempRange[1]:
                 print(
-                    Fore.RED + f"ERROR: Temp memory out of range ({STempRange})")
+                    Fore.RED + f"ERROR: Temp memory out of range ({Stack.TempRange})")
             # D = tempAddr
             r.extend([f"@{tempAddr}", "D=M"])
             # *SP = D, SP ++
@@ -71,11 +66,11 @@ class Stack(Operation):
         if self._mt("pop", "pointer"):
             # SP--, THIS/THAT = *SP
             if self.value == 0:
-                thisthat = SAdresses.get("this")
+                thisthat = Stack.Adresses.get("this")
             elif self.value == 1:
-                thisthat = SAdresses.get("that")
+                thisthat = Stack.Adresses.get("that")
             else:
-                thisthat = SAdresses.get("this")
+                thisthat = Stack.Adresses.get("this")
                 print(
                     Fore.RED + f"ERROR: pointer can only be 0 or 1. not {self.value}")
             # SP --, D = *SP
@@ -87,11 +82,11 @@ class Stack(Operation):
         if self._mt("push", "pointer"):
             # *SP = THIS/THAT, SP++
             if self.value == 0:
-                thisthat = SAdresses.get("this")
+                thisthat = Stack.Adresses.get("this")
             elif self.value == 1:
-                thisthat = SAdresses.get("that")
+                thisthat = Stack.Adresses.get("that")
             else:
-                thisthat = SAdresses.get("this")
+                thisthat = Stack.Adresses.get("this")
                 print(
                     Fore.RED + f"ERROR: pointer can only be 0 or 1. not {self.value}")
             # D = THIS/THAT
@@ -103,7 +98,7 @@ class Stack(Operation):
         # static
         if self._mt("pop", "static"):
             # SP --, @filename.value = *SP
-            if SStaticRange[0] + self.value > SStaticRange[1]:
+            if Stack.StaticRange[0] + self.value > Stack.StaticRange[1]:
                 print(Fore.RED + "ERROR: Static out of memory range")
             targetName = f"{self.fileName}.{self.value}"
             # SP --, D = @SP
@@ -114,7 +109,7 @@ class Stack(Operation):
 
         if self._mt("push", "static"):
             # *SP = @filename.value, SP ++
-            if SStaticRange[0] + self.value > SStaticRange[1]:
+            if Stack.StaticRange[0] + self.value > Stack.StaticRange[1]:
                 print(Fore.RED + "ERROR: Static out of memory range")
             targetName = f"{self.fileName}.{self.value}"
             #  D = @filename.value
@@ -127,7 +122,7 @@ class Stack(Operation):
         if self.mode == "pop":
             # addr=LCL+i, SP--, *addr=*SP
             tempRegister = "@13"
-            typeBase = SAdresses.get(self.type)
+            typeBase = Stack.Adresses.get(self.type)
             # D = addr
             r.extend([f"@{typeBase}", "D=M", f"@{self.value}", "D=D+A"])
             # tempRegister = D
@@ -140,7 +135,7 @@ class Stack(Operation):
 
         if self.mode == "push":
             # addr=LCL+i, *SP=*addr, SP++
-            typeBase = SAdresses.get(self.type)
+            typeBase = Stack.Adresses.get(self.type)
             # D = *addr + i
             r.extend([f"@{typeBase}", "D=M", f"@{self.value}", "A=D+A", "D=M"])
             # *SP = D, SP ++
@@ -157,13 +152,13 @@ class Stack(Operation):
             return False
 
         # Check for Push/Pop
-        if self.sOP[0] in SModes:
+        if self.sOP[0] in Stack.Modes:
             self.mode = self.sOP[0]
         else:
             return False
 
         # Check for type
-        if self.sOP[1] in STypes:
+        if self.sOP[1] in Stack.Types:
             self.type = self.sOP[1]
         else:
             return False
@@ -177,14 +172,13 @@ class Stack(Operation):
         return self.mode == mode and self.type == type
 
 
-ATypes = ["add", "sub", "neg", "and", "or", "not", "eq", "lt", "gt"]
-
-
 class Arithmetic(Operation):
-    type = ""
+    Types = ["add", "sub", "neg", "and", "or", "not", "eq", "lt", "gt"]
 
     def translate(self):
         r = super().translate()
+
+        _SPread2 = ["@SP", "AM=M-1", "D=M", "A=A-1"]
 
         if self.type == "add":
             r.extend(_SPread2)
@@ -197,7 +191,7 @@ class Arithmetic(Operation):
             return r
 
         if self.type == "neg":
-            r.extend(_SPfollow)
+            r.extend(["@SP", "A=M-1"])
             r.extend(["D=0", "M=D-M"])
             return r
 
@@ -212,7 +206,7 @@ class Arithmetic(Operation):
             return r
 
         if self.type == "not":
-            r.extend(_SPfollow)
+            r.extend(["@SP", "A=M-1"])
             r.extend(["M=!M"])
             return r
 
@@ -244,12 +238,66 @@ class Arithmetic(Operation):
             return False
 
         # Check for Type (add, sub, gt, ...)
-        if self.sOP[0] in ATypes:
+        if self.sOP[0] in Arithmetic.Types:
             self.type = self.sOP[0]
         else:
             return False
 
         return True
+
+
+class Label(Operation):
+    def parse(self) -> bool:
+        # Length
+        if len(self.sOP) != 2:
+            return False
+
+        # Has to start with "label"
+        if self.sOP[0] != "label":
+            return False
+
+        self.label = self.sOP[1]
+
+        return True
+
+    def translate(self):
+        r = super().translate()
+        labelName = f"{self.fileName}.funcName${self.label}"
+        r.append(f"({labelName})")
+        return r
+
+
+class GoTo(Operation):
+    types = ["if-goto", "goto"]
+
+    def parse(self) -> bool:
+        # Length
+        if len(self.sOP) != 2:
+            return False
+
+        # Goto or if-Goto
+        if self.sOP[0] in GoTo.types:
+            self.type = self.sOP[0]
+        else:
+            return False
+
+        self.label = self.sOP[1]
+
+        return True
+
+    def translate(self):
+        r = super().translate()
+
+        labelName = f"{self.fileName}.funcName${self.label}"
+
+        if self.type == "if-goto":
+            # SP --, D = *SP
+            r.extend(["@SP", "AM=M-1", "D=M"])
+            # JGT -> labelname
+            r.extend([f"@{labelName}", "D;JGT"])
+        elif self.type == "goto":
+            pass
+        return r
 
 
 class Invalid(Operation):
@@ -262,11 +310,3 @@ class Comment(Operation):
     def __init__(self):
         pass
     pass
-
-
-# Common Stuff
-_SPdec = ["@SP", "M=M-1"]
-_SPinc = ["@SP", "M=M+1"]
-_SPfollowAndDec = ["@SP", "AM=M-1"]
-_SPfollow = ["@SP", "A=M-1"]
-_SPread2 = ["@SP", "AM=M-1", "D=M", "A=A-1"]

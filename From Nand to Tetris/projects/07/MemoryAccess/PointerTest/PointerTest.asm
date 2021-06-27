@@ -1,5 +1,7 @@
 // Generated from projects/07/MemoryAccess/PointerTest/PointerTest.asm
 
+	//Bootstrap
+
 	// push constant 3030
 	@3030
 	D=A
