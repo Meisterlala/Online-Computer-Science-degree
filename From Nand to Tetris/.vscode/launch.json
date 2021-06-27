@@ -6,6 +6,9 @@
     "configurations": [
         {
             "name": "VMTranslator BasicTest",
+            "presentation": {
+                "group": "VMTranslator Simple",
+            },
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/07/VMTranslator/VMTranslator.py",
@@ -16,6 +19,9 @@
         },
         {
             "name": "VMTranslator StaticTest",
+            "presentation": {
+                "group": "VMTranslator Simple",
+            },
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/07/VMTranslator/VMTranslator.py",
@@ -26,6 +32,9 @@
         },
         {
             "name": "VMTranslator PointerTest",
+            "presentation": {
+                "group": "VMTranslator Simple",
+            },
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/07/VMTranslator/VMTranslator.py",
@@ -36,6 +45,10 @@
         },
         {
             "name": "VMTranslator2 PointerTest",
+            "presentation": {
+                "group": "VMTranslator Complex",
+                "hidden": true
+            },
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
@@ -45,12 +58,80 @@
             "console": "integratedTerminal",
         },
         {
-            "name": "VMTranslator2 BasicLoop",
+            "name": "VMTranslator BasicLoop",
+            "presentation": {
+                "group": "VMTranslator Complex",
+            },
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
             "args": [
                 "projects/08/ProgramFlow/BasicLoop/BasicLoop.vm"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator FibonacciSeries",
+            "presentation": {
+                "group": "VMTranslator Complex",
+            },
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/08/ProgramFlow/FibonacciSeries/"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator FibonacciElement",
+            "presentation": {
+                "group": "VMTranslator Complex",
+            },
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/08/FunctionCalls/FibonacciElement/"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator NestedCall",
+            "presentation": {
+                "group": "VMTranslator Complex",
+            },
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/08/FunctionCalls/NestedCall/"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator SimpleFunction",
+            "presentation": {
+                "group": "VMTranslator Complex",
+            },
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/08/FunctionCalls/SimpleFunction/"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "VMTranslator StaticsTest",
+            "presentation": {
+                "group": "VMTranslator Complex",
+            },
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/08/VMTranslator/VMTranslator.py",
+            "args": [
+                "projects/08/FunctionCalls/StaticsTest/"
             ],
             "console": "integratedTerminal",
         },
