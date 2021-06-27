@@ -71,7 +71,7 @@ class VMFile():
 
         # Print for Debug
         if commentCounter > 0:
-            print(f"\tIgnoring {commentCounter} comments")
+            print(f"\tIgnoring {commentCounter} comments/empty lines")
         if invalidCounter > 0:
             print(Fore.YELLOW + f"\tWARNING: {invalidCounter} invalid lines")
 

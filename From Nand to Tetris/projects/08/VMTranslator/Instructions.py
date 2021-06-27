@@ -302,7 +302,8 @@ class GoTo(Operation):
             # JGT -> labelname
             r.extend([f"@{labelName}", "D;JGT"])
         elif self.type == "goto":
-            pass
+            # JMP -> labelname
+            r.extend([f"@{labelName}", "0;JMP"])
         return r
 
 

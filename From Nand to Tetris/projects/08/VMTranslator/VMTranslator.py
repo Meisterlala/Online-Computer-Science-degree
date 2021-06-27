@@ -45,8 +45,9 @@ def main():
 
     # Write output
     if os.path.isdir(sys.argv[1]):  # If folder
+
         dirname = os.path.relpath(sys.argv[1]) + os.path.sep
-        outFilename = dirname + os.path.basename(sys.argv[1]) + ".asm"
+        outFilename = dirname + os.path.basename(sys.argv[1].rstrip(os.sep)) + ".asm"
     else:  # If file
         dirname = os.path.dirname(sys.argv[1]) + os.path.sep
         outFilename = dirname + \
@@ -84,6 +85,9 @@ def ArgumentsParse():
     filename = str(sys.argv[1])
 
     files = []
+
+    # Remove Trailing /
+    filename.rstrip(os.path.sep)
 
     # If File
     if os.path.isfile(filename):
