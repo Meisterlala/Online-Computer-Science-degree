@@ -124,7 +124,9 @@ class Stack(Operation):
             tempRegister = "@13"
             typeBase = Stack.Adresses.get(self.type)
             # D = addr
-            r.extend([f"@{typeBase}", "D=M", f"@{self.value}", "D=D+A"])
+            r.extend([f"@{typeBase}", "D=M"])
+            if self.value != 0:
+                r.extend([f"@{self.value}", "D=D+A"])
             # tempRegister = D
             r.extend([tempRegister, "M=D"])
             # SP --, D=*SP
@@ -137,7 +139,11 @@ class Stack(Operation):
             # addr=LCL+i, *SP=*addr, SP++
             typeBase = Stack.Adresses.get(self.type)
             # D = *addr + i
-            r.extend([f"@{typeBase}", "D=M", f"@{self.value}", "A=D+A", "D=M"])
+            if self.value == 0:
+                r.extend([f"@{typeBase}", "A=M", "D=M"])
+            else:
+                r.extend([f"@{typeBase}", "D=M",
+                          f"@{self.value}", "A=D+A", "D=M"])
             # *SP = D, SP ++
             r.extend(["@SP", "AM=M+1", "A=A-1", "M=D"])
             return r

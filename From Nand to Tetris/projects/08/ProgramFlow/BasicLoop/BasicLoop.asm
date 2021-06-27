@@ -14,8 +14,6 @@
 	// pop local 0         
 	@LCL
 	D=M
-	@0
-	D=D+A
 	@13
 	M=D
 	@SP
@@ -30,9 +28,7 @@
 
 	// push argument 0    
 	@ARG
-	D=M
-	@0
-	A=D+A
+	A=M
 	D=M
 	@SP
 	AM=M+1
@@ -41,9 +37,7 @@
 
 	// push local 0
 	@LCL
-	D=M
-	@0
-	A=D+A
+	A=M
 	D=M
 	@SP
 	AM=M+1
@@ -60,8 +54,6 @@
 	// pop local 0	        
 	@LCL
 	D=M
-	@0
-	D=D+A
 	@13
 	M=D
 	@SP
@@ -73,9 +65,7 @@
 
 	// push argument 0
 	@ARG
-	D=M
-	@0
-	A=D+A
+	A=M
 	D=M
 	@SP
 	AM=M+1
@@ -101,8 +91,6 @@
 	// pop argument 0      
 	@ARG
 	D=M
-	@0
-	D=D+A
 	@13
 	M=D
 	@SP
@@ -114,9 +102,7 @@
 
 	// push argument 0
 	@ARG
-	D=M
-	@0
-	A=D+A
+	A=M
 	D=M
 	@SP
 	AM=M+1
@@ -132,9 +118,7 @@
 
 	// push local 0
 	@LCL
-	D=M
-	@0
-	A=D+A
+	A=M
 	D=M
 	@SP
 	AM=M+1
