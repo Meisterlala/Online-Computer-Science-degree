@@ -1,3 +1,8 @@
 {
-    "python.pythonPath": "/bin/python"
+    "python.pythonPath": "C:\\Python39\\python.exe",
+    "python.linting.banditEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylamaEnabled": false,
+    "python.linting.flake8Enabled": false
 }
