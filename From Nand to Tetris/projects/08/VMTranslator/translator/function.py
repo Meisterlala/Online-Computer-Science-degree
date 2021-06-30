@@ -85,7 +85,7 @@ class Return(op.Operation):
                     target = *(pointer - offset)
             Args:
                 target (str): target of write
-                pointer (int, optional): base address of pointer. Defaults to Return.end_frame_address.
+                pointer (int, optional): base address of pointer.
                 offset (int, optional): pointer offset. Defaults to 0.
             """
             if offset < 0:
