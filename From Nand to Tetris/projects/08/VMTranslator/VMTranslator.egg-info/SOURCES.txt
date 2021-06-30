@@ -1,0 +1,13 @@
+pyproject.toml
+setup.cfg
+VMTranslator.egg-info/PKG-INFO
+VMTranslator.egg-info/SOURCES.txt
+VMTranslator.egg-info/dependency_links.txt
+VMTranslator.egg-info/entry_points.txt
+VMTranslator.egg-info/requires.txt
+VMTranslator.egg-info/top_level.txt
+translator/__init__.py
+translator/function.py
+translator/instructions.py
+translator/vmfile.py
+translator/vmtranslator.py

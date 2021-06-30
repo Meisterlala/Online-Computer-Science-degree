@@ -50,14 +50,14 @@ def main():
     if os.path.isdir(sys.argv[1]):  # If folder
         dirname = os.path.relpath(sys.argv[1]) + os.path.sep
         out_filename = dirname + \
-            os.path.basename(sys.argv[1].rstrip(os.sep)) + ".asm"
+            os.path.basename(sys.argv[1].rstrip("/").rstrip("\\")) + ".asm"
     else:  # If file
         dirname = os.path.dirname(sys.argv[1]) + os.path.sep
         out_filename = dirname + \
             os.path.splitext(os.path.basename(sys.argv[1]))[0] + ".asm"
     print(f"Writing {out_filename}")
 
-    with open(out_filename, "w") as out_file:
+    with open(out_filename, "w", newline=os.linesep) as out_file:
         out_file.write(output_string(translated, out_filename))
 
     sys.exit(0)
@@ -66,16 +66,16 @@ def main():
 def output_string(lines: List[str], filename):
     """Formats the Output before writing a File"""
     # Header
-    outp = f"// Generated from {filename}"
+    outp = f"// Generated from {filename}\n"
 
     for out_line in lines:
         # Indent if not a label
         if out_line[0] == "(":  # label
-            outp += "\r\n"
+            outp += "\n"
         elif out_line[0] == "/":
-            outp += "\r\n\r\n\t"
-        else:    # Code
-            outp += "\r\n\t"
+            outp += "\n\n"
+        else:  # Code
+            outp += "\n\t"
         outp += out_line
     return outp
 
@@ -96,7 +96,7 @@ def arguments_parse():
     files = []
 
     # Remove Trailing /
-    filename.rstrip(os.path.sep)
+    filename = filename.rstrip("\\").rstrip("/")
 
     # If File
     if os.path.isfile(filename):

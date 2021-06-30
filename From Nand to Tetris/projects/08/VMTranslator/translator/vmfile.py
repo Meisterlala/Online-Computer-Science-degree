@@ -6,6 +6,7 @@ from typing import List
 from colorama import Fore
 
 import translator.instructions as op
+import translator.function as fc
 
 
 def filenames_to_objects(filenames: List[str]):
@@ -150,5 +151,13 @@ def _parse_line(line: str, jump_id: int, file_name: str):
     label = op.Label(pre_parsed, file_name, jump_id)
     if label.parse():
         return label
+
+    function = fc.Function(pre_parsed, file_name, jump_id)
+    if function.parse():
+        return function
+
+    return_op = fc.Return(pre_parsed, file_name, jump_id)
+    if return_op.parse():
+        return return_op
 
     return op.Invalid()
