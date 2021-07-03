@@ -1,5 +1,5 @@
 """ Containes all the code to parse and translate Operation """
-
+from typing import List
 from colorama import Fore
 
 
@@ -12,7 +12,7 @@ class Operation:
         self.file_name = SourceFile
         self.jump_id = str(lineNumber).zfill(8)
 
-    def translate(self):
+    def translate(self) -> List[str]:
         """ Used for adding a Comment"""
         return [f"// {self.jack_op}", ]
 
@@ -353,8 +353,8 @@ class Invalid(Operation):
     """ Empty Operation to represent a invalid Operation """
     # pylint: disable=super-init-not-called
 
-    def __init__(self):
-        pass
+    def __init__(self, line):
+        self.jack_op = line
 
 
 class Comment(Operation):

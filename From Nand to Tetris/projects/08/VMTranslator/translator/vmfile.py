@@ -70,12 +70,14 @@ class VMFile():
         wait(futures)
         invalid_counter = 0
         comment_counter = 0
+        invalids: List[op.Operation] = []
 
         # Put results in list
         for future in futures:
             result = future.result()
             # Remove invalid lines
             if isinstance(result, op.Invalid):
+                invalids.append(result)
                 invalid_counter += 1
                 continue
             # Remove comments
@@ -88,7 +90,9 @@ class VMFile():
         if comment_counter > 0:
             print(f"\tIgnoring {comment_counter} comments/empty lines")
         if invalid_counter > 0:
-            print(Fore.YELLOW + f"\tWARNING: {invalid_counter} invalid lines")
+            print(Fore.YELLOW + f"\tWARNING: {invalid_counter} invalid lines:")
+            for invalid_result in invalids:
+                print(Fore.YELLOW + f"\t\t{invalid_result.jack_op}")
 
     def translate(self):
         """ Translate Parsed OP codes to Assembly """
@@ -160,4 +164,8 @@ def _parse_line(line: str, jump_id: int, file_name: str):
     if return_op.parse():
         return return_op
 
-    return op.Invalid()
+    call = fc.Call(pre_parsed, file_name, jump_id)
+    if call.parse():
+        return call
+
+    return op.Invalid(pre_parsed)

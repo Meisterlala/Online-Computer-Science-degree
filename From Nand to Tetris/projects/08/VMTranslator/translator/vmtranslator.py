@@ -8,6 +8,7 @@ from typing import List
 from colorama import Fore, init
 
 import translator.vmfile as vmfile
+import translator.function as fc
 
 
 def main():
@@ -122,10 +123,27 @@ def arguments_parse():
 def bootstrap_code():
     """Generates Code to Bootstrap the first function
 
+        SP = 256
+        Call Sys.init
+
     Returns:
         List[str]: Assembly OP Codes
     """
-    return ["//Bootstrap"]
+    retrun_value = ["// Bootstrap"]
+    # SP = 256
+    retrun_value.extend(["@256", "D=A", "@SP", "M=D"])
+    # -1 to Stack pointers
+    retrun_value.extend(["@0", "D=A",
+                         "@LCL", "M=D-1",
+                         "@ARG", "M=D-1",
+                         "@THIS", "M=D-1",
+                         "@THAT", "M=D-1"])
+    # Call Sys.init
+    call = fc.Call("call Sys.init 0", "Sys.init", 0)
+    call.parse()
+    retrun_value.extend(call.translate())
+
+    return retrun_value
 
 
 if __name__ == "__main__":

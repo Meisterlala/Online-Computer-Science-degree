@@ -50,7 +50,7 @@ class Function(op.Operation):
 
 class Return(op.Operation):
     """ A Jack function operation
-        eg: retun
+        eg: return
     """
 
     end_frame_address = 14
@@ -117,4 +117,99 @@ class Return(op.Operation):
         # goto retAddr
         return_value.extend(
             [f"@{Return.return_frame_address}", "A=M", "0;JMP"])
+        return return_value
+
+
+class Call(op.Operation):
+    """ A Jack function operation
+        eg: call Sys.main 0
+            call Foo.bar1 2
+    """
+
+    return_counter_dic = {}
+
+    @staticmethod
+    def _get_return_counter(func_name: str) -> int:
+        """Returns an incrementing Integer, used for each return call label
+
+        Args:
+            funcName (str): Name of the funtion
+
+        Returns:
+            int: incrementing counter
+        """
+        # Lookup value in dic
+        lookup = Call.return_counter_dic.get(func_name)
+
+        if lookup is None:
+            # Set to 0 if not found
+            Call.return_counter_dic[func_name] = 0
+            return 0
+        else:
+            # If found increment
+            Call.return_counter_dic[func_name] = lookup + 1
+            return lookup + 1
+
+    def __init__(self, JackOP: str, SourceFile: str, lineNumber: int):
+        super().__init__(JackOP, SourceFile, lineNumber)
+        self.arguments = 0
+        self.function_name = ""
+
+    def parse(self) -> bool:
+        if len(self.s_op) != 3:
+            return False
+
+        if self.s_op[0] != "call":
+            return False
+
+        if not self.s_op[2].isdigit():
+            return False
+
+        self.function_name = self.s_op[1]
+        self.arguments = int(self.s_op[2])
+        return True
+
+    def translate(self):
+        """ Pseudo Code
+            push returnAddress
+            push LCL
+            push ARG
+            push THIS
+            push THAT
+            ARG = SP - 5 - nArgs
+            LCL = SP
+            goto funcName
+            (returnAdressLabel)
+        """
+        return_value = super().translate()
+
+        # funcName = functionName$ret.i
+        return_counter = Call._get_return_counter(self.function_name)
+        return_adress_label = f"{self.function_name}$ret.{return_counter}"
+
+        def push(value):
+            """ Push value on Stack """
+            return [f"@{value}", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
+
+        return_value.extend(
+            [f"@{return_adress_label}", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"])
+        return_value.extend(push("LCL"))
+        return_value.extend(push("ARG"))
+        return_value.extend(push("THIS"))
+        return_value.extend(push("THAT"))
+
+        offset = 5 + self.arguments
+        # ARG = SP - offset
+        return_value.extend(
+            ["@SP", "D=M", f"@{offset}", "D=D-A", "@ARG", "M=D"])
+
+        # LCL = SP
+        return_value.extend(["@SP", "D=M", "@LCL", "M=D"])
+
+        # goto funcName
+        return_value.extend([f"@{self.function_name}", "0;JMP"])
+
+        # return label
+        return_value.append(f"({return_adress_label})")
+
         return return_value
