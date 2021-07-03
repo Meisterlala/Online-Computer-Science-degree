@@ -61,11 +61,6 @@
 	@Sys.init
 	0;JMP
 (Sys.init$ret.0)
-	@9999
-	@9999
-	@0000000000000000
-	@9999
-	@9999
 
 // function Main.fibonacci 0
 (Main.fibonacci)
@@ -262,11 +257,6 @@
 	@Main.fibonacci
 	0;JMP
 (Main.fibonacci$ret.0)
-	@9999
-	@9999
-	@0000000000000024
-	@9999
-	@9999
 
 // push argument 0
 	@ARG
@@ -337,11 +327,6 @@
 	@Main.fibonacci
 	0;JMP
 (Main.fibonacci$ret.1)
-	@9999
-	@9999
-	@0000000000000028
-	@9999
-	@9999
 
 // add                    
 	@SP
@@ -466,11 +451,6 @@
 	@Main.fibonacci
 	0;JMP
 (Main.fibonacci$ret.2)
-	@9999
-	@9999
-	@0000000000000043
-	@9999
-	@9999
 
 // label WHILE
 (Sys.init$WHILE)

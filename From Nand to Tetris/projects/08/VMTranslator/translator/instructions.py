@@ -5,9 +5,6 @@ from typing import List
 from colorama import Fore
 
 
-DEBUG_AFTER_CALL = True
-
-
 class Operation:
     """ represents a Jack OP code """
 
@@ -596,9 +593,5 @@ class Call(Operation):
 
         # return label
         return_value.append(f"({return_adress_label})")
-
-        if DEBUG_AFTER_CALL:
-            return_value.extend(
-                ["@9999", "@9999", f"@{self.jump_id}", "@9999", "@9999"])
 
         return return_value
