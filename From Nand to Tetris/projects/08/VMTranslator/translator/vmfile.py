@@ -1,12 +1,11 @@
 """ Handels a Single File for compiling """
 import os
-from concurrent.futures import ProcessPoolExecutor, wait
+from concurrent.futures import ThreadPoolExecutor, wait
 from typing import List
 
 from colorama import Fore
 
 import translator.instructions as op
-import translator.function as fc
 
 
 def filenames_to_objects(filenames: List[str]):
@@ -51,10 +50,10 @@ class VMFile():
 
     def parse(self):
         """Parse File Contents"""
-        print(f"Parsing {self.file_name}")
+        print(Fore.BLUE + f"Parsing {self.file_name}")
 
         # Multi threading
-        pool = ProcessPoolExecutor()
+        pool = ThreadPoolExecutor()
         futures = []
 
         # start Threads
@@ -65,9 +64,9 @@ class VMFile():
             futures.append(pool.submit(
                 _parse_line, line, uid, file_name_no_extension))
             line_number += 1
+        wait(futures)
 
         # Filter Invalids
-        wait(futures)
         invalid_counter = 0
         comment_counter = 0
         invalids: List[op.Operation] = []
@@ -88,16 +87,24 @@ class VMFile():
 
         # Print for Debug
         if comment_counter > 0:
-            print(f"\tIgnoring {comment_counter} comments/empty lines")
+            print(Fore.RESET +
+                  f"\tIgnoring {comment_counter} comments/empty lines")
         if invalid_counter > 0:
             print(Fore.YELLOW + f"\tWARNING: {invalid_counter} invalid lines:")
             for invalid_result in invalids:
                 print(Fore.YELLOW + f"\t\t{invalid_result.jack_op}")
 
+        # Reparse Labels/Goto
+        i = 0
+        for operation in self.ops:
+            if isinstance(operation, (op.Label, op.GoTo)):
+                operation.rename(self.ops[:i])
+            i = i + 1
+
     def translate(self):
         """ Translate Parsed OP codes to Assembly """
         # Multi threading
-        pool = ProcessPoolExecutor()
+        pool = ThreadPoolExecutor()
         futures = []
 
         # Start Thread to translate
@@ -156,15 +163,15 @@ def _parse_line(line: str, jump_id: int, file_name: str):
     if label.parse():
         return label
 
-    function = fc.Function(pre_parsed, file_name, jump_id)
+    function = op.Function(pre_parsed, file_name, jump_id)
     if function.parse():
         return function
 
-    return_op = fc.Return(pre_parsed, file_name, jump_id)
+    return_op = op.Return(pre_parsed, file_name, jump_id)
     if return_op.parse():
         return return_op
 
-    call = fc.Call(pre_parsed, file_name, jump_id)
+    call = op.Call(pre_parsed, file_name, jump_id)
     if call.parse():
         return call
 

@@ -4,64 +4,88 @@ import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, wait
 from typing import List
+import time
 
 from colorama import Fore, init
 
 import translator.vmfile as vmfile
-import translator.function as fc
+from translator.instructions import Call
+
+# Has ugly output
+MULTI_TRHEADED = False
+# Output time taken
+PERF_TEST = True
 
 
 def main():
     """Main function"""
+
+    start_timer = time.perf_counter()
 
     # init colorama Color output
     init()
 
     # Handle arguments
     files = arguments_parse()
-    print("Translating:")
+    print(Fore.BLUE + "Translating:")
     for file in files:
-        print(f"\t{file}")
+        print(Fore.RESET + f"\t{file}")
 
     # Read Files
     vm_files = vmfile.filenames_to_objects(files)
-
-    # Multi threading
-    main_pool = ThreadPoolExecutor()
-
-    # Parse Files Multi threaded
-    file_futures = []
-    for vm_object in vm_files:
-        file_futures.append(main_pool.submit(vm_object.parse))
-    wait(file_futures)
-
-    # Translate Files Multi threaded
-    translate_futures = []
-    for vm_object in vm_files:
-        translate_futures.append(main_pool.submit(vm_object.translate))
-    wait(translate_futures)
-    main_pool.shutdown(True)
+    if MULTI_TRHEADED:
+        main_pool = ThreadPoolExecutor()
+        parse_mt(vm_files, main_pool)
+        translate_mt(vm_files, main_pool)
+        main_pool.shutdown(True)
+    else:
+        for vm_object in vm_files:
+            vm_object.parse()
+            vm_object.translate()
 
     # Combine Outputs
     translated = bootstrap_code()
     for vm_object in vm_files:
         translated.extend(vm_object.assembly)
 
+    # Perf Output
+    if PERF_TEST:
+        print(Fore.MAGENTA +
+              f"Translating took {round( time.perf_counter() - start_timer,5)}s")
+
     # Write output
     if os.path.isdir(sys.argv[1]):  # If folder
         dirname = os.path.relpath(sys.argv[1]) + os.path.sep
-        out_filename = dirname + \
-            os.path.basename(sys.argv[1].rstrip("/").rstrip("\\")) + ".asm"
+        out_endname = os.path.basename(
+            sys.argv[1].rstrip("/").rstrip("\\")) + ".asm"
+        out_filename = dirname + out_endname
     else:  # If file
         dirname = os.path.dirname(sys.argv[1]) + os.path.sep
-        out_filename = dirname + \
-            os.path.splitext(os.path.basename(sys.argv[1]))[0] + ".asm"
-    print(f"Writing {out_filename}")
+        out_endname = os.path.splitext(
+            os.path.basename(sys.argv[1]))[0] + ".asm"
+        out_filename = dirname + out_endname
+    print(Fore.BLUE + f"Writing {dirname}" + Fore.GREEN + out_endname)
 
     with open(out_filename, "w", newline=os.linesep) as out_file:
         out_file.write(output_string(translated, out_filename))
 
     sys.exit(0)
+
+
+def translate_mt(vm_files, main_pool):
+    """Translate Files"""
+    translate_futures = []
+    for vm_object in vm_files:
+        translate_futures.append(main_pool.submit(vm_object.translate))
+    wait(translate_futures)
+
+
+def parse_mt(vm_files, main_pool):
+    """Parse Files"""
+    file_futures = []
+    for vm_object in vm_files:
+        file_futures.append(main_pool.submit(vm_object.parse))
+    wait(file_futures)
 
 
 def output_string(lines: List[str], filename):
@@ -139,7 +163,7 @@ def bootstrap_code():
                          "@THIS", "M=D-1",
                          "@THAT", "M=D-1"])
     # Call Sys.init
-    call = fc.Call("call Sys.init 0", "Sys.init", 0)
+    call = Call("call Sys.init 0", "Sys.init", 0)
     call.parse()
     retrun_value.extend(call.translate())
 
