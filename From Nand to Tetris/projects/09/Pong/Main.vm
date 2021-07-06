@@ -1,0 +1,24 @@
+function Main.main 2
+push constant 35
+pop local 1
+call Board.new 0
+pop local 0
+label WHILE_EXP0
+push local 0
+call Board.hasEnded 1
+not
+not
+if-goto WHILE_END0
+push local 0
+call Board.tick 1
+pop temp 0
+push local 0
+call Board.draw 1
+pop temp 0
+push local 1
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return

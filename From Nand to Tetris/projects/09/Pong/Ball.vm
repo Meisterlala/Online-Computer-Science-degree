@@ -1,0 +1,20 @@
+function Ball.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push pointer 0
+return
+function Ball.draw 0
+push argument 0
+pop pointer 0
+push this 0
+push this 1
+push constant 3
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return

@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile with supplied Jack Compiler",
+            "command": "tools/JackCompiler.bat",
+            "type": "shell",
+            "args": [
+                "${fileDirname}"
+            ],
+            "problemMatcher": {
+                "fileLocation": [
+                    "relative",
+                    "${fileDirname}"
+                ],
+                "pattern": {
+                    "regexp": "^In (\\S+) \\(line (\\d+)\\): (.+)$",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            },
+            "presentation": {
+                "panel": "shared",
+                "revealProblems": "onProblem"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Open VM Emulator",
+            "command": "tools/VMEmulator.bat",
+            "type": "shell",
+            "presentation": {
+                "reveal": "never",
+                "focus": false,
+                "showReuseMessage": true,
+                "clear": false,
+            },
+            "problemMatcher": []
+        }
+    ]
+}

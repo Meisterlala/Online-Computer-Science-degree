@@ -1,0 +1,88 @@
+class Puck {
+   field int x, y;
+   field int x2, y2;
+   field int width, length;
+   field int lastx1, lasty1, lastx2, lasty2;
+   
+   field int moveSpeed;
+
+   constructor Puck new(int _x, int _y){
+      let x = _x;
+      let y = _y;
+      let width = 4;
+      let length = 20;
+      let x2 = _x + width;
+      let y2 = _y + length;
+
+      // Speed of moving
+      let moveSpeed = 10;
+
+      return this;
+   }
+
+   method void moveUp(){
+      var int calculatedy;
+      var int calculatedy2;
+
+      // Clear prev
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x, y, x2, y2);
+      do Screen.setColor(true);
+
+      // Calc next position
+      let calculatedy = y - moveSpeed;
+      let calculatedy2 = y2 - moveSpeed;
+
+      // Bound check and move
+      if (Puck.inBounds(calculatedy, calculatedy2)){
+         let y = calculatedy;
+         let y2 = calculatedy2;
+      } else {
+         let y = 0;
+         let y2 = length;
+      }
+      return;
+   }
+
+   method void moveDown(){
+      var int calculatedy;
+      var int calculatedy2;
+
+      // Clear prev
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x, y, x2, y2);
+      do Screen.setColor(true);
+
+      // Calc next position
+      let calculatedy = y + moveSpeed;
+      let calculatedy2 = y2 + moveSpeed;
+
+      // Bound check and move
+      if (Puck.inBounds(calculatedy, calculatedy2)){
+         let y = calculatedy;
+         let y2 = calculatedy2;
+      } else {
+         let y = 255 - length;
+         let y2 = 255;
+      }
+      return;
+   }
+
+   function bool inBounds(int y, int y2) {
+      // Top edge
+      if (y  < 0) {return false;}
+      if (y2 < 0) {return false;}
+
+      // Bottom edge
+      if (y  > 255) {return false;}
+      if (y2 > 255) {return false;}
+
+      // Base Case
+      return true;
+   }
+
+   method void draw(){
+      do Screen.drawRectangle(x, y, x2, y2);
+      return;
+   }
+}

@@ -1,0 +1,163 @@
+function Puck.new 0
+push constant 11
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push constant 4
+pop this 4
+push constant 20
+pop this 5
+push argument 0
+push this 4
+add
+pop this 2
+push argument 1
+push this 5
+add
+pop this 3
+push constant 10
+pop this 10
+push pointer 0
+return
+function Puck.moveUp 2
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+push this 3
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 1
+push this 10
+sub
+pop local 0
+push this 3
+push this 10
+sub
+pop local 1
+push local 0
+push local 1
+call Puck.inBounds 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+pop this 1
+push local 1
+pop this 3
+goto IF_END0
+label IF_FALSE0
+push constant 0
+pop this 1
+push this 5
+pop this 3
+label IF_END0
+push constant 0
+return
+function Puck.moveDown 2
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+push this 3
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 1
+push this 10
+add
+pop local 0
+push this 3
+push this 10
+add
+pop local 1
+push local 0
+push local 1
+call Puck.inBounds 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+pop this 1
+push local 1
+pop this 3
+goto IF_END0
+label IF_FALSE0
+push constant 255
+push this 5
+sub
+pop this 1
+push constant 255
+pop this 3
+label IF_END0
+push constant 0
+return
+function Puck.inBounds 0
+push argument 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push argument 1
+push constant 0
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push argument 0
+push constant 255
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+return
+label IF_FALSE2
+push argument 1
+push constant 255
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+return
+label IF_FALSE3
+push constant 0
+not
+return
+function Puck.draw 0
+push argument 0
+pop pointer 0
+push this 0
+push this 1
+push this 2
+push this 3
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return

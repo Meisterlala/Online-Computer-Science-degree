@@ -1,0 +1,70 @@
+class Board {
+   field int score;
+   field Ball b;
+   field Puck left, right;
+   field char lastPressed;
+
+
+   constructor Board new(){
+      let score = 0;
+      // left Puck in middle on left side
+      let left = Puck.new(4, 128);
+      // right Puck in middle on right side
+      let right = Puck.new(500, 128);
+      // Ball in center
+      let b = Ball.new(256, 128);
+
+      // Set last pressed key to invalid key
+      let lastPressed = 12;
+      return this;
+   }
+
+   method void draw() {
+      // Draw Pucks
+      do left.draw();
+      do right.draw();
+
+      // Draw Ball
+      do b.draw();
+      return;
+   } 
+
+   method void tick() {
+      // Read last keypress
+      let lastPressed = Keyboard.keyPressed();
+      if (lastPressed = 0) {
+         // Only tick ball
+
+      } else {
+         // Move Puck
+         if (lastPressed = 87) //w
+         {
+            do left.moveUp();
+         } 
+         if (lastPressed = 83) //s
+         {
+            do left.moveDown();
+         } 
+         if (lastPressed = 131) //up
+         {
+            do right.moveUp();
+         } 
+         if (lastPressed = 133) //down
+         {
+            do right.moveDown();
+         } 
+      }
+
+ 
+
+      return;
+   }
+
+   method bool hasEnded() {
+      var bool ended;
+      let ended = false;
+
+      return ended;
+   }
+
+}

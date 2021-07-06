@@ -1,0 +1,17 @@
+class Main {
+   function void main() {
+      var Board mainBoard;
+
+      var int gameSpeed;
+      let gameSpeed = 35;
+
+      let mainBoard = Board.new();
+
+      while(~(mainBoard.hasEnded())){
+         do mainBoard.tick();
+         do mainBoard.draw();
+         do Sys.wait(gameSpeed);
+      }
+      return;
+   }
+}

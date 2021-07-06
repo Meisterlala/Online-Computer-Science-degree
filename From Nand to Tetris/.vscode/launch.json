@@ -121,5 +121,15 @@
             ],
             "console": "integratedTerminal",
         },
+        {
+            "name": "JackCompiler",
+            "type": "clr",
+            "request": "launch",
+            "console": "integratedTerminal",
+            "program": "tools/JackCompiler.bat",
+            "args": [
+                "${file}"
+            ]
+        }
     ],
 }

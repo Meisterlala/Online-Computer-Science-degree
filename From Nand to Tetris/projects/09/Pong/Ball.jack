@@ -1,0 +1,14 @@
+class Ball {
+   field int x, y;
+
+   constructor Ball new(int _x, int _y){
+      let x = _x;
+      let y = _y;
+      return this;
+   }
+
+   method void draw() {
+      do Screen.drawCircle(x,y,3);
+      return;
+   }
+}
