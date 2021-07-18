@@ -122,14 +122,43 @@
             "console": "integratedTerminal",
         },
         {
-            "name": "JackCompiler",
-            "type": "clr",
+            "name": "Jack Compiler XML ExpressionLessSquare",
+            "presentation": {
+                "group": "JackCompiler XML",
+            },
+            "type": "python",
             "request": "launch",
-            "console": "integratedTerminal",
-            "program": "tools/JackCompiler.bat",
+            "module": "jackc",
             "args": [
-                "${file}"
-            ]
-        }
+                "projects\\10\\ExpressionLessSquare"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler XML Square",
+            "presentation": {
+                "group": "JackCompiler XML",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\10\\Square"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler XML ArrayTest",
+            "presentation": {
+                "group": "JackCompiler XML",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\10\\ArrayTest"
+            ],
+            "console": "integratedTerminal",
+        },
     ],
 }
