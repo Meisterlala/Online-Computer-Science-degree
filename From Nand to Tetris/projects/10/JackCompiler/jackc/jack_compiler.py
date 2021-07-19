@@ -3,8 +3,6 @@
 import os
 import sys
 
-from jackc import tokens
-
 from .jack_file import JackFile
 from .tokenizer import Tokenizer
 

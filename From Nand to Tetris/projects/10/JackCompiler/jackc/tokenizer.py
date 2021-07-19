@@ -5,7 +5,6 @@ from io import StringIO
 
 from .jack_file import JackFile
 from .tokens import Token, Tokens
-from jackc import tokens
 
 
 class Tokenizer():
