@@ -12,7 +12,7 @@ class JackFile():
         self.filename = filename
         self.input_path = inp
         self.output_path = outp
-        self.compiled_content = ["some", "thisng"]
+        self.compiled_content = []
 
     def __repr__(self) -> str:
         return_value = f"From {self.input_path} to {self.output_path}"
@@ -38,4 +38,11 @@ class JackFile():
               f"Writing {rel_path} with {len(self.compiled_content)} Lines")
 
         with open(self.output_path, "w") as out_file:
-            out_file.writelines(self.compiled_content)
+            out_file.write("\n".join(self.compiled_content))
+
+    def read(self) -> str:
+        """ Read the File and return content as String"""
+
+        with open(self.input_path, "r") as in_file:
+            content = in_file.read()
+        return content
