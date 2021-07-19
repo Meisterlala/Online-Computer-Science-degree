@@ -12,7 +12,7 @@ class JackFile():
         self.filename = filename
         self.input_path = inp
         self.output_path = outp
-        self.compiled_content = []
+        self.compiled_content = ""
 
     def __repr__(self) -> str:
         return_value = f"From {self.input_path} to {self.output_path}"
@@ -27,18 +27,19 @@ class JackFile():
         Args:
             content (List[str]): List of text to be appended
         """
-        self.compiled_content.extend(content)
+        self.compiled_content += content
 
     def save(self):
         """Save the File to Disk
         """
 
         rel_path = path.relpath(self.output_path)
+        count = self.compiled_content.count('\n') + 1
         print(Fore.GREEN +
-              f"Writing {rel_path} with {len(self.compiled_content)} Lines")
+              f"Writing {rel_path} with {count} Lines")
 
         with open(self.output_path, "w") as out_file:
-            out_file.write("\n".join(self.compiled_content))
+            out_file.write(self.compiled_content)
 
     def read(self) -> str:
         """ Read the File and return content as String"""

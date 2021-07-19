@@ -4,7 +4,7 @@
 from io import StringIO
 
 from .jack_file import JackFile
-from .tokens import Token, Tokens
+from .tokens import Token, Tokens, Invalid
 
 
 class Tokenizer():
@@ -95,7 +95,7 @@ class Tokenizer():
             self.stream.seek(self.stream.tell() - 1)
             return Tokens.Identifier(temp_name)
 
-        return Tokens.Invalid()
+        return Invalid()
 
     def has_more_tokens(self) -> bool:
         """ True if there are more tokens"""

@@ -5,6 +5,7 @@ import sys
 
 from .jack_file import JackFile
 from .tokenizer import Tokenizer
+from .parser import Parser
 
 
 def main():
@@ -17,7 +18,9 @@ def main():
         tokenizer = Tokenizer(file)
         print(file)
         token_list = tokenizer.tokenize()
-        file.append(tokenizer.to_xml())
+        parser = Parser(token_list)
+        parsed = parser.parse()
+        file.append(str(parsed))
 
     for file in jack_files:
         file.save()
