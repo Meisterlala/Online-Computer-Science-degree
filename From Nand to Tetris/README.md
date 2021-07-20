@@ -1,7 +1,29 @@
+
+# Software written in this course
+
+## Jack Compiler
+a compiler for the Jack programming language to Jack VM code (similar to Java bytecode) 
+
+```
+pip install "git+https://github.com/Meisterlala/Online-Computer-Science-degree/#egg=Jack-Compiler&subdirectory=From Nand to Tetris/projects/10/JackCompiler"
+JackC (file|directory)
+```
+
+## Jack VM Translator
+a compiler used to translate Jack VM code to Hack Assembly.
+
+```
+pip install "git+https://github.com/Meisterlala/Online-Computer-Science-degree/#egg=VMTranslator&subdirectory=From Nand to Tetris/projects/08/VMTranslator"
+VMTranslator (file|directory)
+```
+
+
+
 # Build a Modern Computer from First Principles: From Nand to Tetris
 by Hebrew University of Jerusalem
 
-# Project-Centered course
+
+### Project-Centered course
 1. Project: Building elementary logic gates like And, Or, Not, Multiplexor, and more
 2. Project: Building a family of adder chips, culminating in the construction of an Arithmetic Logic Unit (ALU)
 3. Project: Building registers and memory units, culminating in the construction of a Random Access Memory (RAM)
@@ -16,12 +38,12 @@ https://www.coursera.org/learn/build-a-computer
 # Build a Modern Computer from First Principles: From Nand to Tetris 2
 by Hebrew University of Jerusalem
 
-# Project-Centered course
+### Project-Centered course
 1. Project: Programming a basic IL Language compiler
 2. Project: Adding more advanced functionality to the compiler
 3. Project: Building a Syntax Analyzer for the High-Level Language Jack
 4. Project: Completing the Jack compiler
-5. Project: Creating an Operation 
+5. Project: Creating an Operatingsystem 
 6. Project: Constructing games and running them using everything build in this Course
 
 
