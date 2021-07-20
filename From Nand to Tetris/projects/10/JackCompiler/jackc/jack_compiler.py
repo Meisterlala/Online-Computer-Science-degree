@@ -16,7 +16,6 @@ def main():
 
     for file in jack_files:
         tokenizer = Tokenizer(file)
-        print(file)
         token_list = tokenizer.tokenize()
         parser = Parser(token_list)
         parsed = parser.parse()

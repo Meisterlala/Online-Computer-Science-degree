@@ -57,7 +57,15 @@ class Tokenizer():
 
         # if IntConst
         if current_char.isdigit():
-            return Tokens.IntConst(int(current_char))
+            number = current_char
+            last_known_digit = self.stream.tell()
+            next_char = self.stream.read(1)
+            # While next char is a digit
+            while next_char.isdigit():
+                number += next_char
+                next_char = self.stream.read(1)
+            self.stream.seek(last_known_digit + len(number) - 1)
+            return Tokens.IntConst(int(number))
 
         # if StringConst
         if current_char == '"':

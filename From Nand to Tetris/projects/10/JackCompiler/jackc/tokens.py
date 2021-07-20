@@ -14,6 +14,16 @@ class Token():
     def __repr__(self) -> str:
         return f"({self.name}: {self.value} )"
 
+    def __eq__(self, touple: tuple[str, str]) -> bool:
+        """ Expects a touple with (name, value) or None"""
+        name, val = touple
+
+        if name is None:
+            return self.value == val
+        if val is None:
+            return self.name == name
+        return self.name == name and self.value == val
+
 
 class Invalid(Token):
     """ base case Invalid """
@@ -25,10 +35,19 @@ class Tokens():
     class Symbol(Token):
         """ a single symbol (){}[]... """
         name = "symbol"
+        ALT_SYMBOL_NAMES = {"<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "&": "&amp;"}
 
         def __init__(self, symbol_name) -> None:
             super().__init__()
+
             self.value = symbol_name
+
+        def __str__(self) -> str:
+            val = self.ALT_SYMBOL_NAMES.get(self.value, self.value)
+            return f"<{self.name}> {val} </{self.name}>"
 
     class Keyword(Token):
         """ a more complex word"""
