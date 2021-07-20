@@ -1,8 +1,12 @@
 
 # Software written in this course
+I developed 2 compilers while taking this course. They require Python3.9 and can be installed with the commands below.
+
 
 ## Jack Compiler
-a compiler for the Jack programming language to Jack VM code (similar to Java bytecode) 
+a compiler for the Jack programming language to Jack VM code (similar to Java bytecode).
+
+[Source Code](/From%20Nand%20to%20Tetris/projects/10/JackCompiler/jackc/)
 
 ```
 pip install "git+https://github.com/Meisterlala/Online-Computer-Science-degree/#egg=Jack-Compiler&subdirectory=From Nand to Tetris/projects/10/JackCompiler"
@@ -11,6 +15,8 @@ JackC (file|directory)
 
 ## Jack VM Translator
 a compiler used to translate Jack VM code to Hack Assembly.
+
+[Source Code](/From%20Nand%20to%20Tetris/projects/08/VMTranslator/translator/)
 
 ```
 pip install "git+https://github.com/Meisterlala/Online-Computer-Science-degree/#egg=VMTranslator&subdirectory=From Nand to Tetris/projects/08/VMTranslator"
