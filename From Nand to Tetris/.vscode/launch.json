@@ -160,5 +160,83 @@
             ],
             "console": "integratedTerminal",
         },
+        {
+            "name": "Jack Compiler Seven",
+            "presentation": {
+                "group": "JackCompiler",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\11\\Seven"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler ConvertToBin",
+            "presentation": {
+                "group": "JackCompiler",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\11\\ConvertToBin"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler Square",
+            "presentation": {
+                "group": "JackCompiler",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\11\\Square"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler Average",
+            "presentation": {
+                "group": "JackCompiler",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\11\\Average"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler Pong",
+            "presentation": {
+                "group": "JackCompiler",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\11\\Pong"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Jack Compiler ComplexArrays",
+            "presentation": {
+                "group": "JackCompiler",
+            },
+            "type": "python",
+            "request": "launch",
+            "module": "jackc",
+            "args": [
+                "projects\\11\\ComplexArrays"
+            ],
+            "console": "integratedTerminal",
+        },
     ],
 }
