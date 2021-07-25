@@ -1,8 +1,9 @@
 """ Containts all Jack Structures """
 
+
+from .statement import Statements
 from ..parents import XMLString, Compile
-from ..tokens import Token
-from ..JClasses.statement import Statements
+from ..tokens import Token  # pylint: disable=unused-import
 from ..symbol_table import SymbolTable
 
 
@@ -57,7 +58,7 @@ class Structure():
             assert token == ("symbol", "}")
             self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> "list[str]":
+        def compile(self, table) -> "list[str]":
             compiled = []
 
             # subroutineDec*
@@ -174,7 +175,7 @@ class Structure():
         def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
             self.length = 0
-            self.arguments: list[tuple[str, str]] = []
+            self.arguments: "list[tuple[str, str]]" = []
 
             # parameterList  ((type varName) (',' type varName)*)?
             if tokens[-1] != ("symbol", ")"):  # to match the last question mark
@@ -229,7 +230,7 @@ class Structure():
 
             # varDec*
             next_token = tokens[-1]
-            self.var_decs: list[Structure.JVarDec] = []
+            self.var_decs: "list[Structure.JVarDec]" = []
             while next_token == ("keyword", "var"):
                 var_dec = Structure.JVarDec(tokens)
                 self.var_decs.append(var_dec)

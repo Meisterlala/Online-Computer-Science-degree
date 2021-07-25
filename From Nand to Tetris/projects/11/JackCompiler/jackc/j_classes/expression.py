@@ -1,8 +1,10 @@
 """ Containts all Jack Expressions """
+
+
 from enum import Enum
 from ..parents import Compile, XMLString
 from ..symbol_table import SymbolTable
-from ..tokens import Token
+from ..tokens import Token  # pylint: disable=unused-import
 
 
 class Expressions:
@@ -16,7 +18,7 @@ class Expressions:
         """ term (op term)* """
         xml_name = "expression"
 
-        def __init__(self, tokens: "list[Token]") -> None:
+        def __init__(self, tokens) -> None:
             self.content = []
             self.terms_and_ops: "list[tuple[Expressions.JTerm, Token]]" = []
 
@@ -277,7 +279,7 @@ class Expressions:
             (className | varName) '.' subroutineName '(' expressionList ')' """
         xml_name = "subroutineCall"
 
-        def __init__(self, tokens: "list[Token]") -> None:
+        def __init__(self, tokens) -> None:
             self.content = []
 
             possible_dot = tokens[-2]
@@ -341,7 +343,7 @@ class Expressions:
             """ Dont Display self Name"""
             return "\n".join(str(x) for x in self.content)
 
-        def compile(self, table: SymbolTable) -> "list[str]":
+        def compile(self, table) -> "list[str]":
             compiled = []
 
             # push expressions onto stack

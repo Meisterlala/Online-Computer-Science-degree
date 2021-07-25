@@ -2,7 +2,7 @@
 
 # pylint: disable=unused-import
 from .tokens import Token
-from .JClasses.structure import Structure
+from .j_classes.structure import Structure
 
 
 class Parser():

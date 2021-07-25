@@ -1,10 +1,10 @@
 """ Containts all Jack Statements """
 
 
-from ..parents import XMLString, Compile
-from ..tokens import Token
-from ..JClasses.expression import Expressions
+from .expression import Expressions
+from ..parents import Compile, XMLString
 from ..symbol_table import SymbolTable
+from ..tokens import Token  # pylint: disable=unused-import
 
 
 class Statements:
@@ -14,7 +14,7 @@ class Statements:
         """ (letStatement | ifStatement| whileStatement | doStatement | returnStatement)* """
         xml_name = "statements"
 
-        def __init__(self, tokens: "list[Token]") -> None:
+        def __init__(self, tokens) -> None:
             self.content = []
             self.statements = []
 
