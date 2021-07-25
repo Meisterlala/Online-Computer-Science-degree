@@ -9,7 +9,7 @@ a compiler for the Jack programming language to Jack VM code (similar to Java by
 [Source Code](/From%20Nand%20to%20Tetris/projects/10/JackCompiler/jackc/)
 
 ```
-pip install "git+https://github.com/Meisterlala/Online-Computer-Science-degree/#egg=Jack-Compiler&subdirectory=From Nand to Tetris/projects/10/JackCompiler"
+pip install "git+https://github.com/Meisterlala/Online-Computer-Science-degree/#egg=Jack-Compiler&subdirectory=From Nand to Tetris/projects/11/JackCompiler"
 JackC (file|directory)
 ```
 
