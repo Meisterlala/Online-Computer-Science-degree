@@ -151,7 +151,7 @@ class Structure():
             compiled = []
 
             # function Main.main 0
-            parameter_count = self.parameter_list.length
+            # parameter_count = self.parameter_list.length
             local_count = self.sub_body.locals()
             compiled.append(
                 f"function {table.class_name}.{self.subroutine_name.value} {local_count}")

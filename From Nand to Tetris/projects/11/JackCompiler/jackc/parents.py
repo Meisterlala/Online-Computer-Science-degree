@@ -40,4 +40,5 @@ class Compile():
 
     def compile(self, table) -> list[str]:
         """ Compile self to JackVM """
+        # pylint: disable=unused-argument
         return [str(self)]
