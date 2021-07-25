@@ -31,7 +31,7 @@ def main():
 OUTPUT_FORMAT = ".vm"
 
 
-def handle_input(argv) -> "list[JackFile]":
+def handle_input(argv):
     """ Creates an List of Files"""
 
     # If no argument
