@@ -1,6 +1,6 @@
 """ Containts all Jack Statements """
 
-from os import chdir
+
 from jackc.parents import XMLString, Compile
 from jackc.tokens import Token
 from jackc.JClasses.expression import Expressions
@@ -61,6 +61,7 @@ class Statements:
             token = tokens.pop()
             assert token == ("identifier", None)
             self.content.append(token)
+            self.target = token.value
 
             # ('[' expression ']')?
             next_token = tokens[-1]
@@ -83,12 +84,37 @@ class Statements:
             self.content.append(token)
 
             # expression
-            self.content.append(Expressions.JExpression(tokens))
+            expr = Expressions.JExpression(tokens)
+            self.expression = expr
+            self.content.append(expr)
 
             # ';'
             token = tokens.pop()
             assert token == ("symbol", ";")
             self.content.append(token)
+
+        def compile(self, table: SymbolTable) -> list[str]:
+            compiled = []
+
+            # TODO hande Arrays
+
+            # Compile Expression
+            compiled.extend(self.expression.compile(table))
+
+            # pop into value
+            index = table.index_of(self.target)
+            kind = table.kind_of(self.target)
+            if kind == SymbolTable.Entry.Kind.LOCAL:
+                compiled.append(f"pop local {index} // {self.target}")
+            elif kind == SymbolTable.Entry.Kind.ARG:
+                compiled.append(f"pop argument {index} // {self.target}")
+            elif kind == SymbolTable.Entry.Kind.STATIC:
+                compiled.append(f"pop static {index} // {self.target}")
+            elif kind == SymbolTable.Entry.Kind.FIELD:
+                # Assume pointer 0 is this
+                compiled.append(f"pop this {index} // {self.target}")
+
+            return compiled
 
     class JIfStatement(XMLString, Compile):
         """ 'if' '(' expression ')' '{' statements '}' ('else' '{' statements '}')? """
@@ -96,6 +122,7 @@ class Statements:
 
         def __init__(self, tokens: list[Token]) -> None:
             self.content = []
+            self.has_else = False
 
             # 'if'
             token = tokens.pop()
@@ -108,7 +135,9 @@ class Statements:
             self.content.append(token)
 
             # expression
-            self.content.append(Expressions.JExpression(tokens))
+            expression = Expressions.JExpression(tokens)
+            self.content.append(expression)
+            self.expression = expression
 
             # ')'
             token = tokens.pop()
@@ -121,7 +150,9 @@ class Statements:
             self.content.append(token)
 
             # statements
-            self.content.append(Statements.JStatements(tokens))
+            statement1 = Statements.JStatements(tokens)
+            self.content.append(statement1)
+            self.statements_true = statement1
 
             # '}'
             token = tokens.pop()
@@ -132,6 +163,7 @@ class Statements:
             next_token = tokens[-1]
             if next_token == ("keyword", "else"):
                 self.content.append(tokens.pop())
+                self.has_else = True
 
                 # '{'
                 token = tokens.pop()
@@ -139,12 +171,53 @@ class Statements:
                 self.content.append(token)
 
                 # statements
-                self.content.append(Statements.JStatements(tokens))
+                statement2 = Statements.JStatements(tokens)
+                self.content.append(statement2)
+                self.statements_false = statement2
 
                 # '}'
                 token = tokens.pop()
                 assert token == ("symbol", "}")
                 self.content.append(token)
+
+        def compile(self, table: SymbolTable) -> list[str]:
+            compiled = []
+
+            u_index = table.get_unique_index()
+            label1 = u_index + "_IF_FALSE"
+            label2 = u_index + "_IF_END"
+
+            if self.has_else:
+                # Expression
+                compiled.extend(self.expression.compile(table))
+                # not
+                compiled.append("not")
+                # if-goto L1 (Start Label)
+                compiled.append(f"if-goto {label1}")
+                # statements True
+                compiled.extend(self.statements_true.compile(table))
+                # goto L2 (End Label)
+                compiled.append(f"goto {label2}")
+
+                # Label L1 (Start Label)
+                compiled.append(f"label {label1}")
+                # statements False
+                compiled.extend(self.statements_false.compile(table))
+                # Label L2 (End Label)
+                compiled.append(f"label {label2}")
+            else:
+                # Expression
+                compiled.extend(self.expression.compile(table))
+                # not
+                compiled.append("not")
+                # goto L2 (End Label)
+                compiled.append(f"if-goto {label2}")
+                # statements True
+                compiled.extend(self.statements_true.compile(table))
+                # Label L2 (End Label)
+                compiled.append(f"label {label2}")
+
+            return compiled
 
     class JWhileStatement(XMLString, Compile):
         """ 'while' '(' expression ')' '{' statements '}' """
@@ -164,7 +237,9 @@ class Statements:
             self.content.append(token)
 
             # expression
-            self.content.append(Expressions.JExpression(tokens))
+            expression = Expressions.JExpression(tokens)
+            self.content.append(expression)
+            self.expression = expression
 
             # ')'
             token = tokens.pop()
@@ -177,12 +252,38 @@ class Statements:
             self.content.append(token)
 
             # statements
-            self.content.append(Statements.JStatements(tokens))
+            statements = Statements.JStatements(tokens)
+            self.content.append(statements)
+            self.statements = statements
 
             # '}'
             token = tokens.pop()
             assert token == ("symbol", "}")
             self.content.append(token)
+
+        def compile(self, table: SymbolTable) -> list[str]:
+            compiled = []
+
+            u_index = table.get_unique_index()
+            label1 = u_index + "_WHILE_START"
+            label2 = u_index + "_WHILE_END"
+
+            # Label L1 (Start Label)
+            compiled.append(f"label {label1}")
+            # Expression
+            compiled.extend(self.expression.compile(table))
+            # not
+            compiled.append("not")
+            # if-goto L2 (End Label)
+            compiled.append(f"if-goto {label2}")
+            # statements
+            compiled.extend(self.statements.compile(table))
+            # goto L1 (Start Label)
+            compiled.append(f"goto {label1}")
+            # Label L2 (End Label)
+            compiled.append(f"label {label2}")
+
+            return compiled
 
     class JDoStatement(XMLString, Compile):
         """ 'do' subroutineCall ';' """
@@ -208,10 +309,10 @@ class Statements:
 
         def compile(self, table: SymbolTable) -> list[str]:
             compiled = []
-            # Compile Subrine
+            # Compile subroutine
             compiled.extend(self.sub_call.compile(table))
             # remove 0 from stack, because this is a void method
-            compiled.append("pop temp 0")
+            compiled.append("pop temp 0 // pop because type void")
             return compiled
 
     class JReturnStatement(XMLString, Compile):

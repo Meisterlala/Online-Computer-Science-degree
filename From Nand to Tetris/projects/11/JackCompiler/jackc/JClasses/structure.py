@@ -118,8 +118,6 @@ class Structure():
 
             # ('void' | type)
             token = tokens.pop()
-            if token != ("keyword", "void"):
-                assert token == ("identifier", None)
             self.content.append(token)
             self.return_type = token
 
@@ -154,38 +152,68 @@ class Structure():
 
             # function Main.main 0
             parameter_count = self.parameter_list.length
+            local_count = self.sub_body.locals()
             compiled.append(
-                f"function {table.class_name}.{self.subroutine_name.value} {parameter_count}")
+                f"function {table.class_name}.{self.subroutine_name.value} {local_count}")
+
+            # Handle arguments
+            compiled.extend(self.parameter_list.compile(table))
 
             # compile
             compiled.extend(self.sub_body.compile(table))
 
+            # reset Table
+            table.reset_table_sub()
+
             return compiled
 
-    class JParameterList(XMLString):
+    class JParameterList(XMLString, Compile):
         """ ((type varName) (',' type varName)*)? """
         xml_name = "parameterList"
 
         def __init__(self, tokens: list[Token]) -> None:
             self.content = []
             self.length = 0
+            self.arguments: list[tuple[str, str]] = []
 
             # parameterList  ((type varName) (',' type varName)*)?
             if tokens[-1] != ("symbol", ")"):  # to match the last question mark
-                self.content.append(Structure.JType(tokens))  # type
-                token = tokens.pop()  # varName
+                # type
+                j_type = Structure.JType(tokens)
+                self.content.append(j_type)
+                # varName
+                token = tokens.pop()
                 assert token == ("identifier", None)
                 self.content.append(token)
                 self.length += 1
+                self.arguments.append(
+                    (j_type.singe_content.value, token.value))
 
                 while tokens[-1] == ("symbol", ","):  # (',' type varName)*
+                    # ','
+                    token_1 = tokens.pop()
+                    self.content.append(token_1)
+
+                    # type
+                    j_type = Structure.JType(tokens)
+                    self.content.append(j_type)
+
+                    # varName
                     token = tokens.pop()
-                    self.content.append(token)  # ','
-                    self.content.append(Structure.JType(tokens))  # type
-                    token = tokens.pop()  # varName
                     assert token == ("identifier", None)
                     self.content.append(token)
+
                     self.length += 1
+                    self.arguments.append(
+                        (j_type.singe_content.value, token.value))
+
+        def compile(self, table: SymbolTable) -> list[str]:
+
+            for j_type, name in self.arguments:
+                table.add(name, j_type, SymbolTable.Entry.Kind.ARG)
+
+            # no code generated, only symbol table addition
+            return []
 
     class JSubroutineBody(XMLString, Compile):
         """ '{' varDec* statements '}' """
@@ -201,7 +229,7 @@ class Structure():
 
             # varDec*
             next_token = tokens[-1]
-            self.var_decs = []
+            self.var_decs: list[Structure.JVarDec] = []
             while next_token == ("keyword", "var"):
                 var_dec = Structure.JVarDec(tokens)
                 self.var_decs.append(var_dec)
@@ -221,19 +249,32 @@ class Structure():
         def compile(self, table: SymbolTable) -> list[str]:
             compiled = []
 
+            # set this to current object
+
             # varDec*
+            for var_dec in self.var_decs:
+                compiled.extend(var_dec.compile(table))
 
             # statements
             compiled.extend(self.statements.compile(table))
 
             return compiled
 
-    class JVarDec(XMLString):
+        def locals(self) -> int:
+            """ Returns the amount of local variables in this Subroutine """
+            count = 0
+            for var_dec in self.var_decs:
+                count += len(var_dec.var_names)
+
+            return count
+
+    class JVarDec(XMLString, Compile):
         """ 'var' type varName (',' varName)* ';' """
         xml_name = "varDec"
 
         def __init__(self, tokens: list[Token]) -> None:
             self.content = []
+            self.var_names = []
 
             # 'var'
             token = tokens.pop()
@@ -241,12 +282,15 @@ class Structure():
             self.content.append(token)
 
             # type
-            self.content.append(Structure.JType(tokens))
+            token = Structure.JType(tokens)
+            self.content.append(token)
+            self.j_type = token.singe_content.value
 
             # varName
             token = tokens.pop()
             assert token == ("identifier", None)
             self.content.append(token)
+            self.var_names.append(token.value)
 
             # (, Varname)*
             token = tokens.pop()  # , or ;
@@ -256,13 +300,23 @@ class Structure():
                 token = tokens.pop()  # varName
                 assert token == ("identifier", None)
                 self.content.append(token)
+                self.var_names.append(token.value)
+
                 token = tokens.pop()  # , or ;
                 self.content.append(token)
 
             # ;
             assert token.value == ";"
 
-    class JType(XMLString):
+        def compile(self, table: SymbolTable) -> list[str]:
+            # Adds to the Symbol Table
+            for name in self.var_names:
+                table.add(name, self.j_type, SymbolTable.Entry.Kind.LOCAL)
+
+            # no output
+            return []
+
+    class JType(XMLString, Compile):
         """ 'int' | 'char' | 'boolean' | className """
         types = {"int", "char", "boolean"}
 

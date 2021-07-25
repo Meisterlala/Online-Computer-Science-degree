@@ -1,0 +1,106 @@
+
+function Main.main 1
+	push constant 8001
+	push constant 16
+	push constant 1
+	neg
+	call Main.fillMemory 3
+	pop temp 0 // pop because type void
+	push constant 8000
+	call Memory.peek 1
+	pop local 0 // value
+	push local 0 // value
+	call Main.convert 1
+	pop temp 0 // pop because type void
+	push constant 0
+return
+
+function Main.convert 3
+	push constant 1
+	neg // True
+	pop local 2 // loop
+label Main_00000000_WHILE_START
+	push local 2 // loop
+	not
+	if-goto Main_00000000_WHILE_END
+	push local 1 // position
+	push constant 1
+	add
+	pop local 1 // position
+	push local 0 // mask
+	call Main.nextMask 1
+	pop local 0 // mask
+	push local 1 // position
+	push constant 16
+	gt
+	if-goto Main_00000001_IF_FALSE
+	push argument 0 // value
+	push local 0 // mask
+	and
+	push constant 0
+	eq
+	if-goto Main_00000002_IF_FALSE
+	push constant 8000
+	push local 1 // position
+	add
+	push constant 1
+	call Memory.poke 2
+	pop temp 0 // pop because type void
+	goto Main_00000002_IF_END
+label Main_00000002_IF_FALSE
+	push constant 8000
+	push local 1 // position
+	add
+	push constant 0
+	call Memory.poke 2
+	pop temp 0 // pop because type void
+label Main_00000002_IF_END
+	goto Main_00000001_IF_END
+label Main_00000001_IF_FALSE
+	push constant 0 // false or null
+	pop local 2 // loop
+label Main_00000001_IF_END
+	goto Main_00000000_WHILE_START
+label Main_00000000_WHILE_END
+	push constant 0
+return
+
+function Main.nextMask 0
+	push argument 0 // mask
+	push constant 0
+	eq
+	not
+	if-goto Main_00000003_IF_FALSE
+	push constant 1
+return
+	goto Main_00000003_IF_END
+label Main_00000003_IF_FALSE
+	push argument 0 // mask
+	push constant 2
+	call Math.multiply 2
+return
+label Main_00000003_IF_END
+
+function Main.fillMemory 0
+label Main_00000004_WHILE_START
+	push argument 1 // length
+	push constant 0
+	gt
+	not
+	if-goto Main_00000004_WHILE_END
+	push argument 0 // startAddress
+	push argument 2 // value
+	call Memory.poke 2
+	pop temp 0 // pop because type void
+	push argument 1 // length
+	push constant 1
+	sub
+	pop argument 1 // length
+	push argument 0 // startAddress
+	push constant 1
+	add
+	pop argument 0 // startAddress
+	goto Main_00000004_WHILE_START
+label Main_00000004_WHILE_END
+	push constant 0
+return

@@ -58,16 +58,16 @@ class Expressions:
 
     class JOperation():
         """ Simple Compile or Covert from OP to Jack VM call"""
-        OPS = {"+", "-", "*", "/", "&", "|", "<", ">", "="}
+
         lookup_table = {"+": ["add"],
                         "-": ["sub"],
                         "*": ["call Math.multiply 2"],
                         "/": ["call Math.divide 2"],
-                        "&": [" & not imp"],
-                        "|": [" | not imp"],
-                        "<": [" < not imp"],
-                        ">": [" > not imp"],
-                        "=": [" = not imp"]}
+                        "&": ["and"],
+                        "|": ["or"],
+                        "<": ["lt"],
+                        ">": ["gt"],
+                        "=": ["eq"]}
 
         @staticmethod
         def compile(token: Token) -> list[str]:
@@ -106,12 +106,16 @@ class Expressions:
 
             # StringConstant
             if token == ("stringConstant", None):
+                self.term_type = Expressions.JTerm.TermType.STRINGCONST
+
                 self.content.append(token)
                 return
 
             # KeywordConstant
             if (token.name == "keyword" and
                     token.value in Expressions.KEYWORD_CONSTANTS):
+                self.term_type = Expressions.JTerm.TermType.KEYWORDCONST
+                self.key_word = token.value
                 self.content.append(token)
                 return
 
@@ -136,25 +140,39 @@ class Expressions:
             # unaryOP term
             if (token.name == "symbol" and
                     token.value in Expressions.UNARY_OPS):
+                self.term_type = Expressions.JTerm.TermType.UNARY
                 self.content.append(token)
+                self.unary_type = token.value
 
                 # term
-                self.content.append(Expressions.JTerm(tokens))
+                term = Expressions.JTerm(tokens)
+                self.term = term
+                self.content.append(term)
                 return
 
             # subroutineCall
             next_token = tokens[-1]
             if (next_token == ("symbol", "(") or
                     next_token == ("symbol", ".")):
+
+                self.term_type = Expressions.JTerm.TermType.SUBCALL
                 assert token == ("identifier", None)
                 tokens.append(token)
-                self.content.append(Expressions.JSubroutineCall(tokens))
+                sub_call = Expressions.JSubroutineCall(tokens)
+                self.content.append(sub_call)
+                self.sub_call = sub_call
+
                 return
 
             # varName  ('[' expression ']')
             if token == ("identifier", None):
+                self.term_type = Expressions.JTerm.TermType.VARNAME
                 self.content.append(token)
+                self.var_name = token.value
+
                 if next_token == ("symbol", "["):
+                    self.term_type = Expressions.JTerm.TermType.VARNAME_EXP
+
                     # '['
                     self.content.append(tokens.pop())
 
@@ -167,13 +185,50 @@ class Expressions:
                     self.content.append(token)
                 return
 
-        def compile(self, table) -> list[str]:
+        def compile(self, table: SymbolTable) -> list[str]:
             if self.term_type == Expressions.JTerm.TermType.INTCONST:
                 return [f"push constant {self.value}"]
+
             if self.term_type == Expressions.JTerm.TermType.EXP:
                 return self.expression.compile(table)
 
-            return ["TermType not implemented"]
+            if self.term_type == Expressions.JTerm.TermType.UNARY:
+                compiled = self.term.compile(table)
+                if self.unary_type == "-":
+                    compiled.append("neg")
+                else:  # ~
+                    compiled.append("not")
+                return compiled
+
+            if self.term_type == Expressions.JTerm.TermType.SUBCALL:
+                return self.sub_call.compile(table)
+
+            if self.term_type == Expressions.JTerm.TermType.VARNAME:
+
+                kind = table.kind_of(self.var_name)
+                index = table.index_of(self.var_name)
+                segment = "not_defined"
+                if kind == SymbolTable.Entry.Kind.LOCAL:
+                    segment = "local"
+                elif kind == SymbolTable.Entry.Kind.STATIC:
+                    segment = "static"
+                elif kind == SymbolTable.Entry.Kind.FIELD:
+                    segment = "this"
+                elif kind == SymbolTable.Entry.Kind.ARG:
+                    segment = "argument"
+
+                return [f"push {segment} {index} // {self.var_name}"]
+
+            if self.term_type == Expressions.JTerm.TermType.KEYWORDCONST:
+                if self.key_word in ("null", "false"):
+                    return ["push constant 0 // false or null"]
+                elif self.key_word == "true":
+                    return["push constant 1", "neg // True"]
+                elif self.key_word == "this":
+                    # might be "push pointer 0"
+                    return["push this"]
+
+            return ["TermType not implemented " + str(self.term_type)]
 
     class JExpressionList(XMLString, Compile):
         """ (expression (',' expression)*)?

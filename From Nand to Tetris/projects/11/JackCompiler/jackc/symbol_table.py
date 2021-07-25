@@ -1,7 +1,6 @@
 """ a Symbol table containing names of variables """
 
 from enum import Enum
-from typing import Union
 
 
 class SymbolTable():
@@ -10,11 +9,12 @@ class SymbolTable():
         """ Represents a Entry in the Symbol table (without name) """
         class Kind(Enum):
             """ STATIC and FIELD are class scope
-                VAR and ARG are sub scope """
+                LOCAL and ARG are sub scope """
             FIELD = 0
             STATIC = 1
             ARG = 2
-            VAR = 3
+            LOCAL = 3
+            INVALID = 4
 
         def __init__(self, j_type: str, kind: Kind, index: int) -> None:
             self.j_type = j_type
@@ -25,11 +25,18 @@ class SymbolTable():
         self.table_class: dict[str, SymbolTable.Entry] = {}
         self.table_sub: dict[str, SymbolTable.Entry] = {}
         self.class_name: str = class_name
+        self.label_index: int = -1
 
     def add(self, name: str, j_type: str, kind: Entry.Kind):
         """ Add an entry to the table """
 
-        new_index = self.var_count(kind) + 1
+        counted = self.var_count(kind)
+        if counted == 0:
+            # needed to start counting from 0
+            new_index = 0
+        else:
+            new_index = counted
+
         new_entry = SymbolTable.Entry(j_type, kind, new_index)
 
         # if class scope
@@ -38,16 +45,22 @@ class SymbolTable():
         else:  # sub scope
             self.table_sub[name] = new_entry
 
+    def get_unique_index(self) -> str:
+        """ Gets a class unique int for creating labels """
+        self.label_index += 1
+        index = str(self.label_index).zfill(8)
+        return f"{self.class_name}_{index}"
+
     def reset_table_sub(self):
         """ Clears the Sub scope table """
         self.table_sub.clear()
 
-    def kind_of(self, name: str) -> Union[Entry.Kind, None]:
+    def kind_of(self, name: str) -> Entry.Kind:
         """ returns Kind or None """
         # Get Entry
         entry = self.get_entry(name)
         if entry is None:
-            return None
+            return SymbolTable.Entry.Kind.INVALID
 
         return entry.kind
 
@@ -74,7 +87,7 @@ class SymbolTable():
                 count += 1
         return count
 
-    def get_entry(self, name) -> Union[Entry, None]:
+    def get_entry(self, name) -> Entry:
         """ returns None or Entry if found """
         # if in sub table
         sub_entry = self.table_sub.get(name, None)
@@ -86,4 +99,6 @@ class SymbolTable():
         if class_entry is not None:
             return class_entry
 
-        return None
+        # Error, unknown var
+        assert False, f"Unknown, never seen variable {str(name)}"
+        return SymbolTable.Entry("int", SymbolTable.Entry.Kind.INVALID, 0)
