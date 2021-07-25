@@ -22,8 +22,8 @@ class SymbolTable():
             self.index = index
 
     def __init__(self, class_name) -> None:
-        self.table_class: dict[str, SymbolTable.Entry] = {}
-        self.table_sub: dict[str, SymbolTable.Entry] = {}
+        self.table_class: "dict[str, SymbolTable.Entry]" = {}
+        self.table_sub: "dict[str, SymbolTable.Entry]" = {}
         self.class_name: str = class_name
         self.label_index: int = -1
 

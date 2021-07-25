@@ -38,7 +38,7 @@ class XMLString():
 class Compile():
     """ Parent Class to compile to JackVM """
 
-    def compile(self, table) -> list[str]:
+    def compile(self, table) -> "list[str]":
         """ Compile self to JackVM """
         # pylint: disable=unused-argument
         return [str(self)]

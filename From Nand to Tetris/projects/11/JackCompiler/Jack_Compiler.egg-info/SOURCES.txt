@@ -9,9 +9,10 @@ Jack_Compiler.egg-info/top_level.txt
 jackc/__init__.py
 jackc/__main__.py
 jackc/compiler.py
-jackc/compiler_test.py
 jackc/jack_compiler.py
 jackc/jack_file.py
+jackc/parents.py
 jackc/parser.py
+jackc/symbol_table.py
 jackc/tokenizer.py
 jackc/tokens.py

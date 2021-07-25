@@ -1,8 +1,8 @@
 """ Containts all Jack Expressions """
 from enum import Enum
-from jackc.parents import Compile, XMLString
-from jackc.symbol_table import SymbolTable
-from jackc.tokens import Token
+from ..parents import Compile, XMLString
+from ..symbol_table import SymbolTable
+from ..tokens import Token
 
 
 class Expressions:
@@ -16,9 +16,9 @@ class Expressions:
         """ term (op term)* """
         xml_name = "expression"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
-            self.terms_and_ops: list[tuple[Expressions.JTerm, Token]] = []
+            self.terms_and_ops: "list[tuple[Expressions.JTerm, Token]]" = []
 
             # term
             term_1 = Expressions.JTerm(tokens)
@@ -41,7 +41,7 @@ class Expressions:
 
                 next_token = tokens[-1]
 
-        def compile(self, table) -> list[str]:
+        def compile(self, table) -> "list[str]":
             compiled = []
 
             # Compile first term
@@ -70,7 +70,7 @@ class Expressions:
                         "=": ["eq"]}
 
         @staticmethod
-        def compile(token: Token) -> list[str]:
+        def compile(token: "Token") -> "list[str]":
             """ Convert from op Token to JackVM call"""
             return Expressions.JOperation.lookup_table.get(token.value, [])
 
@@ -91,7 +91,7 @@ class Expressions:
             UNARY = 7
             INVALID = 8
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             token = tokens.pop()
@@ -185,7 +185,7 @@ class Expressions:
                     self.content.append(token)
                 return
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             if self.term_type == Expressions.JTerm.TermType.INTCONST:
                 return [f"push constant {self.value}"]
 
@@ -237,7 +237,7 @@ class Expressions:
 
         xml_name = "expressionList"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
             self.length = 0
             self.expressions = []
@@ -266,7 +266,7 @@ class Expressions:
                 self.length += 1
                 next_token = tokens[-1]
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
             for expression in self.expressions:
                 compiled.extend(expression.compile(table))
@@ -277,7 +277,7 @@ class Expressions:
             (className | varName) '.' subroutineName '(' expressionList ')' """
         xml_name = "subroutineCall"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             possible_dot = tokens[-2]
@@ -341,7 +341,7 @@ class Expressions:
             """ Dont Display self Name"""
             return "\n".join(str(x) for x in self.content)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             # push expressions onto stack

@@ -1,14 +1,14 @@
 """ Parses/Compiles the keywords"""
 
-
-from jackc.tokens import Token
-from jackc.JClasses.structure import Structure
+# pylint: disable=unused-import
+from .tokens import Token
+from .JClasses.structure import Structure
 
 
 class Parser():
     """ Parser of Keywords"""
 
-    def __init__(self, tokens: list[Token]) -> None:
+    def __init__(self, tokens: "list[Token]") -> None:
         # Reverse List
         self.tokens = tokens[::-1]
 

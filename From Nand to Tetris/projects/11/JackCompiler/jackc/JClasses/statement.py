@@ -1,10 +1,10 @@
 """ Containts all Jack Statements """
 
 
-from jackc.parents import XMLString, Compile
-from jackc.tokens import Token
-from jackc.JClasses.expression import Expressions
-from jackc.symbol_table import SymbolTable
+from ..parents import XMLString, Compile
+from ..tokens import Token
+from ..JClasses.expression import Expressions
+from ..symbol_table import SymbolTable
 
 
 class Statements:
@@ -14,7 +14,7 @@ class Statements:
         """ (letStatement | ifStatement| whileStatement | doStatement | returnStatement)* """
         xml_name = "statements"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
             self.statements = []
 
@@ -37,7 +37,7 @@ class Statements:
                 statement_type = Statements.STATEMENT_TYPES.get(
                     next_token.value, None)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
             # compile statements
             for statement in self.statements:
@@ -49,7 +49,7 @@ class Statements:
         """ 'let' varName ('[' expression ']')? '=' expression ';' """
         xml_name = "letStatement"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # 'let'
@@ -93,7 +93,7 @@ class Statements:
             assert token == ("symbol", ";")
             self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             # TODO hande Arrays
@@ -120,7 +120,7 @@ class Statements:
         """ 'if' '(' expression ')' '{' statements '}' ('else' '{' statements '}')? """
         xml_name = "ifStatement"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
             self.has_else = False
 
@@ -180,7 +180,7 @@ class Statements:
                 assert token == ("symbol", "}")
                 self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             u_index = table.get_unique_index()
@@ -223,7 +223,7 @@ class Statements:
         """ 'while' '(' expression ')' '{' statements '}' """
         xml_name = "whileStatement"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # 'while'
@@ -261,7 +261,7 @@ class Statements:
             assert token == ("symbol", "}")
             self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             u_index = table.get_unique_index()
@@ -289,7 +289,7 @@ class Statements:
         """ 'do' subroutineCall ';' """
         xml_name = "doStatement"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # 'do'
@@ -307,7 +307,7 @@ class Statements:
             assert token == ("symbol", ";")
             self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
             # Compile subroutine
             compiled.extend(self.sub_call.compile(table))
@@ -319,7 +319,7 @@ class Statements:
         """ 'return' expression? ';' """
         xml_name = "returnStatement"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # 'return'
@@ -340,7 +340,7 @@ class Statements:
             assert token == ("symbol", ";")
             self.content.append(token)
 
-        def compile(self, table) -> list[str]:
+        def compile(self, table) -> "list[str]":
             compiled = []
 
             # If it has an expression

@@ -14,7 +14,7 @@ class Token():
     def __repr__(self) -> str:
         return f"({self.name}: {self.value} )"
 
-    def __eq__(self, touple: tuple[str, str]) -> bool:
+    def __eq__(self, touple: "tuple[str, str]") -> bool:
         """ Expects a touple with (name, value) or None"""
         name, val = touple
 

@@ -1,8 +1,8 @@
 """ Compiles a JClass to Jack VM code """
 
 
-from jackc.parser import Structure
-from jackc.symbol_table import SymbolTable
+from .parser import Structure
+from .symbol_table import SymbolTable
 
 
 class Compiler():
@@ -30,7 +30,7 @@ class Compiler():
         #code = self.sys_init(code)
         return "\n".join(code)
 
-    def sys_init(self, source: list[str]) -> list[str]:
+    def sys_init(self, source: "list[str]") -> "list[str]":
         """ Bootstrap Code """
 
         bootstrap = ["// Bootstrap Code",
@@ -44,7 +44,7 @@ class Compiler():
         return bootstrap
 
     @staticmethod
-    def indent(source: list[str]) -> list[str]:
+    def indent(source: "list[str]") -> "list[str]":
         """ Indents Jack Commands for easier reading """
         indented = []
         for line in source:
@@ -67,7 +67,7 @@ class Compiler():
         return indented
 
     @staticmethod
-    def remove_duplicates(source: list[str]) -> list[str]:
+    def remove_duplicates(source: "list[str]") -> "list[str]":
         """ Removes duplicates commands for performance"""
         clean = []
         last_line = ""

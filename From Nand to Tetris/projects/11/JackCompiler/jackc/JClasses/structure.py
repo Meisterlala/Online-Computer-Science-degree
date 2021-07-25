@@ -1,9 +1,9 @@
 """ Containts all Jack Structures """
 
-from jackc.parents import XMLString, Compile
-from jackc.tokens import Token
-from jackc.JClasses.statement import Statements
-from jackc.symbol_table import SymbolTable
+from ..parents import XMLString, Compile
+from ..tokens import Token
+from ..JClasses.statement import Statements
+from ..symbol_table import SymbolTable
 
 
 class Structure():
@@ -13,7 +13,7 @@ class Structure():
         """ 'class' ClassName '{ classVarDec* subroutineDec* '}' """
         xml_name = "class"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # Class
@@ -57,7 +57,7 @@ class Structure():
             assert token == ("symbol", "}")
             self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             # subroutineDec*
@@ -71,7 +71,7 @@ class Structure():
         xml_name = "classVarDec"
         var_types = {"static", "field"}
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # ('static'|'field')
@@ -107,7 +107,7 @@ class Structure():
         xml_name = "subroutineDec"
         sub_types = {"constructor", "function", "method"}
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # ('constructor'|'function'|'method')
@@ -147,7 +147,7 @@ class Structure():
             self.content.append(body)
             self.sub_body = body
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             # function Main.main 0
@@ -171,7 +171,7 @@ class Structure():
         """ ((type varName) (',' type varName)*)? """
         xml_name = "parameterList"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
             self.length = 0
             self.arguments: list[tuple[str, str]] = []
@@ -207,7 +207,7 @@ class Structure():
                     self.arguments.append(
                         (j_type.singe_content.value, token.value))
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
 
             for j_type, name in self.arguments:
                 table.add(name, j_type, SymbolTable.Entry.Kind.ARG)
@@ -219,7 +219,7 @@ class Structure():
         """ '{' varDec* statements '}' """
         xml_name = "subroutineBody"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
 
             # {
@@ -246,7 +246,7 @@ class Structure():
             assert token == ("symbol", "}")
             self.content.append(token)
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
             # set this to current object
@@ -272,7 +272,7 @@ class Structure():
         """ 'var' type varName (',' varName)* ';' """
         xml_name = "varDec"
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
             self.var_names = []
 
@@ -308,7 +308,7 @@ class Structure():
             # ;
             assert token.value == ";"
 
-        def compile(self, table: SymbolTable) -> list[str]:
+        def compile(self, table: SymbolTable) -> "list[str]":
             # Adds to the Symbol Table
             for name in self.var_names:
                 table.add(name, self.j_type, SymbolTable.Entry.Kind.LOCAL)
@@ -320,7 +320,7 @@ class Structure():
         """ 'int' | 'char' | 'boolean' | className """
         types = {"int", "char", "boolean"}
 
-        def __init__(self, tokens: list[Token]) -> None:
+        def __init__(self, tokens: "list[Token]") -> None:
             token = tokens.pop()
 
             # 'int' | 'char' | 'boolean'

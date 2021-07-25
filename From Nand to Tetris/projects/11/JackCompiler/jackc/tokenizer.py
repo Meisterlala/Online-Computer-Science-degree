@@ -25,7 +25,7 @@ class Tokenizer():
         self.raw_content_position = 0
         self.tokens = []
 
-    def to_xml(self) -> list[str]:
+    def to_xml(self) -> "list[str]":
         """ Uses the str() on all Tokens and outputs a list"""
         return_list = ["<tokens>"]
         for token in self.tokens:
