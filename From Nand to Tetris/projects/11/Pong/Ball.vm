@@ -1,0 +1,429 @@
+
+function Ball.new 0
+	push constant 15                  // size of object
+	call Memory.alloc 1               // allocate memory
+	pop pointer 0                     // store base adress in this
+	push argument 0                   // Ax
+	pop this 0                        // x
+	push argument 1                   // Ay
+	pop this 1                        // y
+	push argument 2                   // AleftWall
+	pop this 10                       // leftWall
+	push argument 3                   // ArightWall
+	push constant 6
+	sub
+	pop this 11                       // rightWall
+	push argument 4                   // AtopWall
+	pop this 12                       // topWall
+	push argument 5                   // AbottomWall
+	push constant 6
+	sub
+	pop this 13                       // bottomWall
+	push constant 0
+	pop this 14                       // wall
+	push pointer 0                    // push this as reference for method
+	call Ball.show 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // return base adress
+return
+
+function Ball.dispose 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push pointer 0                    // return base adress
+	call Memory.deAlloc 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Ball.show 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // push this as reference for method
+	call Ball.draw 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Ball.hide 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // push this as reference for method
+	call Ball.draw 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Ball.draw 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push constant 5
+	add
+	push this 1                       // y
+	push constant 5
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Ball.getLeft 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+return
+
+function Ball.getRight 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+	push constant 5
+	add
+return
+
+function Ball.setDestination 4
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push argument 1                   // destx
+	push this 0                       // x
+	sub
+	pop this 2                        // lengthx
+	push argument 2                   // desty
+	push this 1                       // y
+	sub
+	pop this 3                        // lengthy
+	push this 2                       // lengthx
+	call Math.abs 1
+	pop local 0                       // dx
+	push this 3                       // lengthy
+	call Math.abs 1
+	pop local 1                       // dy
+	push local 0                      // dx
+	push local 1                      // dy
+	lt
+	pop this 7                        // invert
+	push this 7                       // invert
+	not
+	if-goto Ball_00000000_IF_FALSE
+	push local 0                      // dx
+	pop local 2                       // temp
+	push local 1                      // dy
+	pop local 0                       // dx
+	push local 2                      // temp
+	pop local 1                       // dy
+	push this 1                       // y
+	push argument 2                   // desty
+	lt
+	pop this 8                        // positivex
+	push this 0                       // x
+	push argument 1                   // destx
+	lt
+	pop this 9                        // positivey
+	goto Ball_00000000_IF_END
+label Ball_00000000_IF_FALSE
+	push this 0                       // x
+	push argument 1                   // destx
+	lt
+	pop this 8                        // positivex
+	push this 1                       // y
+	push argument 2                   // desty
+	lt
+	pop this 9                        // positivey
+label Ball_00000000_IF_END
+	push constant 2
+	push local 1                      // dy
+	call Math.multiply 2
+	push local 0                      // dx
+	sub
+	pop this 4                        // d
+	push constant 2
+	push local 1                      // dy
+	call Math.multiply 2
+	pop this 5                        // straightD
+	push constant 2
+	push local 1                      // dy
+	push local 0                      // dx
+	sub
+	call Math.multiply 2
+	pop this 6                        // diagonalD
+	push constant 0                   // dummy void value
+return
+
+function Ball.move 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push pointer 0                    // push this as reference for method
+	call Ball.hide 1
+	pop temp 0                        // dump return type void
+	push this 4                       // d
+	push constant 0
+	lt
+	not
+	if-goto Ball_00000001_IF_FALSE
+	push this 4                       // d
+	push this 5                       // straightD
+	add
+	pop this 4                        // d
+	goto Ball_00000001_IF_END
+label Ball_00000001_IF_FALSE
+	push this 4                       // d
+	push this 6                       // diagonalD
+	add
+	pop this 4                        // d
+	push this 9                       // positivey
+	not
+	if-goto Ball_00000002_IF_FALSE
+	push this 7                       // invert
+	not
+	if-goto Ball_00000003_IF_FALSE
+	push this 0                       // x
+	push constant 4
+	add
+	pop this 0                        // x
+	goto Ball_00000003_IF_END
+label Ball_00000003_IF_FALSE
+	push this 1                       // y
+	push constant 4
+	add
+	pop this 1                        // y
+label Ball_00000003_IF_END
+	goto Ball_00000002_IF_END
+label Ball_00000002_IF_FALSE
+	push this 7                       // invert
+	not
+	if-goto Ball_00000004_IF_FALSE
+	push this 0                       // x
+	push constant 4
+	sub
+	pop this 0                        // x
+	goto Ball_00000004_IF_END
+label Ball_00000004_IF_FALSE
+	push this 1                       // y
+	push constant 4
+	sub
+	pop this 1                        // y
+label Ball_00000004_IF_END
+label Ball_00000002_IF_END
+label Ball_00000001_IF_END
+	push this 8                       // positivex
+	not
+	if-goto Ball_00000005_IF_FALSE
+	push this 7                       // invert
+	not
+	if-goto Ball_00000006_IF_FALSE
+	push this 1                       // y
+	push constant 4
+	add
+	pop this 1                        // y
+	goto Ball_00000006_IF_END
+label Ball_00000006_IF_FALSE
+	push this 0                       // x
+	push constant 4
+	add
+	pop this 0                        // x
+label Ball_00000006_IF_END
+	goto Ball_00000005_IF_END
+label Ball_00000005_IF_FALSE
+	push this 7                       // invert
+	not
+	if-goto Ball_00000007_IF_FALSE
+	push this 1                       // y
+	push constant 4
+	sub
+	pop this 1                        // y
+	goto Ball_00000007_IF_END
+label Ball_00000007_IF_FALSE
+	push this 0                       // x
+	push constant 4
+	sub
+	pop this 0                        // x
+label Ball_00000007_IF_END
+label Ball_00000005_IF_END
+	push this 0                       // x
+	push this 10                      // leftWall
+	gt
+	if-goto Ball_00000008_IF_END
+	push constant 1
+	pop this 14                       // wall
+	push this 10                      // leftWall
+	pop this 0                        // x
+label Ball_00000008_IF_END
+	push this 0                       // x
+	push this 11                      // rightWall
+	lt
+	if-goto Ball_00000009_IF_END
+	push constant 2
+	pop this 14                       // wall
+	push this 11                      // rightWall
+	pop this 0                        // x
+label Ball_00000009_IF_END
+	push this 1                       // y
+	push this 12                      // topWall
+	gt
+	if-goto Ball_00000010_IF_END
+	push constant 3
+	pop this 14                       // wall
+	push this 12                      // topWall
+	pop this 1                        // y
+label Ball_00000010_IF_END
+	push this 1                       // y
+	push this 13                      // bottomWall
+	lt
+	if-goto Ball_00000011_IF_END
+	push constant 4
+	pop this 14                       // wall
+	push this 13                      // bottomWall
+	pop this 1                        // y
+label Ball_00000011_IF_END
+	push pointer 0                    // push this as reference for method
+	call Ball.show 1
+	pop temp 0                        // dump return type void
+	push this 14                      // wall
+return
+
+function Ball.bounce 6
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 2                       // lengthx
+	push constant 10
+	call Math.divide 2
+	pop local 2                       // divLengthx
+	push this 3                       // lengthy
+	push constant 10
+	call Math.divide 2
+	pop local 3                       // divLengthy
+	push argument 1                   // bouncingDirection
+	push constant 0
+	eq
+	not
+	if-goto Ball_00000012_IF_FALSE
+	push constant 10
+	pop local 4                       // factor
+	goto Ball_00000012_IF_END
+label Ball_00000012_IF_FALSE
+	push this 2                       // lengthx
+	push constant 0
+	lt
+	not
+	push argument 1                   // bouncingDirection
+	push constant 1
+	eq
+	and
+	push this 2                       // lengthx
+	push constant 0
+	lt
+	push argument 1                   // bouncingDirection
+	push constant 1
+	neg
+	eq
+	and
+	or
+	not
+	if-goto Ball_00000013_IF_FALSE
+	push constant 20
+	pop local 4                       // factor
+	goto Ball_00000013_IF_END
+label Ball_00000013_IF_FALSE
+	push constant 5
+	pop local 4                       // factor
+label Ball_00000013_IF_END
+label Ball_00000012_IF_END
+	push this 14                      // wall
+	push constant 1
+	eq
+	not
+	if-goto Ball_00000014_IF_FALSE
+	push constant 506
+	pop local 0                       // newx
+	push local 3                      // divLengthy
+	push constant 50
+	neg
+	call Math.multiply 2
+	push local 2                      // divLengthx
+	call Math.divide 2
+	pop local 1                       // newy
+	push this 1                       // y
+	push local 1                      // newy
+	push local 4                      // factor
+	call Math.multiply 2
+	add
+	pop local 1                       // newy
+	goto Ball_00000014_IF_END
+label Ball_00000014_IF_FALSE
+	push this 14                      // wall
+	push constant 2
+	eq
+	not
+	if-goto Ball_00000015_IF_FALSE
+	push constant 0
+	pop local 0                       // newx
+	push local 3                      // divLengthy
+	push constant 50
+	call Math.multiply 2
+	push local 2                      // divLengthx
+	call Math.divide 2
+	pop local 1                       // newy
+	push this 1                       // y
+	push local 1                      // newy
+	push local 4                      // factor
+	call Math.multiply 2
+	add
+	pop local 1                       // newy
+	goto Ball_00000015_IF_END
+label Ball_00000015_IF_FALSE
+	push this 14                      // wall
+	push constant 3
+	eq
+	not
+	if-goto Ball_00000016_IF_FALSE
+	push constant 250
+	pop local 1                       // newy
+	push local 2                      // divLengthx
+	push constant 25
+	neg
+	call Math.multiply 2
+	push local 3                      // divLengthy
+	call Math.divide 2
+	pop local 0                       // newx
+	push this 0                       // x
+	push local 0                      // newx
+	push local 4                      // factor
+	call Math.multiply 2
+	add
+	pop local 0                       // newx
+	goto Ball_00000016_IF_END
+label Ball_00000016_IF_FALSE
+	push constant 0
+	pop local 1                       // newy
+	push local 2                      // divLengthx
+	push constant 25
+	call Math.multiply 2
+	push local 3                      // divLengthy
+	call Math.divide 2
+	pop local 0                       // newx
+	push this 0                       // x
+	push local 0                      // newx
+	push local 4                      // factor
+	call Math.multiply 2
+	add
+	pop local 0                       // newx
+label Ball_00000016_IF_END
+label Ball_00000015_IF_END
+label Ball_00000014_IF_END
+	push pointer 0                    // push this as reference for method
+	push local 0                      // newx
+	push local 1                      // newy
+	call Ball.setDestination 3
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return

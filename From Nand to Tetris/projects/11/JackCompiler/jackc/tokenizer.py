@@ -41,7 +41,6 @@ class Tokenizer():
         while self.has_more_tokens():
             next_token = self.advance()
             self.ignore_white()
-
             self.tokens.append(next_token)
 
         return self.tokens
@@ -122,6 +121,18 @@ class Tokenizer():
         """ Seek past whitespace and comments"""
 
         chars = self.stream.read(2)
+
+        # End of File
+        if len(chars) == 0:
+            return
+
+        # if whitespace
+        if len(chars) == 1:
+            if chars[0] in Tokenizer.WHITESPACE:
+                return
+            else:
+                self.stream.seek(self.stream.tell() - 1)
+                return
 
         # End of File
         if len(chars) != 2:

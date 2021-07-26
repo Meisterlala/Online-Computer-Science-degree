@@ -1,0 +1,315 @@
+
+function PongGame.new 0
+	push constant 7                   // size of object
+	call Memory.alloc 1               // allocate memory
+	pop pointer 0                     // store base adress in this
+	call Screen.clearScreen 0
+	pop temp 0                        // dump return type void
+	push constant 50
+	pop this 6                        // batWidth
+	push constant 230
+	push constant 229
+	push this 6                       // batWidth
+	push constant 7
+	call Bat.new 4
+	pop this 0                        // bat
+	push constant 253
+	push constant 222
+	push constant 0
+	push constant 511
+	push constant 0
+	push constant 229
+	call Ball.new 6
+	pop this 1                        // ball
+	push this 1                       // base adress of ball
+	push constant 400
+	push constant 0
+	call Ball.setDestination 3
+	pop temp 0                        // dump return type void
+	push constant 0
+	push constant 238
+	push constant 511
+	push constant 240
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 22
+	push constant 0
+	call Output.moveCursor 2
+	pop temp 0                        // dump return type void
+	push constant 8                   // length of String
+	call String.new 1                 // String: Score: 0
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 83                  // Char: S
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 111                 // Char: o
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 48                  // Char: 0
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // false or null
+	pop this 3                        // exit
+	push constant 0
+	pop this 4                        // score
+	push constant 0
+	pop this 2                        // wall
+	push constant 0
+	pop this 5                        // lastWall
+	push pointer 0                    // return base adress
+return
+
+function PongGame.dispose 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // base adress of bat
+	call Bat.dispose 1
+	pop temp 0                        // dump return type void
+	push this 1                       // base adress of ball
+	call Ball.dispose 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // return base adress
+	call Memory.deAlloc 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function PongGame.newInstance 0
+	call PongGame.new 0
+	pop static 0                      // instance
+	push constant 0                   // dummy void value
+return
+
+function PongGame.getInstance 0
+	push static 0                     // instance
+return
+
+function PongGame.run 2
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+label PongGame_00000000_WHILE_START
+	push this 3                       // exit
+	if-goto PongGame_00000000_WHILE_END
+label PongGame_00000001_WHILE_START
+	push local 0                      // key
+	push constant 0
+	eq
+	push this 3                       // exit
+	not
+	and
+	not
+	if-goto PongGame_00000001_WHILE_END
+	call Keyboard.keyPressed 0
+	pop local 0                       // key
+	push this 0                       // base adress of bat
+	call Bat.move 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // push this as reference for method
+	call PongGame.moveBall 1
+	pop temp 0                        // dump return type void
+	push constant 50
+	call Sys.wait 1
+	pop temp 0                        // dump return type void
+	goto PongGame_00000001_WHILE_START
+label PongGame_00000001_WHILE_END
+	push local 0                      // key
+	push constant 130
+	eq
+	not
+	if-goto PongGame_00000002_IF_FALSE
+	push this 0                       // base adress of bat
+	push constant 1
+	call Bat.setDirection 2
+	pop temp 0                        // dump return type void
+	goto PongGame_00000002_IF_END
+label PongGame_00000002_IF_FALSE
+	push local 0                      // key
+	push constant 132
+	eq
+	not
+	if-goto PongGame_00000003_IF_FALSE
+	push this 0                       // base adress of bat
+	push constant 2
+	call Bat.setDirection 2
+	pop temp 0                        // dump return type void
+	goto PongGame_00000003_IF_END
+label PongGame_00000003_IF_FALSE
+	push local 0                      // key
+	push constant 140
+	eq
+	not
+	if-goto PongGame_00000004_IF_END
+	push constant 1
+	neg                               // True
+	pop this 3                        // exit
+label PongGame_00000004_IF_END
+label PongGame_00000003_IF_END
+label PongGame_00000002_IF_END
+label PongGame_00000005_WHILE_START
+	push local 0                      // key
+	push constant 0
+	eq
+	not
+	push this 3                       // exit
+	not
+	and
+	not
+	if-goto PongGame_00000005_WHILE_END
+	call Keyboard.keyPressed 0
+	pop local 0                       // key
+	push this 0                       // base adress of bat
+	call Bat.move 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // push this as reference for method
+	call PongGame.moveBall 1
+	pop temp 0                        // dump return type void
+	push constant 50
+	call Sys.wait 1
+	pop temp 0                        // dump return type void
+	goto PongGame_00000005_WHILE_START
+label PongGame_00000005_WHILE_END
+	goto PongGame_00000000_WHILE_START
+label PongGame_00000000_WHILE_END
+	push this 3                       // exit
+	not
+	if-goto PongGame_00000006_IF_END
+	push constant 10
+	push constant 27
+	call Output.moveCursor 2
+	pop temp 0                        // dump return type void
+	push constant 9                   // length of String
+	call String.new 1                 // String: Game Over
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 71                  // Char: G
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 109                 // Char: m
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 79                  // Char: O
+	call String.appendChar 2
+	push constant 118                 // Char: v
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+label PongGame_00000006_IF_END
+	push constant 0                   // dummy void value
+return
+
+function PongGame.moveBall 6
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 1                       // base adress of ball
+	call Ball.move 1
+	pop this 2                        // wall
+	push this 2                       // wall
+	push constant 0
+	gt
+	push this 2                       // wall
+	push this 5                       // lastWall
+	eq
+	not
+	and
+	not
+	if-goto PongGame_00000007_IF_END
+	push this 2                       // wall
+	pop this 5                        // lastWall
+	push constant 0
+	pop local 0                       // bouncingDirection
+	push this 0                       // base adress of bat
+	call Bat.getLeft 1
+	pop local 1                       // batLeft
+	push this 0                       // base adress of bat
+	call Bat.getRight 1
+	pop local 2                       // batRight
+	push this 1                       // base adress of ball
+	call Ball.getLeft 1
+	pop local 3                       // ballLeft
+	push this 1                       // base adress of ball
+	call Ball.getRight 1
+	pop local 4                       // ballRight
+	push this 2                       // wall
+	push constant 4
+	eq
+	not
+	if-goto PongGame_00000008_IF_END
+	push local 1                      // batLeft
+	push local 4                      // ballRight
+	gt
+	push local 2                      // batRight
+	push local 3                      // ballLeft
+	lt
+	or
+	pop this 3                        // exit
+	push this 3                       // exit
+	if-goto PongGame_00000009_IF_END
+	push local 4                      // ballRight
+	push local 1                      // batLeft
+	push constant 10
+	add
+	lt
+	not
+	if-goto PongGame_00000010_IF_FALSE
+	push constant 1
+	neg
+	pop local 0                       // bouncingDirection
+	goto PongGame_00000010_IF_END
+label PongGame_00000010_IF_FALSE
+	push local 3                      // ballLeft
+	push local 2                      // batRight
+	push constant 10
+	sub
+	gt
+	not
+	if-goto PongGame_00000011_IF_END
+	push constant 1
+	pop local 0                       // bouncingDirection
+label PongGame_00000011_IF_END
+label PongGame_00000010_IF_END
+	push this 6                       // batWidth
+	push constant 2
+	sub
+	pop this 6                        // batWidth
+	push this 0                       // base adress of bat
+	push this 6                       // batWidth
+	call Bat.setWidth 2
+	pop temp 0                        // dump return type void
+	push this 4                       // score
+	push constant 1
+	add
+	pop this 4                        // score
+	push constant 22
+	push constant 7
+	call Output.moveCursor 2
+	pop temp 0                        // dump return type void
+	push this 4                       // score
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+label PongGame_00000009_IF_END
+label PongGame_00000008_IF_END
+	push this 1                       // base adress of ball
+	push local 0                      // bouncingDirection
+	call Ball.bounce 2
+	pop temp 0                        // dump return type void
+label PongGame_00000007_IF_END
+	push constant 0                   // dummy void value
+return

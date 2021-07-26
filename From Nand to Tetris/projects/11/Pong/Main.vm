@@ -1,0 +1,14 @@
+
+function Main.main 1
+	call PongGame.newInstance 0
+	pop temp 0                        // dump return type void
+	call PongGame.getInstance 0
+	pop local 0                       // game
+	push local 0                      // base adress of game
+	call PongGame.run 1
+	pop temp 0                        // dump return type void
+	push local 0                      // base adress of game
+	call PongGame.dispose 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return

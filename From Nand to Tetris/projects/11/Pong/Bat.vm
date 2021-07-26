@@ -1,0 +1,214 @@
+
+function Bat.new 0
+	push constant 5                   // size of object
+	call Memory.alloc 1               // allocate memory
+	pop pointer 0                     // store base adress in this
+	push argument 0                   // Ax
+	pop this 0                        // x
+	push argument 1                   // Ay
+	pop this 1                        // y
+	push argument 2                   // Awidth
+	pop this 2                        // width
+	push argument 3                   // Aheight
+	pop this 3                        // height
+	push constant 2
+	pop this 4                        // direction
+	push pointer 0                    // push this as reference for method
+	call Bat.show 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // return base adress
+return
+
+function Bat.dispose 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push pointer 0                    // return base adress
+	call Memory.deAlloc 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Bat.show 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // push this as reference for method
+	call Bat.draw 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Bat.hide 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // push this as reference for method
+	call Bat.draw 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Bat.draw 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // width
+	add
+	push this 1                       // y
+	push this 3                       // height
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Bat.setDirection 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push argument 1                   // Adirection
+	pop this 4                        // direction
+	push constant 0                   // dummy void value
+return
+
+function Bat.getLeft 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+return
+
+function Bat.getRight 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+	push this 2                       // width
+	add
+return
+
+function Bat.setWidth 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push pointer 0                    // push this as reference for method
+	call Bat.hide 1
+	pop temp 0                        // dump return type void
+	push argument 1                   // Awidth
+	pop this 2                        // width
+	push pointer 0                    // push this as reference for method
+	call Bat.show 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Bat.move 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 4                       // direction
+	push constant 1
+	eq
+	not
+	if-goto Bat_00000000_IF_FALSE
+	push this 0                       // x
+	push constant 4
+	sub
+	pop this 0                        // x
+	push this 0                       // x
+	push constant 0
+	lt
+	not
+	if-goto Bat_00000001_IF_END
+	push constant 0
+	pop this 0                        // x
+label Bat_00000001_IF_END
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 2                       // width
+	add
+	push constant 1
+	add
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // width
+	add
+	push constant 4
+	add
+	push this 1                       // y
+	push this 3                       // height
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push constant 3
+	add
+	push this 1                       // y
+	push this 3                       // height
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	goto Bat_00000000_IF_END
+label Bat_00000000_IF_FALSE
+	push this 0                       // x
+	push constant 4
+	add
+	pop this 0                        // x
+	push this 0                       // x
+	push this 2                       // width
+	add
+	push constant 511
+	gt
+	not
+	if-goto Bat_00000002_IF_END
+	push constant 511
+	push this 2                       // width
+	sub
+	pop this 0                        // x
+label Bat_00000002_IF_END
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push constant 4
+	sub
+	push this 1                       // y
+	push this 0                       // x
+	push constant 1
+	sub
+	push this 1                       // y
+	push this 3                       // height
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 2                       // width
+	add
+	push constant 3
+	sub
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // width
+	add
+	push this 1                       // y
+	push this 3                       // height
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+label Bat_00000000_IF_END
+	push constant 0                   // dummy void value
+return
