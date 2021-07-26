@@ -61,46 +61,69 @@ class Structure():
         def compile(self, table) -> "list[str]":
             compiled = []
 
+            # ClassVarDec*
+            for class_var_dec in self.class_var_decs:
+                compiled.extend(class_var_dec.compile(table))
+
             # subroutineDec*
             for subroutine in self.subroutine_decs:
                 compiled.extend(subroutine.compile(table))
 
             return compiled
 
-    class JClassVarDec(XMLString):
+    class JClassVarDec(XMLString, Compile):
         """ ('static'|'field') type varName (',' varName)* ';' """
         xml_name = "classVarDec"
         var_types = {"static", "field"}
 
         def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
+            self.var_names = []
 
             # ('static'|'field')
             token = tokens.pop()
             assert token.value in self.var_types
             self.content.append(token)
+            self.kind = token.value
 
             # type
-            self.content.append(Structure.JType(tokens))
+            j_type = Structure.JType(tokens)
+            self.content.append(j_type)
+            self.j_type = j_type.singe_content.value
 
             # varName
             token = tokens.pop()
             assert token == ("identifier", None)
             self.content.append(token)
+            self.var_names.append(token.value)
 
             # (, Varname)*
             token = tokens.pop()  # , or ;
             self.content.append(token)
 
             while token != ("symbol", ";"):
-                token = tokens.pop()  # varName
-                assert token == ("identifier", None)
+                token_name = tokens.pop()  # varName
+                assert token_name == ("identifier", None)
                 self.content.append(token)
                 token = tokens.pop()  # , or ;
                 self.content.append(token)
+                self.var_names.append(token_name.value)
 
             # ;
             assert token.value == ";"
+
+        def compile(self, table: "SymbolTable") -> "list[str]":
+            compiled = []
+
+            if self.kind == "static":
+                kind = SymbolTable.Entry.Kind.STATIC
+            else:  # Else it has to be "field"
+                kind = SymbolTable.Entry.Kind.FIELD
+
+            for name in self.var_names:
+                table.add(name, self.j_type, kind)
+
+            return compiled
 
     class JSubroutineDec(XMLString, Compile):
         """ ('constructor'|'function'|'method') ('void' | type)
@@ -114,7 +137,7 @@ class Structure():
             # ('constructor'|'function'|'method')
             token = tokens.pop()
             assert token.value in self.sub_types
-            self.sub_type = token
+            self.sub_type = token.value
             self.content.append(token)
 
             # ('void' | type)
@@ -151,20 +174,39 @@ class Structure():
         def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
+            # reset Table
+            table.reset_table_sub()
+
             # function Main.main 0
             # parameter_count = self.parameter_list.length
-            local_count = self.sub_body.locals()
+            argument_count = self.sub_body.locals()
+            # inc argument length to account for first this
+            if self.sub_type == "method":
+                argument_count += 1
+
+            # function header
             compiled.append(
-                f"function {table.class_name}.{self.subroutine_name.value} {local_count}")
+                f"function {table.class_name}.{self.subroutine_name.value} {argument_count}")
+
+            # add imaginary "this" and push it to pointer 0
+            if self.sub_type == "method":
+                table.add("this", table.class_name, SymbolTable.Entry.Kind.ARG)
+                index_of_this = table.index_of("this")  # should be 0
+                compiled.extend([f"push argument {index_of_this} // push this",
+                                 "pop pointer 0 // assign this from arg"])
 
             # Handle arguments
             compiled.extend(self.parameter_list.compile(table))
 
-            # compile
-            compiled.extend(self.sub_body.compile(table))
+            # Handle Object Memory Alloc
+            if self.sub_type == "constructor":
+                field_count = table.var_count(SymbolTable.Entry.Kind.FIELD)
+                compiled.extend([f"push constant {field_count} // size of object",
+                                 "call Memory.alloc 1 // allocate memory",
+                                 "pop pointer 0 // store base adress in this"])
 
-            # reset Table
-            table.reset_table_sub()
+            # compile Body
+            compiled.extend(self.sub_body.compile(table))
 
             return compiled
 
@@ -249,8 +291,6 @@ class Structure():
 
         def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
-
-            # set this to current object
 
             # varDec*
             for var_dec in self.var_decs:

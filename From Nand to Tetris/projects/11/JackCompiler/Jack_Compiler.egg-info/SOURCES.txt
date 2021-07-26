@@ -16,3 +16,7 @@ jackc/parser.py
 jackc/symbol_table.py
 jackc/tokenizer.py
 jackc/tokens.py
+jackc/j_classes/__init__.py
+jackc/j_classes/expression.py
+jackc/j_classes/statement.py
+jackc/j_classes/structure.py

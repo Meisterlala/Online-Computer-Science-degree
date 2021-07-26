@@ -312,7 +312,7 @@ class Statements:
             # Compile subroutine
             compiled.extend(self.sub_call.compile(table))
             # remove 0 from stack, because this is a void method
-            compiled.append("pop temp 0 // pop because type void")
+            compiled.append("pop temp 0 // dump return type void")
             return compiled
 
     class JReturnStatement(XMLString, Compile):
@@ -348,7 +348,7 @@ class Statements:
                 compiled.extend(self.expression.compile(table))
             else:  # else it has type void
                 # push dummy value on stack
-                compiled.append("push constant 0")
+                compiled.append("push constant 0 // dummy void value")
 
             # return statement
             compiled.append("return")

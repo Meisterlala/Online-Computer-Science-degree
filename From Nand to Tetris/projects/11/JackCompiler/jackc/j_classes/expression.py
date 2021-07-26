@@ -2,6 +2,7 @@
 
 
 from enum import Enum
+import typing
 from ..parents import Compile, XMLString
 from ..symbol_table import SymbolTable
 from ..tokens import Token  # pylint: disable=unused-import
@@ -227,8 +228,8 @@ class Expressions:
                 elif self.key_word == "true":
                     return["push constant 1", "neg // True"]
                 elif self.key_word == "this":
-                    # might be "push pointer 0"
-                    return["push this"]
+                    # this
+                    return["push pointer 0 // return base adress"]
 
             return ["TermType not implemented " + str(self.term_type)]
 
@@ -284,7 +285,7 @@ class Expressions:
 
             possible_dot = tokens[-2]
             if possible_dot != ("symbol", "."):
-                self.class_name = None
+                self.class_var_name = None
 
                 # subroutineName
                 token = tokens.pop()
@@ -311,7 +312,7 @@ class Expressions:
                 token = tokens.pop()
                 assert token == ("identifier", None)
                 self.content.append(token)
-                self.class_name = token
+                self.class_var_name = token
 
                 # '.'
                 token = tokens.pop()
@@ -343,23 +344,63 @@ class Expressions:
             """ Dont Display self Name"""
             return "\n".join(str(x) for x in self.content)
 
-        def compile(self, table) -> "list[str]":
+        def compile(self, table: "SymbolTable") -> "list[str]":
             compiled = []
+            calling_method = False
+            calling_on_object = False
+            obj_name = ""
+
+            # Figure out what type it is trying to call
+            # If the subroutine call has no Class name, assume the current class as name
+            name = ""
+            if self.class_var_name is None:
+                name = table.class_name
+                calling_method = True
+            else:
+                name = self.class_var_name.value
+
+                # if class_name is a variable, use the class
+                potential_type = table.j_type_of(name)
+                if potential_type is not None:
+                    obj_name = name
+                    name = potential_type
+                    calling_method = True
+                    calling_on_object = True
+            length = self.expression_list.length
+            sub_name = self.subroutine_name.value
+
+            # Inc argument lenght if calling a method
+            if calling_method:
+                length += 1
+
+            if calling_on_object:
+                # Push object base adress as argument
+                vm_type = table.kind_of(obj_name)
+                assert vm_type is not None  # already found previusly
+                segment = ""
+                if vm_type == SymbolTable.Entry.Kind.STATIC:
+                    segment = "static"
+                elif vm_type == SymbolTable.Entry.Kind.ARG:
+                    segment = "argument"
+                elif vm_type == SymbolTable.Entry.Kind.FIELD:
+                    segment = "this"
+                elif vm_type == SymbolTable.Entry.Kind.LOCAL:
+                    segment = "local"
+                index = table.index_of(obj_name)
+
+                # Push base adress of obj
+                compiled.append(
+                    f"push {segment} {index} // base adress of {obj_name}")
+
+            elif calling_method:
+                # Push this as Argument
+                compiled.append(
+                    "push pointer 0 // push this as reference for method")
 
             # push expressions onto stack
             compiled.extend(self.expression_list.compile(table))
 
             # call function
-            # If the subroutine call has no Class name, assume the current class as name
-            name = ""
-            if self.class_name is None:
-                name = table.class_name
-            else:
-                name = self.class_name.value
-
-            length = self.expression_list.length
-            sub_name = self.subroutine_name.value
-
             compiled.append(f"call {name}.{sub_name} {length}")
 
             return compiled

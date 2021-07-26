@@ -1,0 +1,168 @@
+
+function SquareGame.new 0
+	push constant 2                   // size of object
+	call Memory.alloc 1               // allocate memory
+	pop pointer 0                     // store base adress in this
+	push constant 0
+	push constant 0
+	push constant 30
+	call Square.new 3
+	pop this 0                        // square
+	push constant 0
+	pop this 1                        // direction
+	push pointer 0                    // return base adress
+return
+
+function SquareGame.dispose 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // base adress of square
+	call Square.dispose 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // return base adress
+	call Memory.deAlloc 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function SquareGame.moveSquare 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 1                       // direction
+	push constant 1
+	eq
+	not
+	if-goto SquareGame_00000000_IF_END
+	push this 0                       // base adress of square
+	call Square.moveUp 1
+	pop temp 0                        // dump return type void
+label SquareGame_00000000_IF_END
+	push this 1                       // direction
+	push constant 2
+	eq
+	not
+	if-goto SquareGame_00000001_IF_END
+	push this 0                       // base adress of square
+	call Square.moveDown 1
+	pop temp 0                        // dump return type void
+label SquareGame_00000001_IF_END
+	push this 1                       // direction
+	push constant 3
+	eq
+	not
+	if-goto SquareGame_00000002_IF_END
+	push this 0                       // base adress of square
+	call Square.moveLeft 1
+	pop temp 0                        // dump return type void
+label SquareGame_00000002_IF_END
+	push this 1                       // direction
+	push constant 4
+	eq
+	not
+	if-goto SquareGame_00000003_IF_END
+	push this 0                       // base adress of square
+	call Square.moveRight 1
+	pop temp 0                        // dump return type void
+label SquareGame_00000003_IF_END
+	push constant 5
+	call Sys.wait 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function SquareGame.run 3
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 0                   // false or null
+	pop local 1                       // exit
+label SquareGame_00000004_WHILE_START
+	push local 1                      // exit
+	if-goto SquareGame_00000004_WHILE_END
+label SquareGame_00000005_WHILE_START
+	push local 0                      // key
+	push constant 0
+	eq
+	not
+	if-goto SquareGame_00000005_WHILE_END
+	call Keyboard.keyPressed 0
+	pop local 0                       // key
+	push pointer 0                    // push this as reference for method
+	call SquareGame.moveSquare 1
+	pop temp 0                        // dump return type void
+	goto SquareGame_00000005_WHILE_START
+label SquareGame_00000005_WHILE_END
+	push local 0                      // key
+	push constant 81
+	eq
+	not
+	if-goto SquareGame_00000006_IF_END
+	push constant 1
+	neg                               // True
+	pop local 1                       // exit
+label SquareGame_00000006_IF_END
+	push local 0                      // key
+	push constant 90
+	eq
+	not
+	if-goto SquareGame_00000007_IF_END
+	push this 0                       // base adress of square
+	call Square.decSize 1
+	pop temp 0                        // dump return type void
+label SquareGame_00000007_IF_END
+	push local 0                      // key
+	push constant 88
+	eq
+	not
+	if-goto SquareGame_00000008_IF_END
+	push this 0                       // base adress of square
+	call Square.incSize 1
+	pop temp 0                        // dump return type void
+label SquareGame_00000008_IF_END
+	push local 0                      // key
+	push constant 131
+	eq
+	not
+	if-goto SquareGame_00000009_IF_END
+	push constant 1
+	pop this 1                        // direction
+label SquareGame_00000009_IF_END
+	push local 0                      // key
+	push constant 133
+	eq
+	not
+	if-goto SquareGame_00000010_IF_END
+	push constant 2
+	pop this 1                        // direction
+label SquareGame_00000010_IF_END
+	push local 0                      // key
+	push constant 130
+	eq
+	not
+	if-goto SquareGame_00000011_IF_END
+	push constant 3
+	pop this 1                        // direction
+label SquareGame_00000011_IF_END
+	push local 0                      // key
+	push constant 132
+	eq
+	not
+	if-goto SquareGame_00000012_IF_END
+	push constant 4
+	pop this 1                        // direction
+label SquareGame_00000012_IF_END
+label SquareGame_00000013_WHILE_START
+	push local 0                      // key
+	push constant 0
+	eq
+	if-goto SquareGame_00000013_WHILE_END
+	call Keyboard.keyPressed 0
+	pop local 0                       // key
+	push pointer 0                    // push this as reference for method
+	call SquareGame.moveSquare 1
+	pop temp 0                        // dump return type void
+	goto SquareGame_00000013_WHILE_START
+label SquareGame_00000013_WHILE_END
+	goto SquareGame_00000004_WHILE_START
+label SquareGame_00000004_WHILE_END
+	push constant 0                   // dummy void value
+return

@@ -26,6 +26,8 @@ class Compiler():
         code = Compiler.remove_duplicates(code)
         # Indent to make easy to read
         code = Compiler.indent(code)
+        # Allign comments on right
+        code = Compiler.allign_comments(code)
         # Add Sys.init 0 Bootstrap
         #code = self.sys_init(code)
         return "\n".join(code)
@@ -82,3 +84,31 @@ class Compiler():
             last_line = trimmed
 
         return clean
+
+    @staticmethod
+    def allign_comments(source: "list[str]") -> "list[str]":
+        """ Allign all the comments on the right if not on an empty line"""
+        alligned = []
+        for line in source:
+            trimmed = line.lstrip()
+
+            # Ignore empty lines
+            if len(trimmed) == 0:
+                alligned.append(line)
+                continue
+
+            # Full line Comment
+            if trimmed[0:1] == "//":
+                alligned.append(line)
+                continue
+
+            # If no comment
+            start_of_comment = line.find("//")
+            if start_of_comment == -1:
+                alligned.append(line)
+                continue
+
+            first_part = line[0:start_of_comment]
+            alligned.append(f"{first_part : <35}{line[start_of_comment:]}")
+
+        return alligned

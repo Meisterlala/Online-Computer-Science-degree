@@ -1,6 +1,7 @@
 """ a Symbol table containing names of variables """
 
 from enum import Enum
+from typing import Union
 
 
 class SymbolTable():
@@ -55,24 +56,32 @@ class SymbolTable():
         """ Clears the Sub scope table """
         self.table_sub.clear()
 
-    def kind_of(self, name: str) -> Entry.Kind:
+    def kind_of(self, name: str) -> Union[Entry.Kind, None]:
         """ returns Kind or None """
         # Get Entry
         entry = self.get_entry(name)
         if entry is None:
-            return SymbolTable.Entry.Kind.INVALID
+            return None
 
         return entry.kind
 
+    def j_type_of(self, name: str) -> Union[str, None]:
+        """ returns the j_type or None"""
+        # Get entry
+        entry = self.get_entry(name)
+        if entry is None:
+            return None
+        return entry.j_type
+
     def index_of(self, name) -> int:
-        """ returns the index assigned to the named identifier """
+        """ returns the index assigned to the named identifier or -1"""
         # Get Entry
         entry = self.get_entry(name)
         if entry is None:
-            return 0
+            return -1
         return entry.index
 
-    def var_count(self, kind: Entry.Kind):
+    def var_count(self, kind: Entry.Kind) -> int:
         """ Returns the number of variables with a given type """
         # Select which table to search based on Entry.Kind
         if kind in (SymbolTable.Entry.Kind.FIELD, SymbolTable.Entry.Kind.STATIC):
@@ -87,7 +96,7 @@ class SymbolTable():
                 count += 1
         return count
 
-    def get_entry(self, name) -> Entry:
+    def get_entry(self, name) -> Union[Entry, None]:
         """ returns None or Entry if found """
         # if in sub table
         sub_entry = self.table_sub.get(name, None)
@@ -100,5 +109,4 @@ class SymbolTable():
             return class_entry
 
         # Error, unknown var
-        assert False, f"Unknown, never seen variable {str(name)}"
-        return SymbolTable.Entry("int", SymbolTable.Entry.Kind.INVALID, 0)
+        return None

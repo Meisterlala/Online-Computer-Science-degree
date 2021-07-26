@@ -1,0 +1,308 @@
+
+function Square.new 0
+	push constant 3                   // size of object
+	call Memory.alloc 1               // allocate memory
+	pop pointer 0                     // store base adress in this
+	push argument 0                   // Ax
+	pop this 0                        // x
+	push argument 1                   // Ay
+	pop this 1                        // y
+	push argument 2                   // Asize
+	pop this 2                        // size
+	push pointer 0                    // push this as reference for method
+	call Square.draw 1
+	pop temp 0                        // dump return type void
+	push pointer 0                    // return base adress
+return
+
+function Square.dispose 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push pointer 0                    // return base adress
+	call Memory.deAlloc 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Square.draw 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Square.erase 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Square.incSize 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 1                       // y
+	push this 2                       // size
+	add
+	push constant 254
+	lt
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push constant 510
+	lt
+	and
+	not
+	if-goto Square_00000000_IF_END
+	push pointer 0                    // push this as reference for method
+	call Square.erase 1
+	pop temp 0                        // dump return type void
+	push this 2                       // size
+	push constant 2
+	add
+	pop this 2                        // size
+	push pointer 0                    // push this as reference for method
+	call Square.draw 1
+	pop temp 0                        // dump return type void
+label Square_00000000_IF_END
+	push constant 0                   // dummy void value
+return
+
+function Square.decSize 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 2                       // size
+	push constant 2
+	gt
+	not
+	if-goto Square_00000001_IF_END
+	push pointer 0                    // push this as reference for method
+	call Square.erase 1
+	pop temp 0                        // dump return type void
+	push this 2                       // size
+	push constant 2
+	sub
+	pop this 2                        // size
+	push pointer 0                    // push this as reference for method
+	call Square.draw 1
+	pop temp 0                        // dump return type void
+label Square_00000001_IF_END
+	push constant 0                   // dummy void value
+return
+
+function Square.moveUp 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 1                       // y
+	push constant 1
+	gt
+	not
+	if-goto Square_00000002_IF_END
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 2                       // size
+	add
+	push constant 1
+	sub
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push this 1                       // y
+	push constant 2
+	sub
+	pop this 1                        // y
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push constant 1
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+label Square_00000002_IF_END
+	push constant 0                   // dummy void value
+return
+
+function Square.moveDown 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 1                       // y
+	push this 2                       // size
+	add
+	push constant 254
+	lt
+	not
+	if-goto Square_00000003_IF_END
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push constant 1
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push this 1                       // y
+	push constant 2
+	add
+	pop this 1                        // y
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 2                       // size
+	add
+	push constant 1
+	sub
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+label Square_00000003_IF_END
+	push constant 0                   // dummy void value
+return
+
+function Square.moveLeft 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+	push constant 1
+	gt
+	not
+	if-goto Square_00000004_IF_END
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push constant 1
+	sub
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push constant 2
+	sub
+	pop this 0                        // x
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push constant 1
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+label Square_00000004_IF_END
+	push constant 0                   // dummy void value
+return
+
+function Square.moveRight 1
+	push argument 0                   // push this
+	pop pointer 0                     // assign this from arg
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push constant 510
+	lt
+	not
+	if-goto Square_00000005_IF_END
+	push constant 0                   // false or null
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 1                       // y
+	push this 0                       // x
+	push constant 1
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push constant 2
+	add
+	pop this 0                        // x
+	push constant 1
+	neg                               // True
+	call Screen.setColor 1
+	pop temp 0                        // dump return type void
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push constant 1
+	sub
+	push this 1                       // y
+	push this 0                       // x
+	push this 2                       // size
+	add
+	push this 1                       // y
+	push this 2                       // size
+	add
+	call Screen.drawRectangle 4
+	pop temp 0                        // dump return type void
+label Square_00000005_IF_END
+	push constant 0                   // dummy void value
+return
