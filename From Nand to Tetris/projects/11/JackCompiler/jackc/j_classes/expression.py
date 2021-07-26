@@ -2,7 +2,6 @@
 
 
 from enum import Enum
-import typing
 from ..parents import Compile, XMLString
 from ..symbol_table import SymbolTable
 from ..tokens import Token  # pylint: disable=unused-import
