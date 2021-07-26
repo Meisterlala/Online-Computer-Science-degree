@@ -109,7 +109,7 @@ class Expressions:
             # StringConstant
             if token == ("stringConstant", None):
                 self.term_type = Expressions.JTerm.TermType.STRINGCONST
-
+                self.string_content = token.value
                 self.content.append(token)
                 return
 
@@ -179,7 +179,9 @@ class Expressions:
                     self.content.append(tokens.pop())
 
                     # expression
-                    self.content.append(Expressions.JExpression(tokens))
+                    expression = Expressions.JExpression(tokens)
+                    self.content.append(expression)
+                    self.array_expression = expression
 
                     # ']'
                     token = tokens.pop()
@@ -229,6 +231,53 @@ class Expressions:
                 elif self.key_word == "this":
                     # this
                     return["push pointer 0 // return base adress"]
+
+            if self.term_type == Expressions.JTerm.TermType.STRINGCONST:
+                compiled = []
+                length = len(self.string_content)
+
+                compiled.extend(
+                    [f"push constant {length} // length of String",
+                     f"call String.new 1 // String: {self.string_content}",
+                     "pop temp 1 // store string base adress"])
+
+                compiled.append("push temp 1 // base adress of String")
+                for char in self.string_content:
+                    char_int = ord(char)
+                    compiled.extend([f"push constant {str(char_int)} // Char: {char}",
+                                     "call String.appendChar 2"])
+
+                return compiled
+
+            # array
+            if self.term_type == Expressions.JTerm.TermType.VARNAME_EXP:
+                compiled = []
+
+                kind = table.kind_of(self.var_name)
+                index = table.index_of(self.var_name)
+                segment = "not_defined"
+                if kind == SymbolTable.Entry.Kind.LOCAL:
+                    segment = "local"
+                elif kind == SymbolTable.Entry.Kind.STATIC:
+                    segment = "static"
+                elif kind == SymbolTable.Entry.Kind.FIELD:
+                    segment = "this"
+                elif kind == SymbolTable.Entry.Kind.ARG:
+                    segment = "argument"
+
+                compiled.extend(
+                    [f"push {segment} {index} // array {self.var_name}"])
+
+                # Compile expression
+                compiled.extend(self.array_expression.compile(table))
+                # add base value to offset
+                compiled.append("add // Calculate offset")
+
+                # push value to stack
+                compiled.extend([f"pop pointer 1 // that = {self.var_name}[offset]",
+                                 "push that 0 // push value onto stack"])
+
+                return compiled
 
             return ["TermType not implemented " + str(self.term_type)]
 

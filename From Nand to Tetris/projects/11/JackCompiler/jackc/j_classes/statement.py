@@ -51,6 +51,7 @@ class Statements:
 
         def __init__(self, tokens: "list[Token]") -> None:
             self.content = []
+            self.is_array = False
 
             # 'let'
             token = tokens.pop()
@@ -66,11 +67,15 @@ class Statements:
             # ('[' expression ']')?
             next_token = tokens[-1]
             while next_token == ("symbol", "["):
+                self.is_array = True
+
                 # [
                 self.content.append(tokens.pop())  # [
 
                 # expression
-                self.content.append(Expressions.JExpression(tokens))
+                expression_array = Expressions.JExpression(tokens)
+                self.content.append(expression_array)
+                self.expression_array = expression_array
 
                 # ]
                 token = tokens.pop()
@@ -96,23 +101,51 @@ class Statements:
         def compile(self, table: SymbolTable) -> "list[str]":
             compiled = []
 
-            # TODO hande Arrays
+            if self.is_array:
+                # push arr
+                kind = table.kind_of(self.target)
+                index = table.index_of(self.target)
+                segment = "not_defined"
+                if kind == SymbolTable.Entry.Kind.LOCAL:
+                    segment = "local"
+                elif kind == SymbolTable.Entry.Kind.STATIC:
+                    segment = "static"
+                elif kind == SymbolTable.Entry.Kind.FIELD:
+                    segment = "this"
+                elif kind == SymbolTable.Entry.Kind.ARG:
+                    segment = "argument"
 
-            # Compile Expression
-            compiled.extend(self.expression.compile(table))
+                compiled.extend(
+                    [f"push {segment} {index} // array {self.target}"])
 
-            # pop into value
-            index = table.index_of(self.target)
-            kind = table.kind_of(self.target)
-            if kind == SymbolTable.Entry.Kind.LOCAL:
-                compiled.append(f"pop local {index} // {self.target}")
-            elif kind == SymbolTable.Entry.Kind.ARG:
-                compiled.append(f"pop argument {index} // {self.target}")
-            elif kind == SymbolTable.Entry.Kind.STATIC:
-                compiled.append(f"pop static {index} // {self.target}")
-            elif kind == SymbolTable.Entry.Kind.FIELD:
-                # Assume pointer 0 is this
-                compiled.append(f"pop this {index} // {self.target}")
+                # Compile expression
+                compiled.extend(self.expression_array.compile(table))
+                # add base value to offset
+                compiled.append("add // Calculate offset")
+                # Compile right expression
+                compiled.extend(self.expression.compile(table))
+
+                compiled.extend(["pop temp 2 // value of right site expression",
+                                 f"pop pointer 1 // that = {self.target}[offset]",
+                                 "push temp 2 // restore value",
+                                 f"pop that 0 // {self.target}[offset]=value"])
+
+            else:
+                # Compile Expression
+                compiled.extend(self.expression.compile(table))
+
+                # pop into value
+                index = table.index_of(self.target)
+                kind = table.kind_of(self.target)
+                if kind == SymbolTable.Entry.Kind.LOCAL:
+                    compiled.append(f"pop local {index} // {self.target}")
+                elif kind == SymbolTable.Entry.Kind.ARG:
+                    compiled.append(f"pop argument {index} // {self.target}")
+                elif kind == SymbolTable.Entry.Kind.STATIC:
+                    compiled.append(f"pop static {index} // {self.target}")
+                elif kind == SymbolTable.Entry.Kind.FIELD:
+                    # Assume pointer 0 is this
+                    compiled.append(f"pop this {index} // {self.target}")
 
             return compiled
 

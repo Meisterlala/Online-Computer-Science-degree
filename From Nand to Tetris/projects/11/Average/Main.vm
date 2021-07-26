@@ -1,0 +1,156 @@
+
+function Main.main 4
+	push constant 18                  // length of String
+	call String.new 1                 // String: How many numbers? 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 72                  // Char: H
+	call String.appendChar 2
+	push constant 111                 // Char: o
+	call String.appendChar 2
+	push constant 119                 // Char: w
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 109                 // Char: m
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 110                 // Char: n
+	call String.appendChar 2
+	push constant 121                 // Char: y
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 110                 // Char: n
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 109                 // Char: m
+	call String.appendChar 2
+	push constant 98                  // Char: b
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 63                  // Char: ?
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Keyboard.readInt 1
+	pop local 1                       // length
+	push local 1                      // length
+	call Array.new 1
+	pop local 0                       // a
+	push constant 0
+	pop local 2                       // i
+label Main_00000000_WHILE_START
+	push local 2                      // i
+	push local 1                      // length
+	lt
+	not
+	if-goto Main_00000000_WHILE_END
+	push local 0                      // array a
+	push local 2                      // i
+	add                               // Calculate offset
+	push constant 16                  // length of String
+	call String.new 1                 // String: Enter a number: 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 69                  // Char: E
+	call String.appendChar 2
+	push constant 110                 // Char: n
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 110                 // Char: n
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 109                 // Char: m
+	call String.appendChar 2
+	push constant 98                  // Char: b
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Keyboard.readInt 1
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = a[offset]
+	push temp 2                       // restore value
+	pop that 0                        // {self.target}[offset]=value
+	push local 3                      // sum
+	push local 0                      // array a
+	push local 2                      // i
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	add
+	pop local 3                       // sum
+	push local 2                      // i
+	push constant 1
+	add
+	pop local 2                       // i
+	goto Main_00000000_WHILE_START
+label Main_00000000_WHILE_END
+	push constant 15                  // length of String
+	call String.new 1                 // String: The average is 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 84                  // Char: T
+	call String.appendChar 2
+	push constant 104                 // Char: h
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 118                 // Char: v
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 103                 // Char: g
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 105                 // Char: i
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push local 3                      // sum
+	push local 1                      // length
+	call Math.divide 2
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
