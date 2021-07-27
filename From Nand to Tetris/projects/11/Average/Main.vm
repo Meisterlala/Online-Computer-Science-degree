@@ -96,7 +96,7 @@ label Main_00000000_WHILE_START
 	pop temp 2                        // value of right site expression
 	pop pointer 1                     // that = a[offset]
 	push temp 2                       // restore value
-	pop that 0                        // {self.target}[offset]=value
+	pop that 0                        // a[offset]=value
 	push local 3                      // sum
 	push local 0                      // array a
 	push local 2                      // i

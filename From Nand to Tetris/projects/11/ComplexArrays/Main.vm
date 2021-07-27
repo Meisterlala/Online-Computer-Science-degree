@@ -1,0 +1,714 @@
+
+function Main.main 3
+	push constant 10
+	call Array.new 1
+	pop local 0                       // a
+	push constant 5
+	call Array.new 1
+	pop local 1                       // b
+	push constant 1
+	call Array.new 1
+	pop local 2                       // c
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	push constant 2
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = a[offset]
+	push temp 2                       // restore value
+	pop that 0                        // a[offset]=value
+	push local 0                      // array a
+	push constant 4
+	add                               // Calculate offset
+	push constant 8
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = a[offset]
+	push temp 2                       // restore value
+	pop that 0                        // a[offset]=value
+	push local 0                      // array a
+	push constant 5
+	add                               // Calculate offset
+	push constant 4
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = a[offset]
+	push temp 2                       // restore value
+	pop that 0                        // a[offset]=value
+	push local 1                      // array b
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	add                               // Calculate offset
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	push constant 3
+	add
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = b[offset]
+	push temp 2                       // restore value
+	pop that 0                        // b[offset]=value
+	push local 0                      // array a
+	push local 1                      // array b
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	add                               // Calculate offset
+	pop pointer 1                     // that = b[offset]
+	push that 0                       // push value onto stack
+	add                               // Calculate offset
+	push local 0                      // array a
+	push local 0                      // array a
+	push constant 5
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	push local 1                      // array b
+	push constant 7
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	sub
+	push constant 2
+	call Main.double 1
+	sub
+	push constant 1
+	add
+	add                               // Calculate offset
+	pop pointer 1                     // that = b[offset]
+	push that 0                       // push value onto stack
+	call Math.multiply 2
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = a[offset]
+	push temp 2                       // restore value
+	pop that 0                        // a[offset]=value
+	push local 2                      // array c
+	push constant 0
+	add                               // Calculate offset
+	push constant 0                   // false or null
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = c[offset]
+	push temp 2                       // restore value
+	pop that 0                        // c[offset]=value
+	push local 2                      // array c
+	push constant 0
+	add                               // Calculate offset
+	pop pointer 1                     // that = c[offset]
+	push that 0                       // push value onto stack
+	pop local 2                       // c
+	push constant 43                  // length of String
+	call String.new 1                 // String: Test 1: expected result: 5; actual result: 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 84                  // Char: T
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 49                  // Char: 1
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 120                 // Char: x
+	call String.appendChar 2
+	push constant 112                 // Char: p
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 100                 // Char: d
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 53                  // Char: 5
+	call String.appendChar 2
+	push constant 59                  // Char: ;
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push local 1                      // array b
+	push constant 2
+	add                               // Calculate offset
+	pop pointer 1                     // that = b[offset]
+	push that 0                       // push value onto stack
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+	call Output.println 0
+	pop temp 0                        // dump return type void
+	push constant 44                  // length of String
+	call String.new 1                 // String: Test 2: expected result: 40; actual result: 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 84                  // Char: T
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 50                  // Char: 2
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 120                 // Char: x
+	call String.appendChar 2
+	push constant 112                 // Char: p
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 100                 // Char: d
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 52                  // Char: 4
+	call String.appendChar 2
+	push constant 48                  // Char: 0
+	call String.appendChar 2
+	push constant 59                  // Char: ;
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push local 0                      // array a
+	push constant 5
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+	call Output.println 0
+	pop temp 0                        // dump return type void
+	push constant 43                  // length of String
+	call String.new 1                 // String: Test 3: expected result: 0; actual result: 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 84                  // Char: T
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 51                  // Char: 3
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 120                 // Char: x
+	call String.appendChar 2
+	push constant 112                 // Char: p
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 100                 // Char: d
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 48                  // Char: 0
+	call String.appendChar 2
+	push constant 59                  // Char: ;
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push local 2                      // c
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+	call Output.println 0
+	pop temp 0                        // dump return type void
+	push constant 0                   // false or null
+	pop local 2                       // c
+	push local 2                      // c
+	push constant 0                   // false or null
+	eq
+	not
+	if-goto Main_00000000_IF_END
+	push local 0                      // a
+	push constant 10
+	call Main.fill 2
+	pop temp 0                        // dump return type void
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	pop local 2                       // c
+	push local 2                      // array c
+	push constant 1
+	add                               // Calculate offset
+	push constant 33
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = c[offset]
+	push temp 2                       // restore value
+	pop that 0                        // c[offset]=value
+	push local 0                      // array a
+	push constant 7
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	pop local 2                       // c
+	push local 2                      // array c
+	push constant 1
+	add                               // Calculate offset
+	push constant 77
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = c[offset]
+	push temp 2                       // restore value
+	pop that 0                        // c[offset]=value
+	push local 0                      // array a
+	push constant 3
+	add                               // Calculate offset
+	pop pointer 1                     // that = a[offset]
+	push that 0                       // push value onto stack
+	pop local 1                       // b
+	push local 1                      // array b
+	push constant 1
+	add                               // Calculate offset
+	push local 1                      // array b
+	push constant 1
+	add                               // Calculate offset
+	pop pointer 1                     // that = b[offset]
+	push that 0                       // push value onto stack
+	push local 2                      // array c
+	push constant 1
+	add                               // Calculate offset
+	pop pointer 1                     // that = c[offset]
+	push that 0                       // push value onto stack
+	add
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = b[offset]
+	push temp 2                       // restore value
+	pop that 0                        // b[offset]=value
+label Main_00000000_IF_END
+	push constant 44                  // length of String
+	call String.new 1                 // String: Test 4: expected result: 77; actual result: 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 84                  // Char: T
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 52                  // Char: 4
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 120                 // Char: x
+	call String.appendChar 2
+	push constant 112                 // Char: p
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 100                 // Char: d
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 55                  // Char: 7
+	call String.appendChar 2
+	push constant 55                  // Char: 7
+	call String.appendChar 2
+	push constant 59                  // Char: ;
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push local 2                      // array c
+	push constant 1
+	add                               // Calculate offset
+	pop pointer 1                     // that = c[offset]
+	push that 0                       // push value onto stack
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+	call Output.println 0
+	pop temp 0                        // dump return type void
+	push constant 45                  // length of String
+	call String.new 1                 // String: Test 5: expected result: 110; actual result: 
+	pop temp 1                        // store string base adress
+	push temp 1                       // base adress of String
+	push constant 84                  // Char: T
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 53                  // Char: 5
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 120                 // Char: x
+	call String.appendChar 2
+	push constant 112                 // Char: p
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 100                 // Char: d
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 49                  // Char: 1
+	call String.appendChar 2
+	push constant 49                  // Char: 1
+	call String.appendChar 2
+	push constant 48                  // Char: 0
+	call String.appendChar 2
+	push constant 59                  // Char: ;
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 99                  // Char: c
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 97                  // Char: a
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	push constant 114                 // Char: r
+	call String.appendChar 2
+	push constant 101                 // Char: e
+	call String.appendChar 2
+	push constant 115                 // Char: s
+	call String.appendChar 2
+	push constant 117                 // Char: u
+	call String.appendChar 2
+	push constant 108                 // Char: l
+	call String.appendChar 2
+	push constant 116                 // Char: t
+	call String.appendChar 2
+	push constant 58                  // Char: :
+	call String.appendChar 2
+	push constant 32                  // Char:  
+	call String.appendChar 2
+	call Output.printString 1
+	pop temp 0                        // dump return type void
+	push local 1                      // array b
+	push constant 1
+	add                               // Calculate offset
+	pop pointer 1                     // that = b[offset]
+	push that 0                       // push value onto stack
+	call Output.printInt 1
+	pop temp 0                        // dump return type void
+	call Output.println 0
+	pop temp 0                        // dump return type void
+	push constant 0                   // dummy void value
+return
+
+function Main.double 0
+	push argument 0                   // a
+	push constant 2
+	call Math.multiply 2
+return
+
+function Main.fill 0
+label Main_00000001_WHILE_START
+	push argument 1                   // size
+	push constant 0
+	gt
+	not
+	if-goto Main_00000001_WHILE_END
+	push argument 1                   // size
+	push constant 1
+	sub
+	pop argument 1                    // size
+	push argument 0                   // array a
+	push argument 1                   // size
+	add                               // Calculate offset
+	push constant 3
+	call Array.new 1
+	pop temp 2                        // value of right site expression
+	pop pointer 1                     // that = a[offset]
+	push temp 2                       // restore value
+	pop that 0                        // a[offset]=value
+	goto Main_00000001_WHILE_START
+label Main_00000001_WHILE_END
+	push constant 0                   // dummy void value
+return

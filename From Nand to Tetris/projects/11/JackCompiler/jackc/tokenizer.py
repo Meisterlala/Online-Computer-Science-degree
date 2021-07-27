@@ -58,22 +58,22 @@ class Tokenizer():
         if current_char.isdigit():
             number = current_char
             last_known_digit = self.stream.tell()
-            next_char = self.stream.read(1)
+            last_char = self.stream.read(1)
             # While next char is a digit
-            while next_char.isdigit():
-                number += next_char
-                next_char = self.stream.read(1)
+            while last_char.isdigit():
+                number += last_char
+                last_char = self.stream.read(1)
             self.stream.seek(last_known_digit + len(number) - 1)
             return Tokens.IntConst(int(number))
 
         # if StringConst
         if current_char == '"':
             temp_string = ""
-            next_char = self.stream.read(1)
+            last_char = self.stream.read(1)
             # while not the next "
-            while next_char != '"':
-                temp_string += next_char
-                next_char = self.stream.read(1)
+            while last_char != '"':
+                temp_string += last_char
+                last_char = self.stream.read(1)
             return Tokens.StringConst(temp_string)
 
         # if Keyword
@@ -83,6 +83,20 @@ class Tokenizer():
         for _ in range(12):
             temp_keyword += self.stream.read(1)
             if temp_keyword in Tokenizer.KEYWORDS:
+                # check back and ahead to search for . to
+                # Signify a function
+                index = self.stream.tell()
+                self.stream.seek(fallback_index - 2)
+                last_char = self.stream.read(1)
+                self.stream.seek(index)
+                if last_char == ".":
+                    is_keyword = False
+                    break
+                next_char = self.stream.read(1)
+                self.stream.seek(index)
+                if next_char not in ("", " ", "\n", "\t", ";", ")", "]"):
+                    is_keyword = False
+                    break
                 is_keyword = True
                 break
 
