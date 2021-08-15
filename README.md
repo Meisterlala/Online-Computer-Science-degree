@@ -10,12 +10,12 @@ Following the guide of:
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | [Calculus 1A: Differentiation][me11]            | [edX /  Massachusetts Institute of Technology][me12]             | 17.06.2020 |
-| Divide and Conquer, Sorting and Searching, and Randomized Algorithms | [Coursera / Stanford University][ct12]      | 15.08.2021 |
+| [Divide and Conquer, Sorting and Searching, and Randomized Algorithms][ct11] | [Coursera / Stanford University][ct12]      | 15.08.2021 |
 
 [me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
 
-
+[ct11]: Algorithms%20Specialization/Part%201/
 [ct12]: https://www.coursera.org/learn/algorithms-divide-conquer
 
 
