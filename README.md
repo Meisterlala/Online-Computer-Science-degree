@@ -15,7 +15,7 @@ Following the guide of:
 [me11]: Calculus/1A%20Differentiation/
 [me12]: https://www.edx.org/course/calculus-1a-differentiation
 
-[ct11]: 
+
 [ct12]: https://www.coursera.org/learn/algorithms-divide-conquer
 
 
