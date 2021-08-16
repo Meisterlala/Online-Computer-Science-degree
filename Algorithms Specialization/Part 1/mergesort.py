@@ -1,15 +1,29 @@
+from time import time_ns
+
+
 def main():
     # Read Input
     elements = input("Enter unsorted Array:\n")
     unsorted = list(map(int, elements.split()))
-    print(unsorted)
+
+    # Time MergeSort
+    t1 = time_ns()
     sorted = mergesort(unsorted)
+    t2 = time_ns()
+
+    # Output
     print(sorted)
-    pass
+    print(f"Sorting took {t2-t1}ns")
 
 
 def mergesort(arr: list[int]) -> list[int]:
     # Base case
+    if len(arr) == 2:
+        if arr[0] < arr[1]:
+            return arr
+        else:
+            return [arr[1], arr[0]]
+
     if len(arr) <= 1:
         return arr
 
