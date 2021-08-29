@@ -1,17 +1,26 @@
-from timeit import timeit
+from time import time_ns
+import sys
 
 
 def main():
-    inp = input("Input array: \n")
-    array = list(map(int, inp.split()))
 
+    if len(sys.argv) == 2:
+        path = sys.argv[1]
+        array = []
+        with open(path, "r") as file:
+            lines = file.readlines()
+            array = list(map(int, lines))
+        pass
+    else:
+        inp = input("Input array: \n")
+        array = list(map(int, inp.split()))
+
+    time_start = time_ns()
     count = inversions(array)
+    elapsed_time = time_ns() - time_start
     print("Number of Inversions: " + str(count))
 
-    perf = timeit(
-        lambda: inversions(array), "from inversions import inversions", number=10000
-    )
-    print(f"10.000 Executions took: {perf:.3f}s")
+    print(f"Execution took: {elapsed_time // 1_000_000}ms")
 
 
 def inversions(array):
