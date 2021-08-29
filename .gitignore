@@ -27,3 +27,6 @@ _config.yml
 # pycache
 **__pycache__/
 **.venv/
+
+# rust binary
+**target/
