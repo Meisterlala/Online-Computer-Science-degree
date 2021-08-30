@@ -18,11 +18,11 @@ fn main() {
 }
 
 pub fn inversions(array: Vec<i32>) -> u32 {
-    let (_, count) = inversions_sorted(array);
+    let (_, count) = inversions_sorted(&array);
     return count;
 }
 
-fn inversions_sorted(array: Vec<i32>) -> (Vec<i32>, u32) {
+fn inversions_sorted(array: &[i32]) -> (Vec<i32>, u32) {
     // Base case
     let len = array.len();
     if len <= 1 {
@@ -31,15 +31,15 @@ fn inversions_sorted(array: Vec<i32>) -> (Vec<i32>, u32) {
 
     // Recusivly Count Left, Right and Split Inversion
     let split_point: usize = len / 2;
-    let (left, left_c) = inversions_sorted(array[..split_point].to_vec());
-    let (right, right_c) = inversions_sorted(array[split_point..].to_vec());
-    let (sorted, split_c) = inversions_split(left, right);
+    let (left, left_c) = inversions_sorted(&array[..split_point]);
+    let (right, right_c) = inversions_sorted(&array[split_point..]);
+    let (sorted, split_c) = inversions_split(&left, &right);
 
     // Add recusivly calculated values and return
     return (sorted, left_c + right_c + split_c);
 }
 
-fn inversions_split(left: Vec<i32>, right: Vec<i32>) -> (Vec<i32>, u32) {
+fn inversions_split(left: &[i32], right: &[i32]) -> (Vec<i32>, u32) {
     let mut sorted: Vec<i32> = vec![];
     let mut inversions: u32 = 0;
     let mut left_index = 0;
