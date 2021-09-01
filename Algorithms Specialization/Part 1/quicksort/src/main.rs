@@ -15,6 +15,7 @@ fn main() {
     let elapsed = start_time.elapsed().as_millis();
 
     // Count Amount of Errors
+    print!("Checking result... ");
     let errors = input
         .windows(3)
         .filter(|w| w[0] > w[1] || w[1] > w[2])
