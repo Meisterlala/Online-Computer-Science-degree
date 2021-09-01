@@ -64,9 +64,11 @@ pub fn quick_sort(array: &mut [isize]) {
     fn partition_random(array: &mut [isize], length: usize, rng: &mut ThreadRng) -> usize {
         // Chooses pivot randomly and move to first index
         // Can be made faster by caching rng
-        let pivot_index = rng.gen_range(0..length);
-        let mut pivot = array[0];
-        swap(&mut array[0], &mut pivot);
+        /*
+            let pivot_index = rng.gen_range(0..length);
+            let mut pivot = array[0];
+            swap(&mut array[0], &mut pivot);
+        */
         partition(array, length)
     }
 
