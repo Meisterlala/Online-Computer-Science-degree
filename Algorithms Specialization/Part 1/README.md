@@ -7,10 +7,9 @@ by Stanford University
 The primary topics in this part of the specialization are: asymptotic ("Big-oh") notation, sorting and searching, divide and conquer (master method, integer and matrix multiplication, closest pair), and randomized algorithms (QuickSort, contraction algorithm for min cuts).
 
 ## Project
-Calculate the minimum number of cuts by choosing random contraction edges.
-I implemented this with multithreaded Rust.
+Calculate the minimum number of cuts by choosing random contraction edges.I implemented this with multithreaded Rust.
 
-![Alt text](.graph_cut/graphs/bigone.svg)
+![svg](graph_cut/graphs/bigone.svg) ![png](graph_cut/graphs/bigone.png) 
 <img src="graph_cut/graphs/bigone.svg">
 
 
