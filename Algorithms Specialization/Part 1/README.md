@@ -9,8 +9,7 @@ The primary topics in this part of the specialization are: asymptotic ("Big-oh")
 ## Project
 Calculate the minimum number of cuts by choosing random contraction edges.I implemented this with multithreaded Rust.
 
-![svg](graph_cut/graphs/bigone.svg) ![png](graph_cut/graphs/bigone.png) 
-<img src="graph_cut/graphs/bigone.svg">
+![svg](graph_cut/graphs/bigone.svg)
 
 
 ### Week 1
