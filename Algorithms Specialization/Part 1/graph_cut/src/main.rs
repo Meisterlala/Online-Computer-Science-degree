@@ -1,14 +1,12 @@
-use graph_cut::graph_writer::save_graph;
-use petgraph::graph::UnGraph;
+use graph_cut::file::GraphFile;
+use graph_cut::{graph_writer::*, min_cut};
 
 fn main() {
-    let mut g = UnGraph::<(), ()>::new_undirected();
+    let mut big_graph = GraphFile::new("kargerMinCut.txt").unwrap();
+    let converted = big_graph.to_graph();
+    save_graph(&converted, "big_one");
+    println!("Calculation min_cut of {} Node Graph", converted.node_count());   
+    let res = min_cut(&converted);
+    println!("Result: {}", res);
 
-    let n1 = g.add_node(());
-    let n2 = g.add_node(());
-    let n3 = g.add_node(());
-
-    g.extend_with_edges(&[(n1, n2), (n1, n3)]);
-
-    save_graph(&g, "test");
 }

@@ -3,17 +3,16 @@ use petgraph::{
         Config::{EdgeNoLabel, NodeNoLabel},
         Dot,
     },
-    Graph,
+    Graph, Undirected,
 };
 
 use std::io::Write;
 
 /// Save a Graph to a .dot file
-pub fn save_graph<T1, T2, T3>(graph: &Graph<T1, T2, T3>, name: &str)
+pub fn save_graph<T1, T2>(graph: &Graph<T1, T2, Undirected, usize>, name: &str)
 where
     T1: std::fmt::Debug,
     T2: std::fmt::Debug,
-    T3: petgraph::EdgeType,
 {
     let config = [EdgeNoLabel, NodeNoLabel];
 
