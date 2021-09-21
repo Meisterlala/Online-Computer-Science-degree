@@ -10,6 +10,9 @@ The primary topics in this part of the specialization are: data structures (heap
 
 Breadth-first and depth-first search; computing strong components; applications.
 
+Graph analysed for Strongly connected component lengths. (875715 Nodes)
+![scc](graph_scc/graphs/scc_compressed.png)
+
 ### Week 2
 
 Dijkstra's shortest-path algorithm.
