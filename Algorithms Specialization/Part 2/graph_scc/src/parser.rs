@@ -2,19 +2,21 @@ use petgraph::dot::Config::*;
 use petgraph::dot::*;
 use petgraph::{Directed, Graph};
 use std::fs::File;
-use std::io::{BufRead, BufReader, Write};
+use std::io::{Read, Write};
+
+use flate2::read::GzDecoder;
 
 /// Read the SCC.txt file to a directed graph
 pub fn parse_graph(path: &str) -> Option<Graph<i32, (), Directed>> {
     // read file
     let file = File::open(path).ok()?;
-    let file_reader = BufReader::new(file);
+    let mut decoded = GzDecoder::new(file);
+    let mut content = String::new();
+    decoded.read_to_string(&mut content).ok()?;
 
     // Construct Graph
     let mut graph: Graph<i32, (), Directed> = Graph::new();
-    for line in file_reader.lines() {
-        let line = line.unwrap_or_default();
-
+    for line in content.lines() {
         // Check for empty line
         if line.len() < 3 {
             continue;

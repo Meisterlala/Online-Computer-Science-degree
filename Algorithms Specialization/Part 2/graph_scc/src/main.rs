@@ -13,7 +13,7 @@ pub fn main() {
     // Load Graph
     print!("Parsing Graph ");
     std::io::stdout().flush().unwrap();
-    let mut g = parser::parse_graph("SCC.txt").expect("Could not parse graph");
+    let mut g = parser::parse_graph("SCC.txt.gz").expect("Could not parse graph");
     g.shrink_to_fit();
     println!("finished with {:?} Nodes", g.node_count());
 
