@@ -30,3 +30,6 @@ _config.yml
 
 # rust binary
 **target/
+
+# Nested VisualStudio Configs
+**.vscode/

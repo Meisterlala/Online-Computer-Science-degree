@@ -17,6 +17,9 @@ Graph analysed for Strongly connected component lengths. (875715 Nodes)
 
 Dijkstra's shortest-path algorithm.
 
+Graph analysed for shorted paths. (200 Nodes)
+![Dijkstra](dijkstra/graphs/dijkstra.svg)
+
 ### Week 3
 
 Heaps; balanced binary search trees.
