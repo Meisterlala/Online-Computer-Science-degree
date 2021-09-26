@@ -15,7 +15,7 @@ Graph analysed for Strongly connected component lengths. (875715 Nodes)
 
 ### Week 2
 
-Dijkstra's shortest-path algorithm.
+Dijkstra's shortest-path algorithm on weighted Graphs.
 
 Graph analysed for shorted paths. (200 Nodes)
 ![Dijkstra](dijkstra/graphs/dijkstra.svg)
