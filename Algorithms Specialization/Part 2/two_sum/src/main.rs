@@ -20,6 +20,7 @@ fn main() {
     for i in 0..input.len() {
         hashtable.insert(input[i]);
     }
+    hashtable.shrink_to_fit();
     println!(
         "Hashtable created with {} distinct Entries",
         hashtable.len()
