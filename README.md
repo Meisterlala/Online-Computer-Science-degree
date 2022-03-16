@@ -9,12 +9,7 @@ Following the guide of:
 
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
-| [Calculus 1A: Differentiation][me11]            | [edX /  Massachusetts Institute of Technology][me12]             | 17.06.2020 |
-| [Graph Search, Shortest Paths, and Data Structures][ct21] | [Coursera / Stanford University][ct22] | 20.09.2021 |
-
-[me11]: Calculus/1A%20Differentiation/
-[me12]: https://www.edx.org/course/calculus-1a-differentiation
-
+| [Graph Search, Shortest Paths, and Data Structures][ct21] | [Coursera / Stanford University][ct22]                 | 20.09.2021 |
 
 [ct21]: Algorithms%20Specialization/Part%202/
 [ct22]: https://www.coursera.org/learn/algorithms-graphs-data-structures
