@@ -28,5 +28,8 @@ Heaps; balanced binary search trees.
 
 Hashing; bloom filters.
 
+The probability of an insertion error in an 8-bit bloom filter. The X axis represents the number of hashing functions.
+![bloom](bloom.png)
+
 Following the online course:
-https://www.coursera.org/learn/algorithms-graphs-data-structures
+<https://www.coursera.org/learn/algorithms-graphs-data-structures>
