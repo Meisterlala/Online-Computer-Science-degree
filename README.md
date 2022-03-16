@@ -9,11 +9,10 @@ Following the guide of:
 
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
-| [Graph Search, Shortest Paths, and Data Structures][ct21] | [Coursera / Stanford University][ct22]                 | 20.09.2021 |
+| [Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming][ct31] | [Coursera / Stanford University][ct32]| 16.03.2022 |
 
-[ct21]: Algorithms%20Specialization/Part%202/
-[ct22]: https://www.coursera.org/learn/algorithms-graphs-data-structures
-
+[ct31]: Algorithms%20Specialization/Part%203/
+[ct32]: https://www.coursera.org/learn/algorithms-greedy
 
 
 # Completed: 
@@ -50,7 +49,6 @@ Following the guide of:
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | Essence of Linear Algebra                       | [Youtube / 3Blue1Brown][cm12]                                    | 27.09.2019 |
 
-
 [cm12]: https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
 
 
@@ -77,7 +75,11 @@ Following the guide of:
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | [Divide and Conquer, Sorting and Searching, and Randomized Algorithms][ct11] | [Coursera / Stanford University][ct12] | 20.09.2021 |
+| [Graph Search, Shortest Paths, and Data Structures][ct21] | [Coursera / Stanford University][ct22]                 | 16.03.2022 |
 
 
 [ct11]: Algorithms%20Specialization/Part%201/
 [ct12]: https://www.coursera.org/learn/algorithms-divide-conquer
+
+[ct21]: Algorithms%20Specialization/Part%202/
+[ct22]: https://www.coursera.org/learn/algorithms-graphs-data-structures
