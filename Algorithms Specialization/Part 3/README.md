@@ -11,7 +11,7 @@ The primary topics in this part of the specialization are: greedy algorithms (sc
 Two motivating applications; selected review; introduction to greedy algorithms; a scheduling application; Prim's MST algorithm.
 
 Prim's MST algorithm was used to convert a 500 Node 2500 Edge Graph into a minimum spanning tree.
-| Relaxed graph             |  Minimum spanning tree: |
+| Relaxed graph             |  Minimum spanning tree |
 :-------------------------:|:-------------------------:
 ![base](prim_mst/base.png) | ![mst](prim_mst/mst.png)
 
