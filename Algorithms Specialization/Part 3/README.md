@@ -10,6 +10,9 @@ The primary topics in this part of the specialization are: greedy algorithms (sc
 
 Two motivating applications; selected review; introduction to greedy algorithms; a scheduling application; Prim's MST algorithm.
 
+Prim's MST algorithm was used to convert a 500 Node 2500 Edge Graph into this minimum spanning tree.
+![mst](prim_mst/graph.png)
+
 ### Week 2
 
 Kruskal's MST algorithm and applications to clustering; advanced union-find.
