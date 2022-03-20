@@ -20,8 +20,10 @@ Prim's MST algorithm was used to convert a 500 Node 2500 Edge Graph into a minim
 
 Kruskal's MST algorithm and applications to clustering; advanced union-find.
 
-Graph clustert by edge weight into 4 Sub-Graphs
-![cluster](clustering/k4.png)
+
+|  Graph clustert by edge weight into 4 Sub-Graphs         |
+| :------------------------------------------------------: |
+| <img src="clustering/k4.png" width="45%">                |
 
 ### Week 3
 
