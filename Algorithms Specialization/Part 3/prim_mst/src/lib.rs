@@ -8,8 +8,8 @@ pub fn read_from_file(path: &str) -> Option<UnGraph<(), i32>> {
 
     // Initilize Graph
     let mut first_line = lines.next()?.split_whitespace();
-    let nodes = first_line.next()?.parse::<usize>().ok()?.clone();
-    let edges = first_line.next()?.parse::<usize>().ok()?.clone();
+    let nodes = first_line.next()?.parse::<usize>().ok()?;
+    let edges = first_line.next()?.parse::<usize>().ok()?;
     let mut graph = UnGraph::<(), i32>::with_capacity(nodes, edges);
 
     // Fill Graph
@@ -37,8 +37,7 @@ pub fn prim_mst(graph: UnGraph<(), i32>) -> UnGraph<(), i32> {
     let mut mst = UnGraph::<(), i32>::with_capacity(graph.node_count(), graph.edge_count());
 
     // First node
-    let mut mst_nodes = vec![];
-    mst_nodes.push(1);
+    let mut mst_nodes = vec![1];
 
     // For each node
     for _ in 0..graph.node_count() - 1 {
