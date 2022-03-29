@@ -29,8 +29,9 @@ Kruskal's MST algorithm and applications to clustering; advanced union-find.
 
 Huffman codes; introduction to dynamic programming.
 
-Huffman code for weights from a list: ([full version](huffmann/huffman.dot.svg))
-![huff](huffmann/input_random_10_40.dot)
+| Huffman code for symbol frequencies from a list ([full version](huffmann/huffman.dot.svg?raw=1)) |
+| :----------------------------------------------------------------------------: |
+| ![huff](huffmann/input_random_10_40.dot.svg)                                   |
 
 ### Week 4
 
