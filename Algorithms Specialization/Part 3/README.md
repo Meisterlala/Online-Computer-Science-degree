@@ -29,6 +29,9 @@ Kruskal's MST algorithm and applications to clustering; advanced union-find.
 
 Huffman codes; introduction to dynamic programming.
 
+Huffman code for weights from a list: ([full version](huffmann/huffman.dot.svg))
+![huff](huffmann/input_random_10_40.dot)
+
 ### Week 4
 
 Advanced dynamic programming: the knapsack problem, sequence alignment, and optimal binary search trees.
