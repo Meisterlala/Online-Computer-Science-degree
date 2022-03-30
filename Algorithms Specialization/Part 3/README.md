@@ -17,9 +17,9 @@ Two motivating applications; selected review; introduction to greedy algorithms;
 
 Prim's MST algorithm was used to convert a 500 Node 2500 Edge Graph into a minimum spanning tree.
 
-| Relaxed graph               |  Minimum spanning tree      |
-| :-------------------------: | :-------------------------: |
-| ![base](prim_mst/base.png)  | ![mst](prim_mst/mst.png)    |
+| Relaxed graph                     |  Minimum spanning tree            |
+| :-------------------------------: | :-------------------------------: |
+| ![base](prim_mst/base.png?raw=1)  | ![mst](prim_mst/mst.png?raw=1)    |
 
 ### Week 2
 
@@ -27,7 +27,7 @@ Kruskal's MST algorithm and applications to clustering; advanced union-find.
 
 |  Graph clustert by edge weight into 4 Sub-Graphs         |
 | :------------------------------------------------------: |
-| <img src="clustering/k4.png" width="45%">                |
+| <img src="clustering/k4.png?raw=1" width="45%">          |
 
 ### Week 3
 
@@ -35,7 +35,7 @@ Huffman codes; introduction to dynamic programming.
 
 | Huffman code for symbol frequencies from a list ([full version](huffmann/huffman.dot.svg?raw=1)) |
 | :----------------------------------------------------------------------------: |
-| ![huff](huffmann/input_random_10_40.dot.svg)                                   |
+| ![huff](huffmann/input_random_10_40.dot.svg?raw=1)                             |
 
 ### Week 4
 
