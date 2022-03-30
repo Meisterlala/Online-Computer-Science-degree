@@ -6,6 +6,11 @@ by Stanford University
 
 The primary topics in this part of the specialization are: greedy algorithms (scheduling, minimum spanning trees, clustering, Huffman codes) and dynamic programming (knapsack, sequence alignment, optimal search trees).
 
+### Extra
+
+I analysed the runtime of different minimum spanning tree algorithms and compared the running time. Although the asymtotic analysis predicts the opposite, Prim's MST algorithm is faster than Pettie and Ramachandran optimal minimum spanning tree algorithm.
+<img src="mst.svg" width="90%">
+
 ### Week 1
 
 Two motivating applications; selected review; introduction to greedy algorithms; a scheduling application; Prim's MST algorithm.
@@ -19,7 +24,6 @@ Prim's MST algorithm was used to convert a 500 Node 2500 Edge Graph into a minim
 ### Week 2
 
 Kruskal's MST algorithm and applications to clustering; advanced union-find.
-
 
 |  Graph clustert by edge weight into 4 Sub-Graphs         |
 | :------------------------------------------------------: |
