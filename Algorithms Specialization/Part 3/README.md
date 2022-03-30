@@ -9,7 +9,7 @@ The primary topics in this part of the specialization are: greedy algorithms (sc
 ### Extra
 
 I analysed the runtime of different minimum spanning tree algorithms and compared the running time. Although the asymtotic analysis predicts the opposite, Prim's MST algorithm is faster than Pettie and Ramachandran optimal minimum spanning tree algorithm.
-<img src="mst.svg" width="100%">
+<img src="mst.svg?raw=1" width="100%">
 
 ### Week 1
 
