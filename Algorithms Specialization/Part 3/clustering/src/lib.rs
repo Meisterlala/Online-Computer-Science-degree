@@ -55,6 +55,12 @@ pub fn max_weight(graph: &G) -> u32 {
     *graph.edge_weights().max().unwrap_or(&0)
 }
 
+fn test(){
+    loop {
+        a= 123;
+    }
+}
+
 pub fn read_file(path: &str) -> Result<G, Box<dyn std::error::Error>> {
     let file = std::fs::read_to_string(path)?;
     let mut lines = file.lines();
