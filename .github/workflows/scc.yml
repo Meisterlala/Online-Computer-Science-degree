@@ -2,9 +2,9 @@ name: Succinct Code Counter
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
+  schedule:
+      # Every 7 Days
+    - cron: 0 0 */7 * *
       # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -41,7 +41,7 @@ jobs:
           if [-z "$(git status --porcelain)"]; then
              echo "::set-output name=push::false"
           else
-             git commit -m "Updated README table" -a
+             git commit -m "Automatic update of README.md table" -a
              echo "::set-output name=push::true"
           fi
         shell: bash
