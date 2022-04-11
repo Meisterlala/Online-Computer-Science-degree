@@ -20,17 +20,10 @@ jobs:
         id: scc
         uses: iryanbell/scc-docker-action@v1.0.2
         with:
-          args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby
+          args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby -f html_table
       - name: wite to File
         run: |
           echo "${{ steps.scc.outputs.scc }}" > .github/loc_table.html
-        shell: bash
-      - name: Update Readme
-        run: |
-          lead='^<!--- LOC_START --->\n'
-          tail='^<!--- LOC_END --->'
-          sed -e "/$lead/,/$tail/{ /$lead/{p; r .github/loc_table.html}; /$tail/p; d
-              }"  README.md > README.md
         shell: bash
       - name: Commit files
         id: commit
