@@ -25,6 +25,12 @@ jobs:
         run: |
           echo "${{ steps.scc.outputs.scc }}" > .github/loc_table.html
         shell: bash
+      - name: Update Readme
+        run: |
+          lead='^<!--- LOC_START --->\n'
+          tail='^<!--- LOC_END --->'
+          sed -e "/$lead/,/$tail/{ /$lead/{p; r .github/loc_table.html}; /$tail/p; d }"  README.md
+        shell: bash
       - name: Commit files
         id: commit
         run: |
