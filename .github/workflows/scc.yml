@@ -29,7 +29,7 @@ jobs:
         run: |
           lead='^<!--- LOC_START --->\n'
           tail='^<!--- LOC_END --->'
-          sed -e "/$lead/,/$tail/{ /$lead/{p; r .github/loc_table.html}; /$tail/p; d }"  README.md
+          sed -e "/$lead/,/$tail/{ /$lead/{p; r .github/loc_table.html}; /$tail/p; d }"  README.md > README.md
         shell: bash
       - name: Commit files
         id: commit
