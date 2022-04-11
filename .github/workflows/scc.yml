@@ -23,7 +23,7 @@ jobs:
           args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby
       - name: wite to File
         run: |
-          echo "${{ steps.scc.outputs.scc }}" > table.html
+          echo "${{ steps.scc.outputs.scc }}" > .github/loc_table.html
         shell: bash
       - name: Commit files
         id: commit
