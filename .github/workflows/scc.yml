@@ -20,7 +20,11 @@ jobs:
         id: scc
         uses: iryanbell/scc-docker-action@v1.0.2
         with:
-          args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby -o table.html
+          args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby
+      - name: wite to File
+        run: |
+          echo "${{ steps.scc.outputs.scc }}" > table.html
+        shell: bash
       - name: Commit files
         id: commit
         run: |
