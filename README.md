@@ -9,7 +9,44 @@ You can explore the contents on this [website](https://meisterlala.github.io/Onl
 
 # Written code
 <!--- LOC_START --->
-<table id="scc-table">
+<table id=scc-table>
+	<thead><tr>
+		<th>Language</th>
+		<th>Files</th>
+		<th>Lines</th>
+		<th>Blank</th>
+		<th>Comment</th>
+		<th>Code</th>
+		<th>Complexity</th>
+		<th>Bytes</th>
+	</tr></thead>
+	<tbody><tr>
+		<th>C</th>
+		<th>124</th>
+		<th>3450</th>
+		<th>595</th>
+		<th>449</th>
+		<th>2406</th>
+		<th>346</th>
+		<th>65700</th>
+	</tr><tr>
+		<th>Standard ML (SML)</th>
+		<th>78</th>
+		<th>3221</th>
+		<th>628</th>
+		<th>656</th>
+		<th>1937</th>
+		<th>338</th>
+		<th>89354</th>
+	</tr><tr>
+		<th>HTML</th>
+		<th>39</th>
+		<th>2294</th>
+		<th>198</th>
+		<th>453</th>
+		<th>1643</th>
+		<th>0</th>
+		<th>86919</th>
 	</tr><tr>
 		<th>Assembly</th>
 		<th>20</th>
@@ -18,17 +55,17 @@ You can explore the contents on this [website](https://meisterlala.github.io/Onl
 		<th>0</th>
 		<th>59027</th>
 		<th>6</th>
-		<th>385719</th>
+		<th>383834</th>
 	</tr></tbody>
 	<tfoot><tr>
 		<th>Total</th>
-		<th>415</th>
-		<th>79332</th>
-		<th>3020</th>
-		<th>2478</th>
-		<th>73834</th>
-		<th>1324</th>
-    	<th>928122</th>
+		<th>261</th>
+		<th>68291</th>
+		<th>1720</th>
+		<th>1558</th>
+		<th>65013</th>
+		<th>690</th>
+    	<th>625807</th>
 	</tr></tfoot>
 	</table>
 <!--- LOC_END --->
