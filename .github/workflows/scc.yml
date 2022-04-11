@@ -20,7 +20,7 @@ jobs:
         id: scc
         uses: iryanbell/scc-docker-action@v1.0.2
         with:
-          args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby -f html_table
+          args: ${{ env.workspace }} -i html,rust,python,c,sml,asm,ruby -f html-table
       - name: wite to File
         run: |
           echo "${{ steps.scc.outputs.scc }}" > .github/loc_table.html
