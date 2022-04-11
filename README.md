@@ -7,7 +7,7 @@ Following the guide of:
 # How to view
 You can explore the contents on this [website](https://meisterlala.github.io/Online-Computer-Science-degree/) or directly in the [git repsetory](https://github.com/Meisterlala/Online-Computer-Science-degree). By clicking on the name of a course in the table below, you get to see more information like the syllabus and my programs.
 
-# Written code
+# Code Statistics
 <!--- LOC_START --->
 <table id=scc-table>
 	<thead><tr>
