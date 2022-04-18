@@ -34,6 +34,30 @@ pub fn knapsack(problem: &Knapsack) -> KnapsackSolution {
     solution
 }
 
+pub fn knapsack_slick(problem: &Knapsack) -> KnapsackSolution {
+    let item_count = problem.items.len();
+    let mut solution = [vec![0; problem.size + 1], vec![0; problem.size + 1]];
+
+    for i in 0..item_count + 1 {
+        solution.swap(0, 1);
+
+        for j in 0..problem.size + 1 {
+            if i == 0 || j == 0 {
+                solution[1][j] = 0;
+            } else if problem.items[i - 1].weight as usize <= j {
+                solution[1][j] = std::cmp::max(
+                    problem.items[i - 1].value
+                        + solution[0][j - problem.items[i - 1].weight as usize],
+                    solution[0][j],
+                );
+            } else {
+                solution[1][j] = solution[0][j];
+            }
+        }
+    }
+    vec![solution[0].clone(), solution[1].clone()]
+}
+
 pub fn read_file(path: &str) -> Knapsack {
     let mut file = std::fs::File::open(path).expect("file not found");
     let mut contents = String::new();

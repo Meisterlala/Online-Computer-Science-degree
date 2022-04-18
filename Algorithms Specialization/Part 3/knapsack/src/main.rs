@@ -12,7 +12,7 @@ fn main() {
     println!("Reading File...");
     let problem = read_file("knapsack_big.txt");
     println!("Solving...");
-    let solution = knapsack(&problem);
+    let solution = knapsack_slick(&problem);
     println!("Optimal solution: {}", optimal_solution(&solution));
 }
 
