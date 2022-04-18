@@ -43,7 +43,7 @@ Advanced dynamic programming: the knapsack problem, sequence alignment, and opti
 
 I optimized the knapsack algorithm from the course. Memory usage was drastically reduced from ~50GB to ~10MB.
 
-| Originial Algorithm                 |  Optimized                             |
+| Original Algorithm                  |  Optimized                             |
 | :---------------------------------: | :------------------------------------: |
 | ![org](knapsack/normal.svg?raw=1)   | ![opt](knapsack/optimized.svg?raw=1)   |
 
