@@ -101,10 +101,7 @@ You can explore the contents on this [website](https://meisterlala.github.io/Onl
 
 | Name                                            | Course link                                                      |      Date  |
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
-| [Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming][ct31] | [Coursera / Stanford University][ct32]| 16.03.2022 |
 
-[ct31]: Algorithms%20Specialization/Part%203/
-[ct32]: https://www.coursera.org/learn/algorithms-greedy
 
 
 # Completed: 
@@ -168,6 +165,7 @@ You can explore the contents on this [website](https://meisterlala.github.io/Onl
 | :---------------------------------------------- |:---------------------------------------------------------------- |-----------:|
 | [Divide and Conquer, Sorting and Searching, and Randomized Algorithms][ct11] | [Coursera / Stanford University][ct12] | 20.09.2021 |
 | [Graph Search, Shortest Paths, and Data Structures][ct21] | [Coursera / Stanford University][ct22]                 | 16.03.2022 |
+| [Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming][ct31] | [Coursera / Stanford University][ct32]| 02.05.2022 |
 
 
 [ct11]: Algorithms%20Specialization/Part%201/
@@ -175,3 +173,6 @@ You can explore the contents on this [website](https://meisterlala.github.io/Onl
 
 [ct21]: Algorithms%20Specialization/Part%202/
 [ct22]: https://www.coursera.org/learn/algorithms-graphs-data-structures
+
+[ct31]: Algorithms%20Specialization/Part%203/
+[ct32]: https://www.coursera.org/learn/algorithms-greedy
